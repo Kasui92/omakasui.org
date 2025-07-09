@@ -18,24 +18,6 @@
   border: 0;
 }
 
-/* Skip link for keyboard navigation */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: #89b29ee6;
-  color: #221e22;
-  padding: 8px;
-  text-decoration: none;
-  z-index: 100;
-  border-radius: 3px;
-  font-weight: bold;
-}
-
-.skip-link:focus {
-  top: 6px;
-}
-
 body {
   font-family: monospace;
   line-height: 1.6;
@@ -105,7 +87,7 @@ h3 {
   color: #ccc;
 }
 
-.omakase-highlight {
+.omakasui-highlight {
   color: #89b29ee6;
   font-weight: bold;
 }

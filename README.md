@@ -1,4 +1,4 @@
-# My Omakase
+# OmaKasui
 
 Static website to showcase my personal Omakase, a collection of post-installation scripts for Linux distributions inspired by [DHH's](https://dhh.dk) [Omacom](http://omacom.io).
 

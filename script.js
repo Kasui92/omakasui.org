@@ -105,8 +105,3 @@ function typewriterEffect() {
     }
   }, 100);
 }
-
-// Activate typewriter effect after a short delay
-// document.addEventListener('DOMContentLoaded', () => {
-//     setTimeout(typewriterEffect, 500);
-// });
