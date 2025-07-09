@@ -1,0 +1,249 @@
+/* Reset e base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Screen reader only utility class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #89b29ee6;
+  color: #221e22;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+body {
+  font-family: monospace;
+  line-height: 1.6;
+  color: #e0e0e0;
+  background-color: #221e22;
+  font-size: 14px;
+}
+
+a {
+  color: #89b29ee6;
+}
+
+a:hover {
+  color: #89b29e;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+header {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3rem;
+  color: #89b29ee6;
+  font-weight: normal;
+}
+
+.subtitle {
+  color: #d8d9d9e6;
+  font-size: 1.2rem;
+}
+
+/* Main content */
+main {
+  padding: 3rem 0;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+h2 {
+  color: #89b29ee6;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+h3 {
+  color: #89b29ee6;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+/* Intro section */
+.intro p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ccc;
+}
+
+.omakase-highlight {
+  color: #89b29ee6;
+  font-weight: bold;
+}
+
+/* Credits section */
+.credits {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #333;
+}
+
+.credits p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #aaa;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Script cards */
+.script-card {
+  background-color: #2a2a2a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: border-color 0.3s ease;
+}
+
+.script-card:hover {
+  border-color: #89b29ee6;
+}
+
+.script-card p {
+  color: #bbb;
+  margin-bottom: 1.5rem;
+}
+
+/* Command box */
+.command-box {
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.command-box code {
+  flex: 1;
+  color: #89b29ee6;
+  font-size: 0.9rem;
+  background: none;
+  word-break: break-all;
+}
+
+.copy-btn {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.copy-btn:hover {
+  background-color: #444;
+  border-color: #89b29ee6;
+}
+
+.copy-btn.copied {
+  background-color: #89b29ee6;
+  color: #221e22;
+  border-color: #89b29ee6;
+}
+
+/* Features list */
+.features {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.features li {
+  color: #bbb;
+  padding: 0.3rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.features li::before {
+  content: "▸";
+  color: #89b29ee6;
+  position: absolute;
+  left: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .command-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .copy-btn {
+    align-self: flex-end;
+    width: auto;
+  }
+}
+
+/* Animation for copy feedback */
+@keyframes copyFeedback {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.copy-btn.copied {
+  animation: copyFeedback 0.3s ease;
+}

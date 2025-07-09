@@ -1,0 +1,2 @@
+OMARELL_REF=master
+eval "$(wget -qO- https://raw.githubusercontent.com/Kasui92/omarell/main/boot.sh)"

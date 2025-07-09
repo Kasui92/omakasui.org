@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Omakase - A curated collection of opinionated post-installation scripts for Linux distributions"
+    />
+    <title>
+      Omakase by Luca Pattocchio - Post-Installation Scripts for Linux
+    </title>
+    <meta property="og:site_name" content="Omakase" />
+    <meta
+      property="og:title"
+      content="Omakase - Post-Installation Scripts for Linux"
+    />
+    <meta
+      property="og:description"
+      content="A curated collection of opinionated post-installation scripts for Linux distributions"
+    />
+    <meta
+      property="og:image"
+      content="https://omakase.lucapattocchio.dev/omakase.svg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:url" content="https://omakase.lucapattocchio.dev" />
+    <meta property="og:type" content="website" />
+
+    <meta
+      name="twitter:title"
+      content="Omakase - Post-Installation Scripts for Linux"
+    />
+    <meta
+      name="twitter:description"
+      content="A curated collection of opinionated post-installation scripts for Linux distributions"
+    />
+    <meta
+      name="twitter:image"
+      content="https://omakase.lucapattocchio.dev/omakase.svg"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Omakase - Post-installation scripts for Linux distributions"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      sizes="16x16"
+      href="favicon-16x16.svg"
+    />
+    <link rel="shortcut icon" href="favicon.svg" />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+      <div class="container">
+        <h1>$ omakase</h1>
+        <p class="subtitle">
+          Post-installation scripts for Linux distributions
+        </p>
+      </div>
+    </header>
+
+    <main
+      class="container"
+      role="main"
+      aria-label="Main content"
+      id="main-content"
+    >
+      <section class="intro" aria-labelledby="intro-heading">
+        <h2 class="sr-only" id="intro-heading">Introduction</h2>
+        <p>
+          Just like
+          <a
+            href="https://dhh.dk"
+            target="_blank"
+            title="David Heinemeier Hansson's website"
+            rel="noopener"
+            >DHH's</a
+          >
+          <a
+            href="https://omacom.io"
+            target="_blank"
+            title="Omacom - DHH's opinionated software collection"
+            rel="noopener"
+            >Omacom</a
+          >
+          philosophy, I've chosen to collect all my post-installation scripts
+          for Linux distributions in one place. <br />This is
+          <span class="omakase-highlight">Omakase</span> - a curated collection
+          of opinionated scripts that automate the setup of popular Linux
+          distributions. With a single command, you can save time and get a
+          ready-to-use system tailored to my preferences and workflow.
+        </p>
+      </section>
+
+      <section class="scripts" aria-labelledby="scripts-heading">
+        <h2 id="scripts-heading">$ ls omakase/</h2>
+
+        <div class="script-card">
+          <h3>
+            >
+            <a
+              href="https://github.com/Kasui92/omarell"
+              target="_blank"
+              title="View omarell source code on GitHub"
+              rel="noopener"
+              >omarell</a
+            >
+          </h3>
+          <p>
+            Basically
+            <a
+              href="https://omakub.org"
+              target="_blank"
+              title="Omakub - DHH's Ubuntu desktop setup"
+              rel="noopener"
+              ><strong>Omakub</strong></a
+            >
+            with some fancy, totally optional (... and unrequested!) tweaks
+          </p>
+          <div
+            class="command-box"
+            role="group"
+            aria-label="Installation command for omarell"
+          >
+            <code aria-label="Installation command"
+              >wget -qO- https://omakase.lucapattocchio.dev/omarell | bash</code
+            >
+            <button
+              class="copy-btn"
+              data-command="curl -sSL https://omakase.lucapattocchio.dev/omarell | bash"
+              title="Copy installation command to clipboard"
+              aria-label="Copy omarell installation command"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <div class="script-card">
+          <h3>
+            >
+            <a
+              href="https://github.com/Kasui92/omasway"
+              target="_blank"
+              title="View omasway source code on GitHub"
+              rel="noopener"
+              >omasway</a
+            >
+          </h3>
+          <p>Opinionated <strong>Ubuntu/Sway</strong> Setup</p>
+          <div
+            class="command-box"
+            role="group"
+            aria-label="Installation command for omasway"
+          >
+            <code aria-label="Installation command"
+              >wget -qO- https://omakase.lucapattocchio.dev/omasway | bash</code
+            >
+            <button
+              class="copy-btn"
+              data-command="curl -sSL https://omakase.lucapattocchio.dev/omasway | bash"
+              title="Copy installation command to clipboard"
+              aria-label="Copy omasway installation command"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="credits" aria-labelledby="credits-heading">
+        <h2 class="sr-only" id="credits-heading">Credits</h2>
+        <p>
+          These scripts are provided by
+          <a
+            href="https://lucapattocchio.dev"
+            target="_blank"
+            title="Luca Pattocchio's personal website"
+            rel="noopener"
+            >Luca Pattocchio</a
+          >, inspired by the excellent work done by
+          <a
+            href="https://dhh.dk"
+            target="_blank"
+            title="David Heinemeier Hansson's website"
+            rel="noopener"
+            >DHH</a
+          >
+          with his opinionated software collections.
+        </p>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
