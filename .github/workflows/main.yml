@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:  # Optional: allows manual trigger from GitHub UI
+  workflow_dispatch: # Optional: allows manual trigger from GitHub UI
 
 jobs:
   ftp-deploy:
@@ -20,5 +20,5 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /omakasui.lucapattocchio.dev/
+          server-dir: /
           local-dir: ./
