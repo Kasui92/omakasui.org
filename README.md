@@ -1,6 +1,6 @@
-# Omakase Website
+# My Omakase
 
-Static website to showcase Omakase, a collection of post-installation scripts for Linux distributions.
+Static website to showcase my personal Omakase, a collection of post-installation scripts for Linux distributions inspired by [DHH's](https://dhh.dk) [Omacom](http://omacom.io).
 
 ## Contributions
 
