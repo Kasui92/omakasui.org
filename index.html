@@ -57,25 +57,30 @@
     <link rel="stylesheet" href="/assets/styles/globals.css" />
   </head>
   <body>
-    <header>
-      <div class="container">
+    <!-- SVG Icons Sprite -->
+    <div style="display: none">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <symbol id="copy-icon" viewBox="0 0 24 24">
+            <path
+              d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
+            />
+          </symbol>
+        </defs>
+      </svg>
+    </div>
+
+    <main role="main" aria-label="Main content" id="main-content">
+      <header>
         <h1>$ omakasui</h1>
         <p class="subtitle">
           Post-installation scripts for Linux distributions
         </p>
-      </div>
-    </header>
-
-    <main
-      class="container"
-      role="main"
-      aria-label="Main content"
-      id="main-content"
-    >
+      </header>
       <section class="intro" aria-labelledby="intro-heading">
         <h2 class="sr-only" id="intro-heading">Introduction</h2>
         <p>
-          Just like
+          Inspired by
           <a
             href="https://dhh.dk"
             target="_blank"
@@ -90,12 +95,11 @@
             rel="noopener"
             >Omacom</a
           >
-          philosophy, I've chosen to collect all my post-installation scripts
-          for Linux distributions in one place. <br />This is
-          <span class="omakasui-highlight">OmaKasui</span> - a curated
-          collection of opinionated scripts that automate the setup of popular
-          Linux distributions. With a single command, you can save time and get
-          a ready-to-use system tailored to my preferences and workflow.
+          philosophy,
+          <span class="highlight">OmaKasui</span> is my curated collection of
+          opinionated post-installation scripts for Linux. One command, zero
+          hassle—get a ready-to-use system tailored to my workflow and
+          preferences.
         </p>
       </section>
 
@@ -139,7 +143,9 @@
               title="Copy installation command to clipboard"
               aria-label="Copy omarell installation command"
             >
-              Copy
+              <svg>
+                <use href="#copy-icon"></use>
+              </svg>
             </button>
           </div>
         </div>
@@ -171,7 +177,9 @@
               title="Copy installation command to clipboard"
               aria-label="Copy omasway installation command"
             >
-              Copy
+              <svg>
+                <use href="#copy-icon"></use>
+              </svg>
             </button>
           </div>
         </div>
@@ -180,22 +188,15 @@
       <section class="credits" aria-labelledby="credits-heading">
         <h2 class="sr-only" id="credits-heading">Credits</h2>
         <p>
-          These scripts are provided by
+          © 2025
           <a
             href="https://lucapattocchio.dev"
             target="_blank"
             title="Luca Pattocchio's personal website"
             rel="noopener"
             >Luca Pattocchio</a
-          >, inspired by the excellent work done by
-          <a
-            href="https://dhh.dk"
-            target="_blank"
-            title="David Heinemeier Hansson's website"
-            rel="noopener"
-            >DHH</a
           >
-          with his opinionated software collections.
+          (<span class="highlight">Kasui</span>).
         </p>
       </section>
     </main>

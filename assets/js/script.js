@@ -10,13 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
         await navigator.clipboard.writeText(command);
 
         // Visual feedback
-        const originalText = this.textContent;
-        this.textContent = "Copied!";
         this.classList.add("copied");
 
-        // Restore original text after 2 seconds
+        // Remove feedback after 2 seconds
         setTimeout(() => {
-          this.textContent = originalText;
           this.classList.remove("copied");
         }, 2000);
       } catch (err) {
@@ -44,12 +41,9 @@ function fallbackCopyTextToClipboard(text, button) {
   try {
     const successful = document.execCommand("copy");
     if (successful) {
-      const originalText = button.textContent;
-      button.textContent = "Copied!";
       button.classList.add("copied");
 
       setTimeout(() => {
-        button.textContent = originalText;
         button.classList.remove("copied");
       }, 2000);
     } else {
