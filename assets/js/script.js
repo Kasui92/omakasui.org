@@ -88,20 +88,3 @@ function fadeInOnScroll() {
 
 // Initialize animations when DOM is ready
 document.addEventListener("DOMContentLoaded", fadeInOnScroll);
-
-// Typewriter effect for main title (optional)
-function typewriterEffect() {
-  const title = document.querySelector("header h1");
-  const text = title.textContent;
-  title.textContent = "";
-
-  let i = 0;
-  const timer = setInterval(() => {
-    if (i < text.length) {
-      title.textContent += text.charAt(i);
-      i++;
-    } else {
-      clearInterval(timer);
-    }
-  }, 100);
-}
