@@ -1,0 +1,2 @@
+OMASWAY_REL=dev
+eval "$(wget -qO- https://raw.githubusercontent.com/Kasui92/omasway/main/boot.sh)"
