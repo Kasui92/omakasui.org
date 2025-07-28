@@ -6,14 +6,14 @@
     <meta name="description" content="The Omarell Handbook" />
     <meta name="author" content="Luca Pattocchio (Kasui)" />
     <title>Omarell Docs</title>
-    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/styles/globals.css" />
     <link
       rel="icon"
       type="image/svg+xml"
       href="../../assets/images/favicon.svg"
     />
     <link rel="preload" href="config.js" as="script" />
-    <link rel="preload" href="assets/script.js" as="script" />
+    <link rel="preload" href="assets/js/script.js" as="script" />
   </head>
   <body>
     <!-- Desktop toggle button -->
@@ -55,6 +55,43 @@
                 <p>Setting up documentation...</p>
               </div>
             </div>
+
+            <!-- Navigation controls -->
+            <div
+              class="content-section"
+              id="pageNavigation"
+              style="display: none"
+            >
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-top: 2rem;
+                "
+              >
+                <a
+                  href="#"
+                  class="prev-nav-link"
+                  id="prevBtn"
+                  title="Previous chapter"
+                  style="display: none"
+                >
+                  <span class="arrow">←</span>
+                  <span id="prevTitle"></span>
+                </a>
+                <a
+                  href="#"
+                  class="next-nav-link"
+                  id="nextBtn"
+                  title="Next chapter"
+                  style="display: none"
+                >
+                  <span id="nextTitle"></span>
+                  <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
           </div>
 
           <footer class="doc-footer">
@@ -75,6 +112,6 @@
     </div>
 
     <script src="config.js"></script>
-    <script src="assets/script.js"></script>
+    <script src="assets/js/script.js"></script>
   </body>
 </html>

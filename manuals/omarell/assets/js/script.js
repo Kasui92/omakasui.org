@@ -11,12 +11,22 @@ class DocumentationApp {
     this.toggleBtnMobile = document.getElementById("toggleBtnMobile");
     this.content = document.getElementById("content");
     this.navLinks = null;
+
+    // Navigation elements
+    this.pageNavigation = document.getElementById("pageNavigation");
+    this.prevBtn = document.getElementById("prevBtn");
+    this.nextBtn = document.getElementById("nextBtn");
+    this.prevTitle = document.getElementById("prevTitle");
+    this.nextTitle = document.getElementById("nextTitle");
   }
 
   initializeState() {
     this.config = window.DOCS_CONFIG;
     this.currentPage = this.getInitialPageFromURL();
     this.pageCache = new Map();
+
+    // Create ordered list of pages for navigation
+    this.pageOrder = Object.keys(this.config.pages);
   }
 
   async init() {
@@ -131,6 +141,7 @@ class DocumentationApp {
     this.bindWindowResize();
     this.bindPopstate();
     this.bindHashChange();
+    this.bindNavigationButtons();
   }
 
   bindToggleButtons() {
@@ -167,6 +178,24 @@ class DocumentationApp {
       if (window.location.hash) {
         const headingId = window.location.hash.substring(1);
         this.scrollToHeading(headingId);
+      }
+    });
+  }
+
+  bindNavigationButtons() {
+    this.prevBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      const prevPage = this.getPreviousPage();
+      if (prevPage) {
+        this.navigateToPage(prevPage);
+      }
+    });
+
+    this.nextBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      const nextPage = this.getNextPage();
+      if (nextPage) {
+        this.navigateToPage(nextPage);
       }
     });
   }
@@ -236,6 +265,7 @@ class DocumentationApp {
       this.sidebar.classList.remove("open");
     }
     this.updateToggleButton();
+    this.updatePageNavigation(); // Update navigation layout on resize
   }
 
   isMobileView() {
@@ -307,6 +337,7 @@ class DocumentationApp {
       this.scrollToTop();
       this.processHeadings();
       this.handleInitialHash();
+      this.updatePageNavigation();
     });
   }
 
@@ -485,6 +516,81 @@ class DocumentationApp {
     this.sidebar.classList.remove("open");
     this.sidebar.classList.remove("show");
     this.updateToggleButton();
+  }
+
+  // Navigation methods
+  getPreviousPage() {
+    const currentIndex = this.pageOrder.indexOf(this.currentPage);
+    return currentIndex > 0 ? this.pageOrder[currentIndex - 1] : null;
+  }
+
+  getNextPage() {
+    const currentIndex = this.pageOrder.indexOf(this.currentPage);
+    return currentIndex < this.pageOrder.length - 1
+      ? this.pageOrder[currentIndex + 1]
+      : null;
+  }
+
+  updatePageNavigation() {
+    if (!this.pageNavigation) return;
+
+    const prevPage = this.getPreviousPage();
+    const nextPage = this.getNextPage();
+
+    // Show/hide navigation if there are prev/next pages
+    const hasNavigation = prevPage || nextPage;
+    this.pageNavigation.style.display = hasNavigation ? "block" : "none";
+
+    if (!hasNavigation) return;
+
+    // Get the flex container
+    const flexContainer = this.pageNavigation.querySelector(
+      'div[style*="display: flex"]'
+    );
+
+    // Update previous button
+    if (prevPage) {
+      this.prevBtn.style.display = "inline-flex";
+      this.prevBtn.href = "#";
+
+      // Different text for mobile vs desktop
+      if (this.isMobileView()) {
+        this.prevTitle.textContent = "Previous";
+      } else {
+        this.prevTitle.textContent = `Previous: ${this.config.pages[prevPage].title}`;
+      }
+    } else {
+      this.prevBtn.style.display = "none";
+    }
+
+    // Update next button
+    if (nextPage) {
+      this.nextBtn.style.display = "inline-flex";
+      this.nextBtn.href = "#";
+
+      // Different text for mobile vs desktop
+      if (this.isMobileView()) {
+        this.nextTitle.textContent = "Next";
+      } else {
+        this.nextTitle.textContent = `Next: ${this.config.pages[nextPage].title}`;
+      }
+    } else {
+      this.nextBtn.style.display = "none";
+    }
+
+    // Adjust flex container justification - same logic for all screen sizes
+    if (flexContainer) {
+      if (prevPage && nextPage) {
+        // Both buttons: space between
+        flexContainer.style.justifyContent = "space-between";
+      } else if (nextPage && !prevPage) {
+        // Only next button: align to right
+        flexContainer.style.justifyContent = "flex-end";
+      } else if (prevPage && !nextPage) {
+        // Only prev button: align to left
+        flexContainer.style.justifyContent = "flex-start";
+      }
+    }
   }
 }
 
