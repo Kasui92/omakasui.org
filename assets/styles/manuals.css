@@ -866,6 +866,14 @@ body {
   font-weight: normal;
 }
 
+.next-nav-link {
+  float: right;
+}
+
+.prev-nav-link {
+  float: left;
+}
+
 .next-nav-link:hover,
 .prev-nav-link:hover {
   border-color: var(--primary-color);
