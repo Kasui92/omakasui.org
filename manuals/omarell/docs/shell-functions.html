@@ -1,11 +1,22 @@
 <div class="content-section">
   <h1>Shell Functions</h1>
   <p>
-    Omarell comes with a set of shell functions to simplify common tasks and
-    encapsulate convoluted parameter calls.
+    Omarell comes with a set of bash functions that simplify common tasks and
+    solve complex jobs.
   </p>
 
-  <h2>Available Functions</h2>
+  <h2>Categories</h2>
+  <div class="category-nav">
+    <ul>
+      <li><a href="#basic-functions">Basic Functions</a></li>
+      <li>
+        <a href="#omarell"><code>omarell</code></a>
+      </li>
+      <li><a href="#usage-notes">Usage Notes</a></li>
+    </ul>
+  </div>
+
+  <h2>Basic Functions</h2>
 
   <div class="function-card">
     <div class="function-header">
@@ -253,6 +264,135 @@
       <div class="code-block">
         <code>refresh-xcompose</code>
         <button class="copy-btn" data-command="refresh-xcompose">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path
+              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <h2>Omarell</h2>
+
+  <div class="function-card">
+    <div class="function-header">
+      <h3><code>omarell</code></h3>
+    </div>
+    <p>Shows all Omarell features omarell</p>
+  </div>
+
+  <div class="function-card">
+    <div class="function-header">
+      <h3><code>omarell version</code></h3>
+    </div>
+    <p>
+      Shows the current version of Omarell and checks for new updates omarell
+    </p>
+  </div>
+
+  <div class="function-card">
+    <div class="function-header">
+      <h3><code>omarell update</code></h3>
+    </div>
+    <p>Updates Omarell and tracks migrations</p>
+  </div>
+
+  <div class="function-card">
+    <div class="function-header">
+      <h3><code>omarell update --system</code></h3>
+    </div>
+    <p>Updates Ubuntu and cleans up orphaned packages</p>
+  </div>
+
+  <div class="function-card">
+    <div class="function-header">
+      <h3><code>omarell update --firmware</code></h3>
+    </div>
+    <p>Updates the firmware</p>
+  </div>
+
+  <div class="function-card">
+    <div class="function-header">
+      <h3><code>omarell theme [theme folder name]</code></h3>
+    </div>
+    <p>
+      Updates the theme using the selected omarell theme. If no theme folder
+      name is provided, it will interactively select a new theme.
+    </p>
+    <div class="function-examples">
+      <div class="code-block">
+        <code>omarell theme tokyo-night</code>
+        <button class="copy-btn" data-command="omarell theme tokyo-night">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path
+              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="function-card">
+    <div class="function-header">
+      <h3><code>omarell apps install [app]</code></h3>
+    </div>
+    <p>
+      Installs the selected application. If no application is specified, it will
+      interactively select one.
+    </p>
+    <div class="function-examples">
+      <div class="code-block">
+        <code>omarell apps install discord</code>
+        <button class="copy-btn" data-command="omarell apps install discord">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path
+              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="function-card">
+    <div class="function-header">
+      <h3><code>omarell apps uninstall [app]</code></h3>
+    </div>
+    <p>
+      Uninstalls the selected application. If no application is specified, it
+      will interactively select one.
+    </p>
+    <div class="function-examples">
+      <div class="code-block">
+        <code>omarell apps uninstall discord</code>
+        <button class="copy-btn" data-command="omarell apps uninstall discord">
           <svg
             width="16"
             height="16"
