@@ -9,10 +9,17 @@ class DocumentationApp {
 
   ensureTrailingSlash() {
     const currentPath = window.location.pathname;
-    const currentHost = window.location.host;
 
-    // Only apply this logic if we're on the manuals subdomain
-    if (currentHost === "manuals.omakasui.org" && !currentPath.endsWith("/")) {
+    // Only apply this logic if we're in a subdirectory that doesn't end with a slash
+    // and it's not a file (doesn't contain a dot in the last segment)
+    const pathSegments = currentPath.split("/");
+    const lastSegment = pathSegments[pathSegments.length - 1];
+
+    if (
+      !currentPath.endsWith("/") &&
+      lastSegment &&
+      !lastSegment.includes(".")
+    ) {
       const correctedUrl =
         window.location.protocol +
         "//" +
