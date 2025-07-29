@@ -1,8 +1,28 @@
 class DocumentationApp {
   constructor() {
+    // Ensure proper URL format before initializing
+    this.ensureTrailingSlash();
     this.initializeElements();
     this.initializeState();
     this.init();
+  }
+
+  ensureTrailingSlash() {
+    const currentPath = window.location.pathname;
+    const currentHost = window.location.host;
+
+    // Only apply this logic if we're on the manuals subdomain
+    if (currentHost === "manuals.omakasui.org" && !currentPath.endsWith("/")) {
+      const correctedUrl =
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        currentPath +
+        "/" +
+        window.location.search +
+        window.location.hash;
+      window.history.replaceState(null, "", correctedUrl);
+    }
   }
 
   initializeElements() {
@@ -310,6 +330,10 @@ class DocumentationApp {
     if (!this.config.pages[page]) return;
 
     const url = new URL(window.location);
+    // Ensure the pathname always ends with /
+    if (!url.pathname.endsWith("/")) {
+      url.pathname += "/";
+    }
     url.searchParams.set("page", page);
     history.pushState({ page }, "", url);
 
@@ -368,6 +392,10 @@ class DocumentationApp {
 
   updateBrowserHistory(page) {
     const url = new URL(window.location);
+    // Ensure the pathname always ends with /
+    if (!url.pathname.endsWith("/")) {
+      url.pathname += "/";
+    }
     url.searchParams.set("page", page);
     history.pushState({ page }, "", url);
   }
@@ -453,6 +481,10 @@ class DocumentationApp {
   handleAnchorClick(headingId, button) {
     // Update URL with hash
     const url = new URL(window.location);
+    // Ensure the pathname always ends with /
+    if (!url.pathname.endsWith("/")) {
+      url.pathname += "/";
+    }
     url.hash = headingId;
     history.pushState(null, "", url);
 
