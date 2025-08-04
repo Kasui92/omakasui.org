@@ -1,6 +1,28 @@
 <div class="content-section">
   <h1>Installation</h1>
   <p>Get started with Omarell on your Ubuntu system</p>
+
+  <div class="note-box">
+    <span class="note-icon">></span>
+    <div class="note-content">
+      <strong>Note:</strong> A new <b>modern</b> and <b>minimal</b> version is
+      under development, which is based on Ubuntu Server and uses a different
+      installation method.
+    </div>
+  </div>
+</div>
+
+<div class="content-section">
+  <div class="warning-box">
+    <span class="warning-icon">!</span>
+    <div class="warning-content">
+      <strong>Warning:</strong> The following instructions are for the
+      <code>legacy</code> version of Omarell, that is based on Ubuntu Desktop. A
+      new <b>modern</b> version is under development, which is based on Ubuntu
+      Server and uses a different installation method.
+    </div>
+  </div>
+
   <h2>Prerequisites</h2>
   <ul>
     <li>
@@ -19,17 +41,15 @@
       A stable connection, to avoid errors when downloading apps and packages
     </li>
   </ul>
-</div>
 
-<div class="content-section">
   <h2>Quick Installation</h2>
   <p>To install Omarell, simply run the following command in your terminal:</p>
 
   <div class="code-block">
-    <code>wget -qO- https://omakasui.org/omarell | bash</code>
+    <code>wget -qO- https://omakasui.org/omarell-legacy | bash</code>
     <button
       class="copy-btn"
-      data-command="wget -qO- https://omakasui.org/omarell | bash"
+      data-command="wget -qO- https://omakasui.org/omarell-legacy | bash"
     >
       <svg
         width="16"
@@ -45,6 +65,18 @@
         ></path>
       </svg>
     </button>
+  </div>
+</div>
+
+<div class="content-section">
+  <h2>Experimental Version</h2>
+
+  <div class="warning-box">
+    <span class="warning-icon">!</span>
+    <div class="warning-content">
+      <strong>Warning:</strong> The development version may contain unstable
+      features and bugs.
+    </div>
   </div>
 
   <p>
@@ -74,11 +106,12 @@
     </button>
   </div>
 
-  <div class="warning-box">
-    <span class="warning-icon">!</span>
-    <div class="warning-content">
-      <strong>Warning:</strong> The development version may contain unstable
-      features and bugs.
+  <div class="note-box">
+    <span class="note-icon">></span>
+    <div class="note-content">
+      <strong>Note:</strong> This version is designed for a fresh new Ubuntu
+      Server (24.04) installation, without a graphical interface and with
+      minimal pre-installed packages.
     </div>
   </div>
 </div>
