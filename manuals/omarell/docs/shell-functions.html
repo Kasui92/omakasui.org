@@ -254,32 +254,17 @@
 
   <div class="function-card">
     <div class="function-header">
-      <h3><code>refresh-xcompose</code></h3>
+      <h3>
+        <code
+          >ssh-key-put [user@host] [optional:path_to_key (default:
+          ~/.ssh/id_ed25519.pub)]</code
+        >
+      </h3>
     </div>
     <p>
-      Restarts fcitx5 to pickup changes made to ~/.XCompose to add new emojis or
-      other auto completions.
+      Uploads the specified SSH public key to the remote host for the specified
+      user.
     </p>
-    <div class="function-examples">
-      <div class="code-block">
-        <code>refresh-xcompose</code>
-        <button class="copy-btn" data-command="refresh-xcompose">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path
-              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-            ></path>
-          </svg>
-        </button>
-      </div>
-    </div>
   </div>
 
   <h2>Omarell</h2>
@@ -393,6 +378,73 @@
       <div class="code-block">
         <code>omarell apps uninstall discord</code>
         <button class="copy-btn" data-command="omarell apps uninstall discord">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path
+              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="function-card">
+    <div class="function-header">
+      <h3><code>omarell refresh [applications|config|gdm]</code></h3>
+    </div>
+    <p>
+      Refreshes the specified component.
+      <ul>
+        <li><code>applications</code>: Refreshes the application list.</li>
+        <li><code>config</code>: Refreshes the configuration files.</li>
+        <li><code>gdm</code>: Refreshes the GDM backgrounds.</li>
+      </ul>
+    </p>
+    <div class="function-examples">
+      <div class="code-block">
+        <code>omarell refresh applications</code>
+        <button class="copy-btn" data-command="omarell refresh applications">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path
+              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="function-card">
+    <div class="function-header">
+      <h3><code>omarell restart [first-boot|xcompose]</code></h3>
+    </div>
+    <p>
+      Restarts the specified service.
+      <ul>
+        <li><code>first-boot</code>: Restarts the first boot setup.</li>
+        <li><code>xcompose</code>: Restarts the X11 compose file.</li>
+      </ul>
+    </p>
+    <div class="function-examples">
+      <div class="code-block">
+        <code>omarell restart first-boot</code>
+        <button class="copy-btn" data-command="omarell restart xcompose">
           <svg
             width="16"
             height="16"
