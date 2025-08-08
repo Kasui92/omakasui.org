@@ -6,6 +6,7 @@
   --background-color: #221e22;
   --text-color: #e0e0e0;
   --text-light: #ccc;
+  --text-emphasis: #89b29ee6;
   --text-heading: #f2f2f2e6;
   --border-color: #333;
   --sidebar-width: 280px;
@@ -76,7 +77,7 @@ body {
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--primary-color);
-  margin: 0 0 0 60px;
+  margin: 0 0 0 30px;
 }
 
 /* Toggle Button */
@@ -474,6 +475,16 @@ body {
   line-height: 1.7;
 }
 
+.content-section p i {
+  color: var(--text-emphasis);
+  font-style: italic;
+}
+
+.content-section p b {
+  color: var(--text-emphasis);
+  font-weight: bold;
+}
+
 .content-section ul {
   margin: 1rem 0;
   padding-left: 2rem;
@@ -503,6 +514,7 @@ body {
   border-radius: var(--border-radius-xl);
   border-left: 3px solid var(--primary-color);
   background-color: #2a2a2a;
+  margin-bottom: 1rem;
 }
 
 .warning-box {

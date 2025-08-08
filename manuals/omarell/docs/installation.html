@@ -2,54 +2,49 @@
   <h1>Installation</h1>
   <p>Get started with Omarell on your Ubuntu system</p>
 
-  <div class="note-box">
-    <span class="note-icon">></span>
-    <div class="note-content">
-      <strong>Note:</strong> A new <b>modern</b> and <b>minimal</b> version is
-      under development, which is based on Ubuntu Server and uses a different
-      installation method.
-    </div>
+  <h2>Categories</h2>
+  <div class="category-nav">
+    <ul>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#installation">Installation</a></li>
+      <li><a href="#installation-legacy">Installation (Legacy)</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
   </div>
 </div>
 
 <div class="content-section">
-  <div class="warning-box">
-    <span class="warning-icon">!</span>
-    <div class="warning-content">
-      <strong>Warning:</strong> The following instructions are for the
-      <code>legacy</code> version of Omarell, that is based on Ubuntu Desktop. A
-      new <b>modern</b> version is under development, which is based on Ubuntu
-      Server and uses a different installation method.
-    </div>
-  </div>
-
   <h2>Prerequisites</h2>
   <ul>
     <li>
       <a
-        href="https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview"
+        href="https://ubuntu.com/tutorials/install-ubuntu-server#1-overview"
         target="_blank"
         rel="noopener"
-        >A fresh install of Ubuntu Desktop</a
-      >, preferably 24.04 but works with 25.04 too.
-    </li>
-    <li>
-      GNOME as Desktop Environment, although it is more recommended than
-      necessary since it can also be installed on Ubuntu Server.
+        >A fresh install of Ubuntu Server</a
+      >, only 24.04 LTS version.
     </li>
     <li>
       A stable connection, to avoid errors when downloading apps and packages
     </li>
   </ul>
 
-  <h2>Quick Installation</h2>
+  <p>
+    You can follow the Ubuntu Server installation guide as suggested above. Use
+    disk encryption only if you deem it necessary.
+    <i>Do not install any other packages or SSH keys; they are not needed</i>.
+    Once the installation is complete and you are logged in, you should leave
+    the system as is.
+  </p>
+
+  <h2>Installation</h2>
   <p>To install Omarell, simply run the following command in your terminal:</p>
 
   <div class="code-block">
-    <code>wget -qO- https://omakasui.org/omarell-legacy | bash</code>
+    <code>wget -qO- https://omakasui.org/omarell | bash</code>
     <button
       class="copy-btn"
-      data-command="wget -qO- https://omakasui.org/omarell-legacy | bash"
+      data-command="wget -qO- https://omakasui.org/omarell | bash"
     >
       <svg
         width="16"
@@ -65,18 +60,6 @@
         ></path>
       </svg>
     </button>
-  </div>
-</div>
-
-<div class="content-section">
-  <h2>Experimental Version</h2>
-
-  <div class="warning-box">
-    <span class="warning-icon">!</span>
-    <div class="warning-content">
-      <strong>Warning:</strong> The development version may contain unstable
-      features and bugs.
-    </div>
   </div>
 
   <p>
@@ -106,12 +89,50 @@
     </button>
   </div>
 
-  <div class="note-box">
-    <span class="note-icon">></span>
-    <div class="note-content">
-      <strong>Note:</strong> This version is designed for a fresh new Ubuntu
-      Server (24.04) installation, without a graphical interface and with
-      minimal pre-installed packages.
+  <div class="warning-box">
+    <span class="warning-icon">!</span>
+    <div class="warning-content">
+      <strong>Warning:</strong> The development version may contain unstable
+      features and bugs.
+    </div>
+  </div>
+</div>
+
+<div class="content-section">
+  <h2>Installation (Legacy)</h2>
+  <p>
+    A <b>legacy</b> version of Omarell, <i>based on Ubuntu Desktop</i>, is also
+    available. To do this, simply install any version of Ubuntu Desktop and,
+    once logged in, run the following command in the terminal:
+  </p>
+
+  <div class="code-block">
+    <code>wget -qO- https://omakasui.org/omarell-legacy | bash</code>
+    <button
+      class="copy-btn"
+      data-command="wget -qO- https://omakasui.org/omarell-legacy | bash"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path
+          d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+        ></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="warning-box">
+    <span class="warning-icon">!</span>
+    <div class="warning-content">
+      <strong>Warning:</strong> This version is no longer considered essential
+      to the project and may not receive frequent updates.
     </div>
   </div>
 </div>
