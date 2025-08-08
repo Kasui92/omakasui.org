@@ -148,61 +148,6 @@ h3 {
   word-break: break-all;
 }
 
-.copy-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.copy-btn svg {
-  width: 18px;
-  height: 18px;
-  fill: #89b29ee6;
-  transition: fill 0.3s ease;
-}
-
-.copy-btn:hover {
-  background-color: rgba(137, 178, 158, 0.1);
-}
-
-.copy-btn:hover svg {
-  fill: #c5d4c8;
-}
-
-.copy-btn.copied {
-  animation: bounce 0.6s ease;
-}
-
-/* Tooltip per feedback di copia */
-.copy-btn::after {
-  content: "Copied!";
-  position: absolute;
-  top: -35px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #89b29ee6;
-  color: #221e22;
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  white-space: nowrap;
-}
-
-.copy-btn.copied::after {
-  opacity: 1;
-}
-
 /* Responsive design */
 @media (max-width: 1024px) {
   main {
@@ -222,27 +167,5 @@ h3 {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
-  }
-
-  .copy-btn {
-    align-self: flex-end;
-    width: auto;
-  }
-}
-
-/* Animation for copy feedback */
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-8px);
-  }
-  60% {
-    transform: translateY(-4px);
   }
 }

@@ -57,19 +57,6 @@
     <link rel="stylesheet" href="/assets/styles/globals.css" />
   </head>
   <body>
-    <!-- SVG Icons Sprite -->
-    <div style="display: none">
-      <svg xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <symbol id="copy-icon" viewBox="0 0 24 24">
-            <path
-              d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
-            />
-          </symbol>
-        </defs>
-      </svg>
-    </div>
-
     <main role="main" aria-label="Main content" id="main-content">
       <header>
         <h1>$ omakasui</h1>
@@ -118,15 +105,15 @@
             >
           </h3>
           <p>
-            Basically
+            Opinionated <strong>Ubuntu</strong>/<strong>Gnome</strong> Setup,
+            powered by
             <a
-              href="https://omakub.org"
+              href="https://github.com/forge-ext/forge"
               target="_blank"
-              title="Omakub - DHH's Ubuntu desktop setup"
+              title="View Forge source code on GitHub"
               rel="noopener"
-              ><strong>Omakub</strong></a
+              >Forge</a
             >
-            with some fancy, totally optional (... and unrequested!) tweaks
           </p>
           <div
             class="command-box"
@@ -136,16 +123,6 @@
             <code aria-label="Installation command"
               >wget -qO- https://omakasui.org/omarell | bash</code
             >
-            <button
-              class="copy-btn"
-              data-command="curl -sSL https://omakasui.org/omarell | bash"
-              title="Copy installation command to clipboard"
-              aria-label="Copy omarell installation command"
-            >
-              <svg>
-                <use href="#copy-icon"></use>
-              </svg>
-            </button>
           </div>
         </div>
 
@@ -160,7 +137,7 @@
               >omasway</a
             >
           </h3>
-          <p>Opinionated <strong>Ubuntu/Sway</strong> Setup</p>
+          <p>Opinionated <strong>Ubuntu</strong>/<strong>Sway</strong> Setup</p>
           <div
             class="command-box"
             role="group"
@@ -169,16 +146,6 @@
             <code aria-label="Installation command"
               >wget -qO- https://omakasui.org/omasway | bash</code
             >
-            <button
-              class="copy-btn"
-              data-command="curl -sSL https://omakasui.org/omasway | bash"
-              title="Copy installation command to clipboard"
-              aria-label="Copy omasway installation command"
-            >
-              <svg>
-                <use href="#copy-icon"></use>
-              </svg>
-            </button>
           </div>
         </div>
       </section>
