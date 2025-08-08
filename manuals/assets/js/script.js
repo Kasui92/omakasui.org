@@ -72,25 +72,25 @@ class DocumentationApp {
     const navMenu = document.getElementById("navMenu");
     navMenu.innerHTML = "";
 
-    Object.entries(this.config.pages).forEach(([pageKey, pageData]) => {
-      const navItem = this.createNavigationItem(pageKey, pageData);
+    Object.entries(this.config.pages).forEach(([pageKey, pageData], index) => {
+      const navItem = this.createNavigationItem(pageKey, pageData, index);
       navMenu.appendChild(navItem);
     });
 
     this.navLinks = document.querySelectorAll(".nav-link");
   }
 
-  createNavigationItem(pageKey, pageData) {
+  createNavigationItem(pageKey, pageData, index) {
     const li = document.createElement("li");
     li.className = "nav-item";
 
-    const link = this.createNavigationLink(pageKey, pageData);
+    const link = this.createNavigationLink(pageKey, pageData, index);
     li.appendChild(link);
 
     return li;
   }
 
-  createNavigationLink(pageKey, pageData) {
+  createNavigationLink(pageKey, pageData, index) {
     const link = document.createElement("a");
     link.href = "#";
     link.className = `nav-link${
@@ -98,20 +98,20 @@ class DocumentationApp {
     }`;
     link.dataset.page = pageKey;
 
-    const icon = this.createIcon(pageData.icon);
+    const order = this.createOrder(index);
     const text = this.createText(pageData.title);
 
-    link.appendChild(icon);
+    link.appendChild(order);
     link.appendChild(text);
 
     return link;
   }
 
-  createIcon(iconText) {
-    const icon = document.createElement("span");
-    icon.className = "icon";
-    icon.textContent = iconText;
-    return icon;
+  createOrder(index) {
+    const order = document.createElement("span");
+    order.className = "order";
+    order.textContent = `${index + 1}.`;
+    return order;
   }
 
   createText(textContent) {
