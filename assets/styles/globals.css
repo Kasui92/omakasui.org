@@ -148,6 +148,12 @@ h3 {
   word-break: break-all;
 }
 
+.project-links {
+  font-size: 0.8rem;
+  color: #bbb;
+  font-style: italic;
+}
+
 /* Responsive design */
 @media (max-width: 1024px) {
   main {
