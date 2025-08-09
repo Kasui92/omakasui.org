@@ -64,8 +64,15 @@ class DocumentationApp {
     this.setDocumentTitle();
   }
 
-  setDocumentTitle() {
-    document.title = this.config.siteTitle;
+  setDocumentTitle(pageKey = null) {
+    const currentPageKey = pageKey || this.currentPage;
+    const pageTitle = this.config.pages[currentPageKey]?.title;
+
+    if (pageTitle) {
+      document.title = `${this.config.siteTitle} - ${pageTitle}`;
+    } else {
+      document.title = this.config.siteTitle;
+    }
   }
 
   generateNavigation() {
@@ -369,6 +376,7 @@ class DocumentationApp {
       this.processHeadings();
       this.handleInitialHash();
       this.updatePageNavigation();
+      this.setDocumentTitle(validatedPage); // Update title with current page
     });
   }
 

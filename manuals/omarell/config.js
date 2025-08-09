@@ -26,5 +26,5 @@ window.DOCS_CONFIG = {
     },
   },
   defaultPage: "home",
-  siteTitle: "Omarell Docs",
+  siteTitle: "Omarell Manual",
 };
