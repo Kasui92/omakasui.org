@@ -604,7 +604,7 @@ body {
   margin-right: 1rem;
 }
 
-/* App Cards & Function Cards - Shared Base Styles */
+/* App Cards & Function Cards */
 .app-card,
 .function-card {
   background-color: #2a2a2a;
@@ -740,6 +740,22 @@ body {
 
 .link-card:active {
   transform: translateY(0);
+}
+
+/* Video */
+.video-container {
+  margin: 2rem 0;
+}
+
+.video-container video {
+  border-radius: var(--border-radius);
+}
+
+.video-caption {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-top: 0.5rem;
+  font-style: italic;
 }
 
 /* Footer */

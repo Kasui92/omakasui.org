@@ -8,6 +8,10 @@ window.DOCS_CONFIG = {
       file: "docs/installation.html",
       title: "Installation",
     },
+    features: {
+      file: "docs/features.html",
+      title: "Features",
+    },
     applications: {
       file: "docs/applications.html",
       title: "Applications",
