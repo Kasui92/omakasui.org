@@ -4,27 +4,7 @@ window.DOCS_CONFIG = {
       file: "docs/home.html",
       title: "Home",
     },
-    installation: {
-      file: "docs/installation.html",
-      title: "Installation",
-    },
-    features: {
-      file: "docs/features.html",
-      title: "Features",
-    },
-    applications: {
-      file: "docs/applications.html",
-      title: "Applications",
-    },
-    hotkeys: {
-      file: "docs/hotkeys.html",
-      title: "Hotkeys",
-    },
-    "shell-functions": {
-      file: "docs/shell-functions.html",
-      title: "Shell Functions",
-    },
   },
   defaultPage: "home",
-  siteTitle: "Omarell Manual",
+  siteTitle: "The Omarell Manual",
 };
