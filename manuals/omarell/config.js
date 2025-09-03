@@ -12,6 +12,14 @@ window.DOCS_CONFIG = {
       file: "docs/features.html",
       title: "Features",
     },
+    hotkeys: {
+      file: "docs/hotkeys.html",
+      title: "Hotkeys",
+    },
+    "shell-functions": {
+      file: "docs/shell-functions.html",
+      title: "Shell Functions",
+    },
   },
   defaultPage: "home",
   siteTitle: "The Omarell Manual",
