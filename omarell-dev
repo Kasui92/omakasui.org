@@ -1,2 +1,2 @@
-OMARELL_REF=dev
+OMAKUB_REF=dev
 eval "$(wget -qO- https://raw.githubusercontent.com/Kasui92/omarell/main/boot.sh)"
