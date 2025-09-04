@@ -208,10 +208,13 @@ class DocumentationApp {
   }
 
   bindHashChange() {
-    window.addEventListener("hashchange", () => {
+    window.addEventListener("hashchange", (e) => {
       if (window.location.hash) {
         const headingId = window.location.hash.substring(1);
-        this.scrollToHeading(headingId);
+        // Only handle hashchange if it's not from our own navigation
+        setTimeout(() => {
+          this.scrollToHeading(headingId);
+        }, 50);
       }
     });
   }
@@ -243,6 +246,9 @@ class DocumentationApp {
     // Handle copy buttons
     if (this.handleCopyButtonClick(target, e)) return;
 
+    // Handle anchor links (category-nav and similar)
+    if (this.handleAnchorLinkClick(target, e)) return;
+
     // Handle navigation links
     if (this.handleNavigationClick(target, e)) return;
 
@@ -251,6 +257,34 @@ class DocumentationApp {
 
     // Close sidebar if clicking outside
     this.handleOutsideClick(target);
+  }
+
+  handleAnchorLinkClick(target, e) {
+    const link = target.closest("a[href^='#']");
+    if (
+      link &&
+      !target.closest(".nav-link") &&
+      !target.closest(".heading-anchor")
+    ) {
+      const href = link.getAttribute("href");
+      if (href && href.startsWith("#") && href.length > 1) {
+        e.preventDefault();
+        const headingId = href.substring(1);
+
+        // Update URL hash
+        const url = new URL(window.location);
+        if (!url.pathname.endsWith("/")) {
+          url.pathname += "/";
+        }
+        url.hash = headingId;
+        history.pushState(null, "", url);
+
+        // Smooth scroll to target
+        this.scrollToHeading(headingId);
+        return true;
+      }
+    }
+    return false;
   }
 
   handleCopyButtonClick(target, e) {
@@ -349,6 +383,9 @@ class DocumentationApp {
       url.pathname += "/";
     }
     url.searchParams.set("page", page);
+
+    // Clear hash when changing pages to avoid conflicts
+    url.hash = "";
     history.pushState({ page }, "", url);
 
     await this.loadPage(page, false);
@@ -370,13 +407,16 @@ class DocumentationApp {
       this.updateBrowserHistory(validatedPage);
     }
 
-    // Use requestAnimationFrame to ensure DOM is updated before scrolling and processing headings
+    // Use requestAnimationFrame to ensure DOM is updated before processing
     requestAnimationFrame(() => {
-      this.scrollToTop();
+      // Only scroll to top if there's no hash in URL
+      if (!window.location.hash) {
+        this.scrollToTop();
+      }
       this.processHeadings();
       this.handleInitialHash();
       this.updatePageNavigation();
-      this.setDocumentTitle(validatedPage); // Update title with current page
+      this.setDocumentTitle(validatedPage);
     });
   }
 
@@ -416,9 +456,9 @@ class DocumentationApp {
   }
 
   scrollToTop() {
-    // Try multiple scroll targets to ensure it works
+    // Use immediate scroll for top to avoid conflicts with smooth anchor scrolling
     try {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "instant" });
     } catch (e) {
       // Fallback for older browsers
       window.scrollTo(0, 0);
@@ -428,7 +468,7 @@ class DocumentationApp {
     const mainContent = document.querySelector(".main-content");
     if (mainContent) {
       try {
-        mainContent.scrollTo({ top: 0, behavior: "smooth" });
+        mainContent.scrollTo({ top: 0, behavior: "instant" });
       } catch (e) {
         mainContent.scrollTop = 0;
       }
@@ -438,7 +478,7 @@ class DocumentationApp {
     const contentWrapper = document.querySelector(".content-wrapper");
     if (contentWrapper) {
       try {
-        contentWrapper.scrollTo({ top: 0, behavior: "smooth" });
+        contentWrapper.scrollTo({ top: 0, behavior: "instant" });
       } catch (e) {
         contentWrapper.scrollTop = 0;
       }
@@ -521,7 +561,14 @@ class DocumentationApp {
   scrollToHeading(headingId) {
     const element = document.getElementById(headingId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Use requestAnimationFrame to ensure smooth scrolling
+      requestAnimationFrame(() => {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+        });
+      });
     }
   }
 
@@ -529,9 +576,10 @@ class DocumentationApp {
     // Handle hash in URL on page load
     if (window.location.hash) {
       const headingId = window.location.hash.substring(1);
+      // Use a longer delay for initial hash to ensure page is fully loaded
       setTimeout(() => {
         this.scrollToHeading(headingId);
-      }, 100);
+      }, 150);
     }
   }
 

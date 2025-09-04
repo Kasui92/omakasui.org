@@ -26,6 +26,11 @@
   box-sizing: border-box;
 }
 
+/* Improve smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Base Styles */
 body {
   font-family: monospace;
