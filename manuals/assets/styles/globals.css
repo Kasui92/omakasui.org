@@ -758,6 +758,41 @@ body {
   font-style: italic;
 }
 
+/* Image Gallery */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.image-box {
+  text-align: center;
+}
+
+.image-box img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.image-box img:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(137, 178, 158, 0.3);
+}
+
+.image-caption {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-top: 0.5rem;
+  font-style: italic;
+  text-align: center;
+}
+
 /* Footer */
 .doc-footer {
   margin-top: 4rem;
