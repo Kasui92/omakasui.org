@@ -62,6 +62,17 @@ body {
   flex: 1;
 }
 
+/* Responsive Utilities */
+.responsive-break {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .responsive-break {
+    display: inline;
+  }
+}
+
 /* Mobile Header */
 .mobile-header {
   display: none;
