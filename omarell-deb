@@ -1,2 +1,0 @@
-OMAKUB_REF=deb
-eval "$(wget -qO- https://raw.githubusercontent.com/Kasui92/omarell/main/boot.sh)"
