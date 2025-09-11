@@ -6,12 +6,36 @@
     <meta name="description" content="The Omaforge Handbook" />
     <meta name="author" content="Luca Pattocchio (Kasui)" />
     <title>Omaforge Manual</title>
-    <link rel="stylesheet" href="../assets/styles/globals.css" />
-    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+
     <link rel="preload" href="config.js" as="script" />
     <link rel="preload" href="../assets/js/script.js" as="script" />
+
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+
+    <link rel="stylesheet" href="../assets/styles/globals.css" />
+    <link rel="stylesheet" href="../assets/styles/webfonts.css" />
   </head>
   <body>
+    <!-- Archived Project Banner -->
+    <div
+      class="archived-banner"
+      onclick="window.open('https://github.com/Kasui92/omaforge', '_blank')"
+    >
+      <div class="archived-content">
+        <i
+          class="archived-text nf nf-fa-warning"
+          aria-label="Experimental"
+          title="Experimental"
+        ></i>
+        <span class="archived-text">
+          <span class="sm-hidden"
+            >This project has been archived on 2025-09-10.</span
+          >
+          <span class="sm-only">Archived!</span>
+        </span>
+      </div>
+    </div>
+
     <!-- Desktop toggle button -->
     <button
       class="toggle-btn desktop-toggle"
