@@ -1,3 +1,0 @@
-OMAKUB_REPO=Kasui92/omarell
-OMAKUB_REF=omakub/refactor
-eval "$(wget -qO- https://raw.githubusercontent.com/Kasui92/omarell/omakub/refactor/boot.sh)"
