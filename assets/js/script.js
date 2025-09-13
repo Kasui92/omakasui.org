@@ -3,142 +3,109 @@
  * @returns {Promise<void>}
  */
 async function loadProjects() {
-  const scriptsSection = document.querySelector(".scripts");
-  const scriptsContainer =
-    scriptsSection.querySelector(".scripts-container") || scriptsSection;
-  const heading = scriptsSection.querySelector("#scripts-heading");
+  const loadingPlaceholder = document.getElementById("loading-placeholder");
+  const errorPlaceholder = document.getElementById("error-placeholder");
+  const scriptsContainer = document.getElementById("scripts-container");
+  const hiddenProjectsSection = document.getElementById("hidden-projects");
 
-  // Show loading placeholder
-  showLoadingPlaceholder(scriptsContainer, heading);
+  // Show loading, hide error
+  showElement(loadingPlaceholder);
+  hideElement(errorPlaceholder);
 
   try {
     const response = await fetch("/data/projects.json");
     const projects = await response.json();
 
-    // Clear loading placeholder
-    clearContainer(scriptsContainer, heading);
+    // Hide loading placeholder
+    hideElement(loadingPlaceholder);
 
     // Filter projects
     const visibleProjects = projects.filter((project) => !project.hidden);
     const hiddenProjects = projects.filter((project) => project.hidden);
 
-    // Render visible projects
+    // Clear and render visible projects
+    scriptsContainer.innerHTML = "";
     visibleProjects.forEach((project) => {
       const card = createProjectCard(project);
       scriptsContainer.appendChild(card);
     });
 
-    // Render hidden projects section if there are any
+    // Setup hidden projects if any
     if (hiddenProjects.length > 0) {
-      createHiddenProjectsSection(scriptsContainer, hiddenProjects);
+      setupHiddenProjects(hiddenProjects);
+      showElement(hiddenProjectsSection);
+    } else {
+      hideElement(hiddenProjectsSection);
     }
 
     // Initialize animations after cards are rendered
     fadeInOnScroll();
   } catch (error) {
     console.error("Error loading projects:", error);
-    showErrorPlaceholder(scriptsContainer, heading);
+    hideElement(loadingPlaceholder);
+    showElement(errorPlaceholder);
   }
 }
 
 /**
- * Show loading placeholder
- * @param {HTMLElement} container
- * @param {HTMLElement} heading
+ * Show element by removing hidden class
+ * @param {HTMLElement} element
  */
-function showLoadingPlaceholder(container, heading) {
-  container.innerHTML = "";
-  if (heading) {
-    container.appendChild(heading);
-  }
-
-  const loadingDiv = document.createElement("div");
-  loadingDiv.className = "loading-placeholder";
-  loadingDiv.innerHTML = `
-    <div class="loading-spinner"></div>
-    <p>Loading projects...</p>
-  `;
-  container.appendChild(loadingDiv);
+function showElement(element) {
+  if (element) element.classList.remove("hidden");
 }
 
 /**
- * Show error placeholder
- * @param {HTMLElement} container
- * @param {HTMLElement} heading
+ * Hide element by adding hidden class
+ * @param {HTMLElement} element
  */
-function showErrorPlaceholder(container, heading) {
-  container.innerHTML = "";
-  if (heading) {
-    container.appendChild(heading);
-  }
-
-  const errorDiv = document.createElement("div");
-  errorDiv.className = "loading-placeholder";
-  errorDiv.innerHTML = `
-    <p>⚠️ Error loading projects. Please refresh the page.</p>
-  `;
-  container.appendChild(errorDiv);
+function hideElement(element) {
+  if (element) element.classList.add("hidden");
 }
 
 /**
- * Clear container but keep heading
- * @param {HTMLElement} container
- * @param {HTMLElement} heading
- */
-function clearContainer(container, heading) {
-  container.innerHTML = "";
-  if (heading) {
-    container.appendChild(heading);
-  }
-}
-
-/**
- * Create hidden projects section with accordion
- * @param {HTMLElement} container
+ * Setup hidden projects functionality
  * @param {Array} hiddenProjects
  */
-function createHiddenProjectsSection(container, hiddenProjects) {
-  const hiddenSection = document.createElement("div");
-  hiddenSection.className = "hidden-projects";
+function setupHiddenProjects(hiddenProjects) {
+  const hiddenToggle = document.getElementById("hidden-toggle");
+  const hiddenCount = document.getElementById("hidden-count");
+  const hiddenContainer = document.getElementById("hidden-projects-container");
+  const hiddenScriptsContainer = document.getElementById(
+    "hidden-scripts-container"
+  );
 
-  // Create toggle button
-  const toggleButton = document.createElement("button");
-  toggleButton.className = "hidden-toggle";
-  toggleButton.innerHTML = `
-    <span>Hidden (${hiddenProjects.length})</span>
-    <span class="arrow">▼</span>
-  `;
+  // Update count
+  hiddenCount.textContent = `( ${hiddenProjects.length} hidden items )`;
 
-  // Create hidden projects container
-  const hiddenContainer = document.createElement("div");
-  hiddenContainer.className = "hidden-projects-container";
-
-  // Add hidden projects to container
+  // Clear and populate hidden projects
+  hiddenScriptsContainer.innerHTML = "";
   hiddenProjects.forEach((project) => {
     const card = createProjectCard(project);
-    hiddenContainer.appendChild(card);
+    hiddenScriptsContainer.appendChild(card);
   });
 
+  // Remove existing event listeners by cloning the element
+  const newToggle = hiddenToggle.cloneNode(true);
+  hiddenToggle.parentNode.replaceChild(newToggle, hiddenToggle);
+
   // Add toggle functionality
-  toggleButton.addEventListener("click", (event) => {
+  newToggle.addEventListener("click", (event) => {
     event.preventDefault();
 
-    const isExpanded = toggleButton.classList.contains("expanded");
+    const isExpanded = newToggle.getAttribute("aria-expanded") === "true";
+    const newState = !isExpanded;
 
-    toggleButton.classList.toggle("expanded");
-    hiddenContainer.classList.toggle("expanded");
+    newToggle.setAttribute("aria-expanded", newState);
+    hiddenContainer.classList.toggle("expanded", newState);
 
     // Re-run fade-in animation for newly visible hidden cards
-    if (hiddenContainer.classList.contains("expanded")) {
+    if (newState) {
       setTimeout(() => {
         fadeInOnScroll();
       }, 100);
     }
   });
-
-  hiddenSection.appendChild(toggleButton);
-  hiddenSection.appendChild(hiddenContainer);
-  container.appendChild(hiddenSection);
 }
 
 /**

@@ -94,7 +94,38 @@
       <section class="scripts" aria-labelledby="scripts-heading">
         <h2 id="scripts-heading">$ ls omakasui/</h2>
 
-        <!-- Project cards will be generated dynamically by JavaScript -->
+        <!-- Loading placeholder -->
+        <div class="loading-placeholder" id="loading-placeholder">
+          <div class="loading-spinner" aria-hidden="true"></div>
+          <p>Loading projects...</p>
+        </div>
+
+        <!-- Error placeholder -->
+        <div class="error-placeholder hidden" id="error-placeholder">
+          <p>⚠️ Error loading projects. Please refresh the page.</p>
+        </div>
+
+        <!-- Scripts container -->
+        <div class="scripts-container" id="scripts-container"></div>
+
+        <!-- Hidden projects section -->
+        <div class="hidden-projects hidden" id="hidden-projects">
+          <button
+            class="hidden-toggle"
+            id="hidden-toggle"
+            aria-expanded="false"
+          >
+            <span id="hidden-count">( 0 hidden items )</span>
+            <span class="arrow" aria-hidden="true">▼</span>
+          </button>
+          <div class="hidden-projects-container" id="hidden-projects-container">
+            <div
+              class="hidden-scripts-container"
+              id="hidden-scripts-container"
+            ></div>
+          </div>
+          <a href="/manuals" class="cd-manuals-link">$ cd omakasui/manuals</a>
+        </div>
       </section>
 
       <section class="credits" aria-labelledby="credits-heading">

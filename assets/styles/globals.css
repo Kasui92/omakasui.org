@@ -1,3 +1,22 @@
+/* CSS Variables */
+:root {
+  --primary-color: #89b29ee6;
+  --primary-hover: #c5d4c8;
+  --text-color: #e0e0e0;
+  --text-light: #ccc;
+  --text-lighter: #bbb;
+  --text-muted: #666;
+  --text-heading: #f2f2f2e6;
+  --text-subtitle: #d8d9d9e6;
+  --bg-color: #221e22;
+  --bg-card: #2a2a2a;
+  --bg-code: #1a1a1a;
+  --border-color: #333;
+  --border-highlight: #444;
+  --accent-color: #e74c3c;
+  --transition: all 0.3s ease;
+}
+
 /* Reset e base styles */
 * {
   margin: 0;
@@ -6,13 +25,13 @@
 }
 
 a {
-  color: #89b29ee6;
+  color: var(--primary-color);
   font-weight: 700;
   transition: color 0.3s ease;
 }
 
 a:hover {
-  color: #c5d4c8;
+  color: var(--primary-hover);
 }
 
 /* Screen reader only utility class */
@@ -28,11 +47,16 @@ a:hover {
   border: 0;
 }
 
+/* Hidden utility class */
+.hidden {
+  display: none !important;
+}
+
 body {
   font-family: monospace;
   line-height: 1.6;
-  color: #e0e0e0;
-  background-color: #221e22;
+  color: var(--text-color);
+  background-color: var(--bg-color);
   font-size: 14px;
 }
 
@@ -44,12 +68,12 @@ header {
 
 header h1 {
   font-size: 3rem;
-  color: #89b29ee6;
+  color: var(--primary-color);
   font-weight: 700;
 }
 
 .subtitle {
-  color: #d8d9d9e6;
+  color: var(--text-subtitle);
   font-size: 1.2rem;
 }
 
@@ -67,14 +91,14 @@ header {
 }
 
 h2 {
-  color: #f2f2f2e6;
+  color: var(--text-heading);
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
   font-weight: 600;
 }
 
 h3 {
-  color: #f2f2f2e6;
+  color: var(--text-heading);
   margin-bottom: 1rem;
   font-size: 1.2rem;
   font-weight: normal;
@@ -84,11 +108,11 @@ h3 {
 .intro p {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #ccc;
+  color: var(--text-light);
 }
 
 .highlight {
-  color: #89b29ee6;
+  color: var(--primary-color);
   font-style: italic;
 }
 
@@ -96,13 +120,13 @@ h3 {
 .credits {
   margin-top: 4rem;
   padding-top: 2rem;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--border-color);
 }
 
 .credits p {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: #aaa;
+  color: var(--text-lighter);
   text-align: center;
   font-style: italic;
   margin-bottom: 1rem;
@@ -110,8 +134,8 @@ h3 {
 
 /* Script cards */
 .script-card {
-  background-color: #2a2a2a;
-  border: 1px solid #333;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 2rem;
   margin-bottom: 2rem;
@@ -119,18 +143,18 @@ h3 {
 }
 
 .script-card:hover {
-  border-color: #89b29ee6;
+  border-color: var(--primary-color);
 }
 
 .script-card p {
-  color: #bbb;
+  color: var(--text-lighter);
   margin-bottom: 1.5rem;
 }
 
 /* Command box */
 .command-box {
-  background-color: #1a1a1a;
-  border: 1px solid #444;
+  background-color: var(--bg-code);
+  border: 1px solid var(--border-highlight);
   border-radius: 4px;
   padding: 1rem;
   margin: 1.5rem 0;
@@ -142,7 +166,7 @@ h3 {
 
 .command-box code {
   flex: 1;
-  color: #89b29ee6;
+  color: var(--primary-color);
   font-size: 0.9rem;
   background: none;
   word-break: break-all;
@@ -150,15 +174,16 @@ h3 {
 
 .project-links {
   font-size: 0.8rem;
-  color: #bbb;
+  color: var(--text-lighter);
   font-style: italic;
 }
 
 /* Loading placeholder */
-.loading-placeholder {
+.loading-placeholder,
+.error-placeholder {
   text-align: center;
   padding: 3rem 1rem;
-  color: #ccc;
+  color: var(--text-light);
   min-height: 200px;
   display: flex;
   flex-direction: column;
@@ -170,8 +195,8 @@ h3 {
 .loading-placeholder .loading-spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid #333;
-  border-top: 3px solid #89b29ee6;
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--primary-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin-bottom: 1rem;
@@ -193,30 +218,32 @@ h3 {
 
 .hidden-toggle {
   background: transparent;
-  border: 2px solid #89b29ee6;
-  color: #89b29ee6;
-  padding: 0.8rem 1.5rem;
+  border: none;
+  color: var(--text-muted);
+  padding: 0.5rem 0;
   font-family: monospace;
   font-size: 0.9rem;
+  font-style: italic;
   cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin: 0 auto;
+  margin: 0;
+  text-align: left;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .hidden-toggle:hover {
-  background: #89b29ee6;
-  color: #221e22;
+  color: var(--primary-color);
 }
 
 .hidden-toggle .arrow {
   transition: transform 0.3s ease;
 }
 
-.hidden-toggle.expanded .arrow {
+.hidden-toggle[aria-expanded="true"] .arrow {
   transform: rotate(180deg);
 }
 
@@ -233,8 +260,25 @@ h3 {
 
 .hidden-projects-container .script-card {
   opacity: 0.7;
-  border-left: 3px solid #e74c3c;
+  border-left: 3px solid var(--accent-color);
   padding-left: 1.2rem;
+}
+
+.cd-manuals-link {
+  display: block;
+  color: var(--text-heading);
+  font-family: monospace;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 1.5rem 0 0.5rem 0;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.cd-manuals-link:hover {
+  color: var(--primary-color);
+  text-decoration: none;
 }
 
 /* Responsive design */
