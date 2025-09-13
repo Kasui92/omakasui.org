@@ -30,7 +30,7 @@
     "name": "omarell",
     "description": "A personal Omakube fork, less apps and more focus",
     "installCommand": "curl -fsSL https://omakasui.org/omarell | bash",
-    "githubUrl": null,
+    "githubUrl": "https://github.com/Kasui92/omarell",
     "manualUrl": null,
     "status": [
       {
