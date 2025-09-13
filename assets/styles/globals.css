@@ -154,6 +154,89 @@ h3 {
   font-style: italic;
 }
 
+/* Loading placeholder */
+.loading-placeholder {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #ccc;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.loading-placeholder .loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #333;
+  border-top: 3px solid #89b29ee6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hidden projects section */
+.hidden-projects {
+  margin-top: 2rem;
+}
+
+.hidden-toggle {
+  background: transparent;
+  border: 2px solid #89b29ee6;
+  color: #89b29ee6;
+  padding: 0.8rem 1.5rem;
+  font-family: monospace;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 auto;
+}
+
+.hidden-toggle:hover {
+  background: #89b29ee6;
+  color: #221e22;
+}
+
+.hidden-toggle .arrow {
+  transition: transform 0.3s ease;
+}
+
+.hidden-toggle.expanded .arrow {
+  transform: rotate(180deg);
+}
+
+.hidden-projects-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  margin-top: 1rem;
+}
+
+.hidden-projects-container.expanded {
+  max-height: 2000px; /* Large enough to show all content */
+}
+
+.hidden-projects-container .script-card {
+  opacity: 0.7;
+  border-left: 3px solid #e74c3c;
+  padding-left: 1.2rem;
+}
+
 /* Responsive design */
 @media (max-width: 1024px) {
   main {
