@@ -6,6 +6,7 @@
     <meta name="description" content="The Omarell Handbook" />
     <meta name="author" content="Luca Pattocchio (Kasui)" />
     <title>Omarell Manual</title>
+
     <link rel="preload" href="config.js" as="script" />
     <link rel="preload" href="../assets/js/script.js" as="script" />
 
@@ -16,28 +17,28 @@
     <link rel="stylesheet" href="../assets/styles/webfonts.css" />
   </head>
   <body>
-    <!-- Desktop toggle button -->
-    <button
-      class="toggle-btn desktop-toggle"
-      id="toggleBtnDesktop"
-      title="Table of contents"
+    <!-- Archived Project Banner -->
+    <div
+      class="archived-banner"
+      onclick="window.open('https://github.com/Kasui92/omarell', '_blank')"
     >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+      <div class="archived-content">
+        <i
+          class="archived-text nf nf-fa-warning"
+          aria-label="Experimental"
+          title="Experimental"
+        ></i>
+        <span class="archived-text">
+          <span class="sm-hidden"
+            >This project has been archived on 2025-09-13.</span
+          >
+          <span class="sm-only">Archived!</span>
+        </span>
+      </div>
+    </div>
 
     <!-- Mobile header -->
     <header class="mobile-header">
-      <button
-        class="toggle-btn mobile-toggle"
-        id="toggleBtnMobile"
-        title="Table of contents"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
       <h1 class="mobile-title">Omarell: Manual</h1>
     </header>
 
@@ -53,36 +54,6 @@
               <div class="loading-placeholder">
                 <h1>Loading...</h1>
                 <p>Setting up documentation...</p>
-              </div>
-            </div>
-
-            <!-- Navigation controls -->
-            <div
-              class="content-section"
-              id="pageNavigation"
-              style="display: none"
-            >
-              <div class="nav-links-container">
-                <a
-                  href="#"
-                  class="prev-nav-link"
-                  id="prevBtn"
-                  title="Previous chapter"
-                  style="display: none"
-                >
-                  <span class="arrow">←</span>
-                  <span id="prevTitle"></span>
-                </a>
-                <a
-                  href="#"
-                  class="next-nav-link"
-                  id="nextBtn"
-                  title="Next chapter"
-                  style="display: none"
-                >
-                  <span id="nextTitle"></span>
-                  <span class="arrow">→</span>
-                </a>
               </div>
             </div>
           </div>
