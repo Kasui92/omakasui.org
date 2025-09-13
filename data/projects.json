@@ -15,8 +15,14 @@
     "description": "A fork of <a href=\"https://omakub.org\" target=\"_blank\" title=\"View Omakub website\" rel=\"noopener\">Omakub</a>, weighed down and more refined",
     "installCommand": "curl -fsSL https://omakasui.org/omakube | bash",
     "githubUrl": "https://github.com/Kasui92/omakube",
-    "manualUrl": "/manuals/omakube/",
-    "status": [],
+    "manualUrl": null,
+    "status": [
+      {
+        "icon": "nf-md-crane",
+        "label": "Work in progress",
+        "title": "Work in progress"
+      }
+    ],
     "hidden": false
   },
   {
@@ -24,8 +30,8 @@
     "name": "omarell",
     "description": "A personal Omakube fork, less apps and more focus",
     "installCommand": "curl -fsSL https://omakasui.org/omarell | bash",
-    "githubUrl": "https://github.com/Kasui92/omarell",
-    "manualUrl": "/manuals/omarell/",
+    "githubUrl": null,
+    "manualUrl": null,
     "status": [
       {
         "icon": "nf-md-archive",
@@ -62,7 +68,7 @@
     "description": "Just like Omakube, but for <strong>Debian</strong>",
     "installCommand": "curl -fsSL https://omakasui.org/omadeb | bash",
     "githubUrl": "https://github.com/Kasui92/omadeb",
-    "manualUrl": "/manuals/omadeb/",
+    "manualUrl": null,
     "status": [
       {
         "icon": "nf-md-crane",
