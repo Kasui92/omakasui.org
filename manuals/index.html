@@ -43,9 +43,36 @@
       </header>
 
       <section class="manuals-library" aria-labelledby="manuals-heading">
-        <h2 class="sr-only" id="manuals-heading">Available Manuals</h2>
+        <h2 id="manuals-heading">$ ls omakasui/manuals</h2>
 
-        <!-- Manuals grid will be generated dynamically by JavaScript -->
+        <!-- Loading placeholder -->
+        <div class="loading-placeholder" id="loading-placeholder">
+          <div class="loading-spinner" aria-hidden="true"></div>
+          <p>Loading manuals...</p>
+        </div>
+
+        <!-- Error placeholder -->
+        <div class="error-placeholder hidden" id="error-placeholder">
+          <p>⚠️ Error loading manuals. Please refresh the page.</p>
+        </div>
+
+        <!-- Manuals grid -->
+        <div class="manuals-grid" id="manuals-grid"></div>
+
+        <!-- Hidden manuals section -->
+        <div class="hidden-manuals hidden" id="hidden-manuals">
+          <button
+            class="hidden-toggle"
+            id="hidden-toggle"
+            aria-expanded="false"
+          >
+            <span id="hidden-count">( 0 hidden items )</span>
+            <span class="arrow" aria-hidden="true">▼</span>
+          </button>
+          <div class="hidden-manuals-container" id="hidden-manuals-container">
+            <div class="hidden-manuals-grid" id="hidden-manuals-grid"></div>
+          </div>
+        </div>
       </section>
 
       <footer class="credits" aria-labelledby="credits-heading">

@@ -6,6 +6,7 @@
   --background-color: #221e22;
   --text-color: #e0e0e0;
   --text-light: #ccc;
+  --text-muted: #666;
   --text-emphasis: #89b29ee6;
   --text-heading: #f2f2f2e6;
   --border-color: #333;
@@ -53,6 +54,11 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Hidden utility class */
+.hidden {
+  display: none !important;
 }
 
 /* Links */
@@ -119,7 +125,8 @@ a:hover {
 }
 
 /* Loading placeholder */
-.loading-placeholder {
+.loading-placeholder,
+.error-placeholder {
   text-align: center;
   padding: 3rem 1rem;
   color: var(--text-light);

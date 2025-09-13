@@ -3,83 +3,108 @@
  * @returns {Promise<void>}
  */
 async function loadManuals() {
-  const manualsSection = document.querySelector(".manuals-library");
+  const loadingPlaceholder = document.getElementById("loading-placeholder");
+  const errorPlaceholder = document.getElementById("error-placeholder");
+  const manualsGrid = document.getElementById("manuals-grid");
+  const hiddenManualsSection = document.getElementById("hidden-manuals");
 
-  // Show loading placeholder
-  showLoadingPlaceholder(manualsSection);
+  // Show loading, hide error
+  showElement(loadingPlaceholder);
+  hideElement(errorPlaceholder);
 
   try {
     const response = await fetch("/manuals/data/manuals.json");
     const manuals = await response.json();
 
-    // Clear loading placeholder
-    clearLoadingPlaceholder(manualsSection);
+    // Hide loading placeholder
+    hideElement(loadingPlaceholder);
 
     // Filter manuals
     const visibleManuals = manuals.filter((manual) => !manual.hidden);
     const hiddenManuals = manuals.filter((manual) => manual.hidden);
 
-    // Create manuals grid
-    const manualsGrid = document.createElement("div");
-    manualsGrid.className = "manuals-grid";
-
-    // Render visible manuals
+    // Clear and render visible manuals
+    manualsGrid.innerHTML = "";
     visibleManuals.forEach((manual) => {
       const card = createManualCard(manual);
       manualsGrid.appendChild(card);
     });
 
-    manualsSection.appendChild(manualsGrid);
-
-    // Render hidden manuals section if there are any
+    // Setup hidden manuals if any
     if (hiddenManuals.length > 0) {
-      createHiddenManualsSection(manualsSection, hiddenManuals);
+      setupHiddenManuals(hiddenManuals);
+      showElement(hiddenManualsSection);
+    } else {
+      hideElement(hiddenManualsSection);
     }
 
     // Initialize animations after cards are rendered
     fadeInOnScroll();
   } catch (error) {
     console.error("Error loading manuals:", error);
-    showErrorPlaceholder(manualsSection);
+    hideElement(loadingPlaceholder);
+    showElement(errorPlaceholder);
   }
 }
 
 /**
- * Show loading placeholder
- * @param {HTMLElement} container
+ * Show element by removing hidden class
+ * @param {HTMLElement} element
  */
-function showLoadingPlaceholder(container) {
-  const loadingDiv = document.createElement("div");
-  loadingDiv.className = "loading-placeholder";
-  loadingDiv.innerHTML = `
-    <div class="loading-spinner"></div>
-    <p>Loading manuals...</p>
-  `;
-  container.appendChild(loadingDiv);
+function showElement(element) {
+  if (element) element.classList.remove("hidden");
 }
 
 /**
- * Show error placeholder
- * @param {HTMLElement} container
+ * Hide element by adding hidden class
+ * @param {HTMLElement} element
  */
-function showErrorPlaceholder(container) {
-  const errorDiv = document.createElement("div");
-  errorDiv.className = "loading-placeholder";
-  errorDiv.innerHTML = `
-    <p>⚠️ Error loading manuals. Please refresh the page.</p>
-  `;
-  container.appendChild(errorDiv);
+function hideElement(element) {
+  if (element) element.classList.add("hidden");
 }
 
 /**
- * Clear loading placeholder
- * @param {HTMLElement} container
+ * Setup hidden manuals functionality
+ * @param {Array} hiddenManuals
  */
-function clearLoadingPlaceholder(container) {
-  const loadingPlaceholder = container.querySelector(".loading-placeholder");
-  if (loadingPlaceholder) {
-    loadingPlaceholder.remove();
-  }
+function setupHiddenManuals(hiddenManuals) {
+  const hiddenToggle = document.getElementById("hidden-toggle");
+  const hiddenCount = document.getElementById("hidden-count");
+  const hiddenContainer = document.getElementById("hidden-manuals-container");
+  const hiddenGrid = document.getElementById("hidden-manuals-grid");
+
+  // Update count
+  hiddenCount.textContent = `( ${hiddenManuals.length} hidden items )`;
+
+  // Clear and populate hidden manuals
+  hiddenGrid.innerHTML = "";
+  hiddenGrid.className = "manuals-grid";
+  hiddenManuals.forEach((manual) => {
+    const card = createManualCard(manual);
+    hiddenGrid.appendChild(card);
+  });
+
+  // Remove existing event listeners by cloning the element
+  const newToggle = hiddenToggle.cloneNode(true);
+  hiddenToggle.parentNode.replaceChild(newToggle, hiddenToggle);
+
+  // Add toggle functionality
+  newToggle.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const isExpanded = newToggle.getAttribute("aria-expanded") === "true";
+    const newState = !isExpanded;
+
+    newToggle.setAttribute("aria-expanded", newState);
+    hiddenContainer.classList.toggle("expanded", newState);
+
+    // Re-run fade-in animation for newly visible hidden cards
+    if (newState) {
+      setTimeout(() => {
+        fadeInOnScroll();
+      }, 100);
+    }
+  });
 }
 
 /**
@@ -105,58 +130,6 @@ function createManualCard(manual) {
   `;
 
   return book;
-}
-
-/**
- * Create hidden manuals section with accordion
- * @param {HTMLElement} container
- * @param {Array} hiddenManuals
- */
-function createHiddenManualsSection(container, hiddenManuals) {
-  const hiddenSection = document.createElement("div");
-  hiddenSection.className = "hidden-manuals";
-
-  // Create toggle button
-  const toggleButton = document.createElement("button");
-  toggleButton.className = "hidden-toggle";
-  toggleButton.innerHTML = `
-    <span>Hidden (${hiddenManuals.length})</span>
-    <span class="arrow">▼</span>
-  `;
-
-  // Create hidden manuals container with grid
-  const hiddenContainer = document.createElement("div");
-  hiddenContainer.className = "hidden-manuals-container";
-
-  const hiddenGrid = document.createElement("div");
-  hiddenGrid.className = "manuals-grid";
-
-  // Add hidden manuals to grid
-  hiddenManuals.forEach((manual) => {
-    const card = createManualCard(manual);
-    hiddenGrid.appendChild(card);
-  });
-
-  hiddenContainer.appendChild(hiddenGrid);
-
-  // Add toggle functionality
-  toggleButton.addEventListener("click", (event) => {
-    event.preventDefault();
-
-    toggleButton.classList.toggle("expanded");
-    hiddenContainer.classList.toggle("expanded");
-
-    // Re-run fade-in animation for newly visible hidden cards
-    if (hiddenContainer.classList.contains("expanded")) {
-      setTimeout(() => {
-        fadeInOnScroll();
-      }, 100);
-    }
-  });
-
-  hiddenSection.appendChild(toggleButton);
-  hiddenSection.appendChild(hiddenContainer);
-  container.appendChild(hiddenSection);
 }
 
 /**
