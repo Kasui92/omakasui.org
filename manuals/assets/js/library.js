@@ -13,7 +13,7 @@ async function loadManuals() {
   hideElement(errorPlaceholder);
 
   try {
-    const response = await fetch("/manuals/data/manuals.json");
+    const response = await fetch("/data/manuals.json");
     const manuals = await response.json();
 
     // Hide loading placeholder

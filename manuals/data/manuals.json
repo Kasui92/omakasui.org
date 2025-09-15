@@ -1,5 +1,15 @@
 [
   {
+    "id": "omakube",
+    "name": "Omakube",
+    "title": "Omakube Manual",
+    "description": "The Omakube Manual",
+    "url": "/manuals/omakube/",
+    "coverImage": "/assets/images/logos/omakube.png",
+    "status": null,
+    "hidden": false
+  },
+  {
     "id": "omarell",
     "name": "Omarell",
     "title": "Omarell Manual",
