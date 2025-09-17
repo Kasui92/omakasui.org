@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/layout/Header.astro";
+import ProjectList from "../components/ProjectList.astro";
+import HiddensToggle from "../components/HiddensToggle.astro";
+
+import { projects, type Project } from "../data/projects.ts";
+
+const activeProjects: Project[] = projects.filter((project) => !project.hidden);
+const hiddenProjects: Project[] = projects.filter((project) => project.hidden);
+---
+
+<Layout>
+  <Header
+    title="$ omakasui"
+    subtitle="Post-installation scripts for Linux distributions"
+    accessibleName="OmaKasui - Home"
+  />
+  <section aria-labelledby="intro-heading">
+    <h2 class="sr-only" id="intro-heading">Introduction</h2>
+    <p class="text-[1.1rem] leading-[1.8] text-[#ccc]">
+      Inspired by
+      <a
+        href="https://dhh.dk"
+        target="_blank"
+        title="David Heinemeier Hansson's website"
+        rel="noopener">DHH's</a
+      >
+      <a
+        href="https://omacom.io"
+        target="_blank"
+        title="Omacom - DHH's opinionated software collection"
+        rel="noopener">Omacom</a
+      >
+      philosophy,
+      <i>OmaKasui</i> is my curated collection of opinionated post-installation scripts
+      for Linux. One command, zero hassle—get a ready-to-use system tailored to my
+      workflow and preferences.
+    </p>
+  </section>
+  <section aria-labelledby="scripts-heading">
+    <h2 class="sr-only" id="scripts-heading">Available scripts</h2>
+    <h2>$ ls projects/</h2>
+    <ProjectList projects={activeProjects} />
+    {
+      hiddenProjects.length > 0 && (
+        <HiddensToggle count={hiddenProjects.length}>
+          <ProjectList projects={hiddenProjects} />
+        </HiddensToggle>
+      )
+    }
+  </section>
+
+  <section aria-labelledby="manuals-heading">
+    <h2 class="sr-only" id="manuals-heading">Available manuals</h2>
+    <h2><a href="/manuals">$ cd manuals/</a></h2>
+  </section>
+
+  <section aria-labelledby="themes-heading">
+    <h2 class="sr-only" id="themes-heading">Available themes</h2>
+    <h2><a href="/themes">$ cd themes/</a></h2>
+  </section>
+</Layout>
