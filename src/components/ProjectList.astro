@@ -1,0 +1,77 @@
+---
+import { type Project } from "../data/projects.ts";
+import StatusIcon from "./StatusIcon.astro";
+const { projects } = Astro.props;
+---
+
+{
+  projects.map((project: Project) => (
+    <div class="mb-2 rounded-[4px] border border-[#333] bg-[#2a2a2a] p-2 transition-colors duration-300 ease-in-out hover:border-[#89b29ee6]">
+      <h3>
+        >
+        <a
+          href="${project.githubUrl}"
+          target="_blank"
+          title="View ${project.name} source code on GitHub"
+          rel="noopener"
+        >
+          {project.name}
+        </a>
+        {project.status.length > 0
+          ? project.status.map((status) => (
+              <span class="ml-[.5rem] align-middle">
+                <StatusIcon status={status} />
+              </span>
+            ))
+          : null}
+      </h3>
+      <p class="mb-[1.5rem] text-[#bbb]" set:html={project.description} />
+      <div
+        class="relative mx-0 my-[1.5rem] flex items-center gap-1 rounded-[4px] border border-[#444] bg-[#1a1a1a] p-1"
+        role="group"
+        aria-label={`Installation command for ${project.name}`}
+      >
+        <code
+          class="scrollbar-hide flex flex-1 items-center overflow-x-auto bg-none text-[0.9rem] whitespace-nowrap text-[#89b29ee6] lg:overflow-visible"
+          aria-label="Installation command"
+          style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
+          {project.installCommand}
+        </code>
+        <button
+          class="ml-2 flex flex-shrink-0 cursor-pointer items-center justify-center rounded border border-[#555] bg-[#333] px-1 py-0.5 text-[0.75rem] text-[#bbb] transition-colors hover:bg-[#444] hover:text-white"
+          onclick={`navigator.clipboard.writeText('${project.installCommand}')`}
+          title="Copy to clipboard"
+          aria-label="Copy installation command to clipboard"
+        >
+          <i class="nf nf-md-content_copy" />
+        </button>
+      </div>
+      {project?.githubUrl || project?.manualUrl ? (
+        <p class="text-[0.875rem] text-[#bbb] italic">
+          The{" "}
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              title={`View ${project.name} source code on GitHub`}
+              rel="noopener"
+            >{`source code`}</a>
+          )}{" "}
+          {project?.githubUrl && project?.manualUrl ? "and" : null}{" "}
+          {project.manualUrl && (
+            <a
+              href={project.manualUrl}
+              target="_blank"
+              title={`View ${project.name} manual`}
+              rel="noopener"
+            >
+              {`manual`}
+            </a>
+          )}{" "}
+          {project?.githubUrl && project?.manualUrl ? "are" : "is"} available.
+        </p>
+      ) : null}
+    </div>
+  ))
+}
