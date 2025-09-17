@@ -1,27 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/layout/Header.astro";
 import ProjectList from "../components/ProjectList.astro";
+import HiddensToggle from "../components/HiddensToggle.astro";
 
 import { projects, type Project } from "../data/projects.ts";
-import HiddensToggle from "../components/HiddensToggle.astro";
 
 const activeProjects: Project[] = projects.filter((project) => !project.hidden);
 const hiddenProjects: Project[] = projects.filter((project) => project.hidden);
 ---
 
 <Layout>
-  <header
-    class="mb-[1.5rem] px-0 py-4 text-center lg:mb-3"
-    aria-labelledby="header-heading"
-  >
-    <h2 class="sr-only" id="header-heading">OmaKasui - Home</h2>
-    <h1 class="text-[2rem] font-bold text-[#89b29ee6] lg:text-[3rem]">
-      $ omakasui
-    </h1>
-    <p class="text-[1.2rem] text-[#d8d9d9e6]">
-      Post-installation scripts for Linux distributions
-    </p>
-  </header>
+  <Header
+    title="$ omakasui"
+    subtitle="Post-installation scripts for Linux distributions"
+    accessibleName="OmaKasui - Home"
+  />
   <section aria-labelledby="intro-heading">
     <h2 class="sr-only" id="intro-heading">Introduction</h2>
     <p class="text-[1.1rem] leading-[1.8] text-[#ccc]">
@@ -59,6 +53,11 @@ const hiddenProjects: Project[] = projects.filter((project) => project.hidden);
 
   <section aria-labelledby="manuals-heading">
     <h2 class="sr-only" id="manuals-heading">Available manuals</h2>
-    <h2><a href="/manuals">$ cd manuals</a></h2>
+    <h2><a href="/manuals">$ cd manuals/</a></h2>
+  </section>
+
+  <section aria-labelledby="themes-heading">
+    <h2 class="sr-only" id="themes-heading">Available themes</h2>
+    <h2><a href="/themes">$ cd themes/</a></h2>
   </section>
 </Layout>
