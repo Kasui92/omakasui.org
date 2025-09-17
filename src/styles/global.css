@@ -61,9 +61,13 @@ i.nf {
 }
 
 .hidden-toggle[aria-expanded="true"] .arrow {
-  @apply rotate-180;
+  transform: rotate(180deg);
 }
 
-.hidden-toggle[aria-expanded="true"] + .hidden-content {
-  @apply grid-template-rows[1fr];
+.hidden-content {
+  max-height: 0;
+}
+
+.hidden-content.expanded {
+  max-height: 1000px;
 }
