@@ -48,17 +48,25 @@ const navigationItems = pages.map((pageInfo) => ({
         <li class="border-b border-gray-700">
           <a
             href={page.url}
-            class={`flex items-center border-l-4 p-1 text-gray-300 no-underline transition-all duration-300 ${
+            class={`group flex items-center border-l-4 p-1 text-gray-300 no-underline transition-all duration-300 ${
               page.active
                 ? "border-l-[#89b29e] bg-[#89b29e]/15 font-bold text-[#89b29e]"
                 : "border-l-transparent hover:border-l-[#89b29e] hover:bg-[#89b29e]/10 hover:text-[#89b29e]"
             }`}
             data-page={page.name}
           >
-            <span class="mr-1 min-w-3 text-left text-base font-bold text-[#89b29e]">
-              {String(index + 1).padStart(2, "0")}
+            <span
+              class={`mr-1 min-w-3 text-left text-base font-bold text-[#89b29e]`}
+            >
+              {String(index + 1)}.
             </span>
-            <span class="whitespace-nowrap">{page.title}</span>
+            <span
+              class={`whitespace-nowrap group-hover:underline ${
+                page.active ? "text-[#89b29e]" : ""
+              }`}
+            >
+              {page.title}
+            </span>
           </a>
         </li>
       ))
