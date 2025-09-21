@@ -1,0 +1,86 @@
+---
+import { marked } from "marked";
+
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/layout/Header.astro";
+import ManualNav from "../../components/ManualNav.astro";
+import {
+  readManualPage,
+  getManualGroups,
+  getManualPages,
+} from "../../utils/manuals";
+
+import "../../styles/manuals.css";
+
+export async function getStaticPaths() {
+  const groups = getManualGroups();
+  const paths = [];
+
+  for (const group of groups) {
+    paths.push({
+      params: { slug: group },
+    });
+
+    const pages = getManualPages(group);
+    for (const pageInfo of pages) {
+      if (pageInfo.slug !== "home") {
+        paths.push({
+          params: { slug: `${group}/${pageInfo.slug}` },
+        });
+      }
+    }
+  }
+
+  return paths;
+}
+
+const { slug } = Astro.params;
+const slugParts = slug?.split("/") || [];
+
+const group = slugParts[0];
+const page = slugParts[1] || "home";
+
+const manualPage = readManualPage(group, page);
+
+const htmlContent = marked(manualPage.content);
+const pageTitle = manualPage.title || `${group} - ${page}`;
+---
+
+<Layout>
+  <Header
+    title={`$ omakasui / manuals / ${group}${page !== "home" ? ` / ${page}` : ""}`}
+    subtitle={pageTitle}
+    accessibleName={`OmaKasui - ${pageTitle}`}
+  />
+
+  <ManualNav currentGroup={group} currentPage={page} />
+
+  <div class="flex min-h-screen w-full flex-col overflow-x-hidden">
+    <div class="flex w-full flex-1 flex-col">
+      <main class="main-content flex flex-1 flex-col justify-center px-2 pt-5">
+        <div class="mx-auto w-full max-w-3xl flex-1 p-0">
+          <nav class="mb-2 text-sm text-gray-400">
+            <a href="/manuals" class="hover:underline">manuals</a>
+            <span class="mx-0.5">/</span>
+            <span class="text-blue-400">{group}</span>
+            {
+              page !== "home" && (
+                <>
+                  <span class="mx-0.5">/</span>
+                  <span class="text-green-400">{page}</span>
+                </>
+              )
+            }
+          </nav>
+
+          <div
+            id="content"
+            class="markdown-content mx-auto w-full max-w-3xl p-1 leading-relaxed break-words"
+          >
+            <Fragment set:html={htmlContent} />
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</Layout>

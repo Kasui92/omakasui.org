@@ -1,13 +1,5 @@
-/**
- * Nerd Font
- * https://www.nerdfonts.com/
- */
 @import "https://www.nerdfonts.com/assets/css/webfont.css";
 
-/**
- * Tailwind CSS
- * https://tailwindcss.com/
- */
 @import "tailwindcss";
 
 @theme {
@@ -32,6 +24,14 @@
     font-size: 1.2rem;
     font-weight: normal;
   }
+
+  a {
+    @apply font-bold text-[#89b29ee6] underline transition duration-300 ease-in-out hover:text-[#c5d4c8];
+  }
+
+  i {
+    @apply text-[#89b29ee6] italic;
+  }
 }
 
 main {
@@ -46,14 +46,6 @@ footer {
 
 section {
   @apply mb-3;
-}
-
-a {
-  @apply font-bold text-[#89b29ee6] underline transition duration-300 ease-in-out hover:text-[#c5d4c8];
-}
-
-i {
-  @apply text-[#89b29ee6] italic;
 }
 
 i.nf {
