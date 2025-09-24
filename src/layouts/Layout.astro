@@ -51,11 +51,11 @@ import "../styles/global.css";
     <meta name="generator" content={Astro.generator} />
   </head>
   <body
-    class="font-monospace bg-[#221e22] font-mono text-[14px] leading-[1.6] text-[#e0e0e0]"
+    class="font-monospace flex min-h-screen flex-col bg-[#221e22] font-mono text-[14px] leading-[1.6] text-[#e0e0e0]"
   >
-    <main role="main" aria-label="Main content">
+    <main role="main" aria-label="Main content" class="flex-1">
       <slot />
-      <Footer />
     </main>
+    <Footer />
   </body>
 </html>
