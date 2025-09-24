@@ -11,7 +11,7 @@ const pages = getManualPages(currentGroup);
 
 const navigationItems = pages.map((pageInfo) => ({
   name: pageInfo.slug,
-  title: pageInfo.displayTitle,
+  title: pageInfo.title,
   url: `/manuals/${currentGroup}${pageInfo.slug === "home" ? "" : `/${pageInfo.slug}`}`,
   active: pageInfo.slug === currentPage,
   order: pageInfo.order,
@@ -35,20 +35,20 @@ const navigationItems = pages.map((pageInfo) => ({
     </button>
 
     <nav
-      class="sidebar fixed inset-y-0 left-0 z-30 h-screen w-[280px] ${shouldBeOpen ? "translate-x-0" : "-translate-x-full"} overflow-y-auto border-r border-gray-700 bg-[#2a252a] pt-5 transition-transform duration-300 ease-in-out"
+      class="sidebar fixed inset-y-0 left-0 z-30 h-screen w-[280px] ${shouldBeOpen ? "translate-x-0" : "-translate-x-full"} overflow-y-auto border-r border-gray-700 bg-[#2a252a] pt-20 transition-transform duration-300 ease-in-out"
       id="sidebar"
     >
   `);
 </script>
 
-<div class="py-1">
+<div class="py-4">
   <ul class="m-0 list-none p-0">
     {
       navigationItems.map((page, index) => (
         <li class="border-b border-gray-700">
           <a
             href={page.url}
-            class={`group flex items-center border-l-4 p-1 text-gray-300 no-underline transition-all duration-300 ${
+            class={`group flex items-center border-l-4 p-4 text-gray-300 no-underline transition-all duration-300 ${
               page.active
                 ? "border-l-[#89b29e] bg-[#89b29e]/15 font-bold text-[#89b29e]"
                 : "border-l-transparent hover:border-l-[#89b29e] hover:bg-[#89b29e]/10 hover:text-[#89b29e]"
@@ -56,7 +56,7 @@ const navigationItems = pages.map((pageInfo) => ({
             data-page={page.name}
           >
             <span
-              class={`mr-1 min-w-3 text-left text-base font-bold text-[#89b29e]`}
+              class={`mr-4 min-w-3 text-left text-base font-bold text-[#89b29e]`}
             >
               {String(index + 1)}.
             </span>

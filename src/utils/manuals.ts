@@ -1,87 +1,29 @@
 import fs from "fs";
 import path from "path";
-import { ucfirst } from "./helpers";
+import { parseFilename } from "./helpers";
+import { manuals, type Manual } from "../data/manuals";
 
 export interface ManualPage {
   filename: string;
-  title?: string;
-  displayTitle: string;
+  title: string;
   content: string;
   order: number;
   exists: boolean;
   slug: string;
 }
 
-export interface ManualPageInfo {
-  filename: string;
-  slug: string;
-  displayTitle: string;
-  order: number;
-}
-
 /**
- * Parse filename like "01-home.md" into components
+ * Get manual data by ID from structured data
+ * @param id - The manual ID
+ * @returns Manual|undefined
  */
-function parseFilename(filename: string): {
-  order: number;
-  slug: string;
-  displayTitle: string;
-} {
-  const nameWithoutExt = path.basename(filename, ".md");
-  const match = nameWithoutExt.match(/^(\d+)-(.+)$/);
-
-  if (match) {
-    const order = parseInt(match[1], 10);
-    const slug = match[2];
-    const displayTitle = slug
-      .split("-")
-      .map((word) => ucfirst(word))
-      .join(" ");
-    return { order, slug, displayTitle };
-  }
-
-  return {
-    order: 999,
-    slug: nameWithoutExt,
-    displayTitle: ucfirst(nameWithoutExt),
-  };
-}
-
-/**
- * Reads a Markdown file from the docs folder
- */
-export function readManualPage(
-  group: string,
-  page: string = "home",
-): ManualPage {
-  const groupPath = path.join(process.cwd(), "docs", group);
-  const files = fs.readdirSync(groupPath).filter((f) => f.endsWith(".md"));
-
-  const targetFile = files.find((f) => {
-    const { slug } = parseFilename(f);
-    return slug === page;
-  })!;
-
-  const filePath = path.join(groupPath, targetFile);
-  const content = fs.readFileSync(filePath, "utf-8");
-  const { order, slug, displayTitle } = parseFilename(targetFile);
-
-  const titleMatch = content.match(/^#\s+(.+)$/m);
-  const title = titleMatch ? titleMatch[1] : undefined;
-
-  return {
-    content,
-    title,
-    exists: true,
-    filename: targetFile,
-    order,
-    slug,
-    displayTitle: title || displayTitle,
-  };
+export function getManualById(id: string): Manual | undefined {
+  return manuals.find((manual) => manual.id === id);
 }
 
 /**
  * Returns all available manual groups
+ * @returns string[]
  */
 export function getManualGroups(): string[] {
   const docsPath = path.join(process.cwd(), "docs");
@@ -93,21 +35,60 @@ export function getManualGroups(): string[] {
 
 /**
  * Returns metadata for all pages in a manual group, sorted by order
+ * Enriches file-based data with structured manual information
  */
-export function getManualPages(group: string): ManualPageInfo[] {
+export function getManualPages(group: string): Partial<ManualPage>[] {
   const groupPath = path.join(process.cwd(), "docs", group);
 
   return fs
     .readdirSync(groupPath)
     .filter((file) => file.endsWith(".md"))
     .map((filename) => {
-      const { order, slug, displayTitle } = parseFilename(filename);
+      const { order, slug } = parseFilename(filename, true);
+
+      // Always use manual title for home page, fallback to generated title for other pages
+      const title = parseFilename(filename, true).title;
+
       return {
         filename,
         slug,
-        displayTitle,
+        title,
         order,
       };
     })
     .sort((a, b) => a.order - b.order);
+}
+
+/**
+ * Reads a Markdown file from the docs folder
+ * @param group - The manual group (subfolder in docs)
+ * @param page - The page slug (filename without extension)
+ * @returns ManualPage
+ */
+export function readManualPage(
+  group: string,
+  page: string = "home",
+): ManualPage {
+  // List all markdown files in the group directory
+  const groupPath = path.join(process.cwd(), "docs", group);
+  const files = fs.readdirSync(groupPath).filter((f) => f.endsWith(".md"));
+
+  // Find the file matching the requested page slug
+  const targetFile = files.find((f) => {
+    const { slug } = parseFilename(f, true);
+    return slug === page;
+  })!;
+
+  const filePath = path.join(groupPath, targetFile);
+  const content = fs.readFileSync(filePath, "utf-8");
+  const { order, slug, title } = parseFilename(targetFile, true);
+
+  return {
+    order,
+    content,
+    title,
+    exists: true,
+    filename: targetFile,
+    slug,
+  };
 }

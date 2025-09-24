@@ -2,8 +2,8 @@
 import { marked } from "marked";
 
 import Layout from "../../layouts/Layout.astro";
-import Header from "../../components/layout/Header.astro";
 import ManualNav from "../../components/ManualNav.astro";
+import HeadingLinks from "../../components/HeadingLinks.astro";
 import {
   readManualPage,
   getManualGroups,
@@ -37,6 +37,7 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const slugParts = slug?.split("/") || [];
 
+// First part is the group, second part (if any) is the page (default to "home")
 const group = slugParts[0];
 const page = slugParts[1] || "home";
 
@@ -48,19 +49,15 @@ const pageTitle = manualPage.title || `${group} - ${page}`;
 
 <Layout>
   <ManualNav currentGroup={group} currentPage={page} />
-
-  <div class="flex min-h-screen w-full flex-col overflow-x-hidden">
-    <div class="flex w-full flex-1 flex-col">
-      <main class="main-content flex flex-1 flex-col justify-center px-2 pt-5">
-        <div class="mx-auto w-full max-w-3xl flex-1 p-0">
-          <div
-            id="content"
-            class="markdown-content mx-auto w-full max-w-3xl p-1 leading-relaxed break-words"
-          >
-            <Fragment set:html={htmlContent} />
-          </div>
-        </div>
-      </main>
+  <section aria-labelledby="manual-heading">
+    <h2 class="sr-only" id="manual-heading">Manual: {pageTitle}</h2>
+    <div
+      id="content"
+      class="markdown-content mx-auto w-full max-w-3xl p-4 leading-relaxed break-words"
+    >
+      <Fragment set:html={htmlContent} />
     </div>
-  </div>
+  </section>
+
+  <HeadingLinks />
 </Layout>

@@ -15,6 +15,33 @@
   line-height: 1.4;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  position: relative;
+}
+
+.markdown-content h2 {
+  scroll-margin-top: 80px;
+}
+
+.markdown-content h2:hover .heading-links {
+  opacity: 0.6;
+}
+
+.heading-links {
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  text-decoration: none !important;
+  font-size: 75%;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.heading-links i {
+  color: #89b29ee6;
+}
+
+.heading-links:hover {
+  opacity: 1 !important;
 }
 
 .markdown-content h1:first-child,
