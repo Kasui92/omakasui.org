@@ -187,9 +187,44 @@
 }
 
 #toggleNavBtn.active {
-  @apply border-[#89b29ee6] bg-[#89b29ee6];
+  background-color: #89b29ee6;
+  border-color: #89b29ee6;
 }
 
 #toggleNavBtn.active span {
-  @apply bg-[#221e22];
+  background-color: #221e22;
+}
+
+main:has(:not(#archivedBanner)) #toggleNavBtn {
+  top: 16px;
+}
+
+main:has(:not(#archivedBanner)) #sideNav {
+  padding-top: 48px;
+}
+
+main:has(#archivedBanner) #toggleNavBtn {
+  top: 50px;
+}
+
+main:has(#archivedBanner) #sideNav {
+  padding-top: 86px;
+}
+
+@media (min-width: 768px) {
+  main:has(:not(#archivedBanner)) #toggleNavBtn {
+    top: 32px;
+  }
+
+  main:has(:not(#archivedBanner)) #sideNav {
+    padding-top: 64px;
+  }
+
+  main:has(#archivedBanner) #toggleNavBtn {
+    top: 64px;
+  }
+
+  main:has(#archivedBanner) #sideNav {
+    padding-top: 96px;
+  }
 }

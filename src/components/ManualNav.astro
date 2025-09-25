@@ -25,7 +25,7 @@ const navigationItems = pages.map((pageInfo) => ({
 
   document.write(`
     <button
-      class="fixed top-[32px] left-[1.25rem] z-[1001] flex h-[40px] w-[40px] cursor-pointer flex-col items-center justify-center gap-[4px] rounded-lg border-2 border-[#89b29e] bg-transparent p-0 shadow-lg transition-all duration-300 hover:scale-105 hover:border-[#7ba088] hover:shadow-xl ${shouldBeOpen ? "active" : ""}"
+      class="fixed left-[0.25rem] z-[1001] flex h-[40px] w-[40px] cursor-pointer flex-col items-center justify-center gap-[4px] rounded-lg border-2 border-[#89b29e] bg-transparent p-0 shadow-lg transition-all duration-300 hover:scale-105 hover:border-[#7ba088] hover:shadow-xl md:left-[1.25rem] ${shouldBeOpen ? "active" : ""}"
       id="toggleNavBtn"
       title="Table of contents"
     >
@@ -35,8 +35,8 @@ const navigationItems = pages.map((pageInfo) => ({
     </button>
 
     <nav
-      class="sidebar fixed inset-y-0 left-0 z-30 h-screen w-[280px] ${shouldBeOpen ? "translate-x-0" : "-translate-x-full"} overflow-y-auto border-r border-gray-700 bg-[#2a252a] pt-20 transition-transform duration-300 ease-in-out"
-      id="sidebar"
+      class="fixed inset-y-0 left-0 z-30 h-screen w-[280px] ${shouldBeOpen ? "translate-x-0" : "-translate-x-full"} overflow-y-auto border-r border-gray-700 bg-[#2a252a] transition-transform duration-300 ease-in-out"
+      id="sideNav"
     >
   `);
 </script>
@@ -80,7 +80,7 @@ const navigationItems = pages.map((pageInfo) => ({
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const sidebar = document.getElementById("sidebar");
+    const sidebar = document.getElementById("sideNav");
     const toggleBtn = document.getElementById("toggleNavBtn");
 
     if (!sidebar || !toggleBtn) return;
@@ -120,7 +120,7 @@ const navigationItems = pages.map((pageInfo) => ({
       const target = e.target;
       if (target && target instanceof Element) {
         if (
-          !target.closest("#sidebar") &&
+          !target.closest("#sideNav") &&
           !target.closest("[id*='toggleNavBtn']")
         ) {
           closeSidebar();
