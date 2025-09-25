@@ -18,16 +18,16 @@ const { manuals } = Astro.props;
             title={`Open the manual for ${manual.title} in a new tab`}
           >
             <div class="relative h-[240px] w-[160px] overflow-hidden rounded-lg border border-[#333] bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] shadow-[0_8px_20px_rgba(0,0,0,0.3)] transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-[0_12px_30px_rgba(0,0,0,0.4)]">
-              <div class="flex h-full w-full items-center justify-center p-4">
+              <div class="flex h-full w-full items-center justify-center p-6">
                 {manual.coverImage ? (
                   <img
                     src={manual.coverImage}
                     alt={`${manual.title} cover`}
-                    class="max-h-20 max-w-20 object-contain opacity-90"
+                    class="max-h-32 max-w-32 object-contain opacity-90"
                     loading="lazy"
                   />
                 ) : (
-                  <div class="flex h-20 w-20 items-center justify-center text-4xl opacity-70">
+                  <div class="flex h-32 w-32 items-center justify-center text-6xl opacity-70">
                     <StatusIcon status={manual.status[0]} />
                   </div>
                 )}
@@ -36,7 +36,7 @@ const { manuals } = Astro.props;
               {manual.status.includes("archived") && (
                 <>
                   <div class="absolute inset-0 bg-[#e74c3c]/10" />
-                  <div class="absolute top-6 left-1/2 w-24 -translate-x-1/2 rotate-12 border border-red-800/50 bg-[#e74c3c] px-2 py-1 text-center text-xs font-bold text-white shadow-sm">
+                  <div class="absolute top-4 -right-8 w-32 rotate-45 border border-red-800/50 bg-[#e74c3c] py-2 text-center text-xs font-bold text-white shadow-lg">
                     ARCHIVED
                   </div>
                 </>
