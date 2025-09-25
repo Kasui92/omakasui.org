@@ -1,0 +1,32 @@
+---
+import Header from "../../components/layout/Header.astro";
+import Layout from "../../layouts/Layout.astro";
+import ManualList from "../../components/ManualList.astro";
+import HiddensToggle from "../../components/HiddensToggle.astro";
+
+import { manuals } from "../../data/manuals";
+
+const activeManuals = manuals.filter((manual) => !manual.hidden);
+const hiddenManuals = manuals.filter((manual) => manual.hidden);
+---
+
+<Layout>
+  <Header
+    title="$ omakasui / manuals"
+    subtitle="Manuals for all the projects here"
+    accessibleName="OmaKasui - Manuals"
+  />
+
+  <section aria-labelledby="manuals-heading">
+    <h2 class="sr-only" id="manuals-heading">Manuals Library</h2>
+    <h2>$ ls</h2>
+    <ManualList manuals={activeManuals} />
+    {
+      hiddenManuals.length > 0 && (
+        <HiddensToggle count={hiddenManuals.length}>
+          <ManualList manuals={hiddenManuals} />
+        </HiddensToggle>
+      )
+    }
+  </section>
+</Layout>

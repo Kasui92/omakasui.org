@@ -1,0 +1,44 @@
+---
+const { count } = Astro.props;
+---
+
+<button
+  class="hidden-toggle m-0 flex w-full cursor-pointer items-center justify-start gap-[0.5rem] border-none bg-transparent px-0 py-[2rem] text-left text-[0.9rem] text-[#666] italic transition-colors duration-300 ease-in-out hover:text-[#89b29ee6] focus:outline-none"
+  aria-expanded="false"
+>
+  <span>( {count} hidden items )</span>
+  <span
+    class="arrow transition-transform duration-300 ease-in-out"
+    aria-hidden="true">▼</span
+  >
+</button>
+<div
+  class="hidden-content overflow-hidden transition-all duration-500 ease-in-out"
+  aria-hidden="true"
+>
+  <div class="mt-2">
+    <slot />
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggles = document.querySelectorAll(".hidden-toggle");
+
+    toggles.forEach((toggle) => {
+      toggle.addEventListener("click", () => {
+        const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+        const content = toggle.nextElementSibling as HTMLElement;
+
+        toggle.setAttribute("aria-expanded", String(!isExpanded));
+        content.setAttribute("aria-hidden", String(isExpanded));
+
+        if (isExpanded) {
+          content.classList.remove("expanded");
+        } else {
+          content.classList.add("expanded");
+        }
+      });
+    });
+  });
+</script>

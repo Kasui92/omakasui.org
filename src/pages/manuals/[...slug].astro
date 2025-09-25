@@ -1,0 +1,103 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ManualNav from "../../components/ManualNav.astro";
+import ManualPageNav from "../../components/ManualPageNav.astro";
+import MarkdownEnhancements from "../../components/MarkdownEnhancements.astro";
+import ArchivedBanner from "../../components/ArchivedBanner.astro";
+import {
+  readManualPage,
+  getManualGroups,
+  getManualPages,
+  getManualById,
+} from "../../utils/manuals";
+import {
+  preprocessCallouts,
+  postprocessCallouts,
+} from "../../utils/calloutRenderer";
+
+import "../../styles/manuals.css";
+import { contentRenderer } from "../../utils/contentRenderer";
+
+export async function getStaticPaths() {
+  const groups = getManualGroups();
+  const paths = [];
+
+  for (const group of groups) {
+    paths.push({
+      params: { slug: group },
+    });
+
+    const pages = getManualPages(group);
+    for (const pageInfo of pages) {
+      if (pageInfo.slug !== "home") {
+        paths.push({
+          params: { slug: `${group}/${pageInfo.slug}` },
+        });
+      }
+    }
+  }
+
+  return paths;
+}
+
+const { slug } = Astro.params;
+const slugParts = slug?.split("/") || [];
+
+// First part is the group, second part (if any) is the page (default to "home")
+const group = slugParts[0];
+const page = slugParts[1] || "home";
+
+const manualPage = readManualPage(group, page);
+const manualInfo = getManualById(group);
+
+if (!manualInfo) {
+  throw new Error(`Manual group "${group}" not found.`);
+}
+
+// Get all pages for navigation
+const allPages = getManualPages(group);
+const currentPageIndex = allPages.findIndex((p) => p.slug === page);
+const previousPage =
+  currentPageIndex > 0 ? allPages[currentPageIndex - 1] : null;
+const nextPage =
+  currentPageIndex < allPages.length - 1
+    ? allPages[currentPageIndex + 1]
+    : null;
+
+// Content processing
+const content = contentRenderer(
+  manualPage.content,
+  [preprocessCallouts],
+  [postprocessCallouts],
+);
+
+// Status of the manual
+const isArchived = manualInfo.status.includes("archived");
+---
+
+<Layout>
+  {isArchived && <ArchivedBanner dateArchived={manualInfo.dateArchived} />}
+  <ManualNav currentGroup={group} currentPage={page} />
+  <section
+    aria-labelledby="manual-heading"
+    class={isArchived ? "mt-12 md:mt-16" : ""}
+  >
+    <h2 class="sr-only" id="manual-heading">
+      {manualInfo.title} - {manualPage.title}
+    </h2>
+    <div
+      id="content"
+      class="markdown-content mx-auto w-full max-w-3xl p-4 leading-relaxed break-words"
+    >
+      <Fragment set:html={content} />
+    </div>
+
+    <ManualPageNav
+      group={group}
+      previousPage={previousPage}
+      nextPage={nextPage}
+    />
+  </section>
+
+  <MarkdownEnhancements />
+</Layout>

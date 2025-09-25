@@ -1,0 +1,141 @@
+---
+import { getManualPages } from "../utils/manuals";
+
+interface Props {
+  currentGroup: string;
+  currentPage?: string;
+}
+
+const { currentGroup, currentPage = "home" } = Astro.props;
+const pages = getManualPages(currentGroup);
+
+const navigationItems = pages.map((pageInfo) => ({
+  name: pageInfo.slug,
+  title: pageInfo.title,
+  url: `/manuals/${currentGroup}${pageInfo.slug === "home" ? "" : `/${pageInfo.slug}`}`,
+  active: pageInfo.slug === currentPage,
+  order: pageInfo.order,
+}));
+---
+
+<script is:inline>
+  const shouldBeOpen =
+    typeof sessionStorage !== "undefined" &&
+    sessionStorage.getItem("sidebarOpen") === "true";
+
+  document.write(`
+    <button
+      class="fixed left-[0.25rem] z-[1001] flex h-[40px] w-[40px] cursor-pointer flex-col items-center justify-center gap-[4px] rounded-lg border-2 border-[#89b29e] bg-transparent p-0 shadow-lg transition-all duration-300 hover:scale-105 hover:border-[#7ba088] hover:shadow-xl md:left-[1.25rem] ${shouldBeOpen ? "active" : ""}"
+      id="toggleNavBtn"
+      title="Table of contents"
+    >
+      <span class="h-[2px] w-[20px] rounded-sm bg-[#89b29e] transition-all duration-300"></span>
+      <span class="h-[2px] w-[20px] rounded-sm bg-[#89b29e] transition-all duration-300"></span>
+      <span class="h-[2px] w-[20px] rounded-sm bg-[#89b29e] transition-all duration-300"></span>
+    </button>
+
+    <nav
+      class="fixed inset-y-0 left-0 z-30 h-screen w-[280px] ${shouldBeOpen ? "translate-x-0" : "-translate-x-full"} overflow-y-auto border-r border-gray-700 bg-[#2a252a] transition-transform duration-300 ease-in-out"
+      id="sideNav"
+    >
+  `);
+</script>
+
+<div class="py-4">
+  <ul class="m-0 list-none p-0">
+    {
+      navigationItems.map((page, index) => (
+        <li class="border-b border-gray-700">
+          <a
+            href={page.url}
+            class={`group flex items-center border-l-4 p-4 text-gray-300 no-underline transition-all duration-300 ${
+              page.active
+                ? "border-l-[#89b29e] bg-[#89b29e]/15 font-bold text-[#89b29e]"
+                : "border-l-transparent hover:border-l-[#89b29e] hover:bg-[#89b29e]/10 hover:text-[#89b29e]"
+            }`}
+            data-page={page.name}
+          >
+            <span
+              class={`mr-4 min-w-3 text-left text-base font-bold text-[#89b29e]`}
+            >
+              {String(index + 1)}.
+            </span>
+            <span
+              class={`whitespace-nowrap group-hover:underline ${
+                page.active ? "text-[#89b29e]" : ""
+              }`}
+            >
+              {page.title}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script is:inline>
+  document.write(`</nav>`);
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.getElementById("sideNav");
+    const toggleBtn = document.getElementById("toggleNavBtn");
+
+    if (!sidebar || !toggleBtn) return;
+
+    function updateSidebarState() {
+      if (!sidebar) return;
+      const isOpen = sidebar.classList.contains("translate-x-0");
+      if (isOpen) {
+        sessionStorage.setItem("sidebarOpen", "true");
+      } else {
+        sessionStorage.removeItem("sidebarOpen");
+      }
+    }
+
+    function toggleSidebar() {
+      if (!sidebar || !toggleBtn) return;
+      sidebar.classList.toggle("translate-x-0");
+      sidebar.classList.toggle("-translate-x-full");
+      toggleBtn.classList.toggle("active");
+      updateSidebarState();
+    }
+
+    function closeSidebar() {
+      if (!sidebar || !toggleBtn) return;
+      sidebar.classList.add("-translate-x-full");
+      sidebar.classList.remove("translate-x-0");
+      toggleBtn.classList.remove("active");
+      updateSidebarState();
+    }
+
+    toggleBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      toggleSidebar();
+    });
+
+    document.addEventListener("click", function (e) {
+      const target = e.target;
+      if (target && target instanceof Element) {
+        if (
+          !target.closest("#sideNav") &&
+          !target.closest("[id*='toggleNavBtn']")
+        ) {
+          closeSidebar();
+        }
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        closeSidebar();
+      }
+      if (e.ctrlKey && e.altKey && e.key.toLowerCase() === "m") {
+        e.preventDefault();
+        toggleSidebar();
+      }
+    });
+  });
+</script>

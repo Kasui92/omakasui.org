@@ -1,0 +1,18 @@
+---
+import { type Status, statusIcons } from "../data/status";
+
+const { status } = Astro.props;
+
+const statusIcon = (status: Status): string => {
+  return statusIcons[status]?.icon ?? "";
+};
+
+const statusLabel = (status: Status): string => {
+  return statusIcons[status]?.label ?? "";
+};
+---
+
+<i
+  class={`nf ${statusIcon(status)}`}
+  title={statusLabel(status)}
+  aria-label={statusLabel(status)}></i>
