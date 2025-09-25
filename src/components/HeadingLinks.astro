@@ -30,6 +30,7 @@ const { selector = ".markdown-content", headerTag = "h2" } = Astro.props;
       linkIcon.className = "heading-links";
       linkIcon.innerHTML = "<i class='nf nf-md-link_variant'></i>";
       linkIcon.setAttribute("aria-label", `Link to ${text}`);
+      linkIcon.setAttribute("href", `#${anchorId}`);
       linkIcon.title = "Copy link to clipboard";
 
       // Add click handler to copy link
