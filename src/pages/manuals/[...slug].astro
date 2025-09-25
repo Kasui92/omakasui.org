@@ -47,15 +47,53 @@ const slugParts = slug?.split("/") || [];
 const group = slugParts[0];
 const page = slugParts[1] || "home";
 
-const manualPage = readManualPage(group, page);
-const manualInfo = getManualById(group);
+// Validate that group exists
+if (!group) {
+  return new Response(null, {
+    status: 404,
+    statusText: "Not found",
+  });
+}
 
+const manualInfo = getManualById(group);
 if (!manualInfo) {
-  throw new Error(`Manual group "${group}" not found.`);
+  return new Response(null, {
+    status: 404,
+    statusText: "Manual group not found",
+  });
+}
+
+// Try to read the manual page
+let manualPage;
+try {
+  manualPage = readManualPage(group, page);
+} catch (error) {
+  return new Response(null, {
+    status: 404,
+    statusText: "Manual page not found",
+  });
+}
+
+// Additional validation - check that the page actually exists
+if (!manualPage || !manualPage.content) {
+  return new Response(null, {
+    status: 404,
+    statusText: "Manual page content not found",
+  });
 }
 
 // Get all pages for navigation
-const allPages = getManualPages(group);
+let allPages;
+try {
+  allPages = getManualPages(group);
+} catch (error) {
+  return new Response(null, {
+    status: 404,
+    statusText: "Manual pages not found",
+  });
+}
+
+// Navigation items
 const currentPageIndex = allPages.findIndex((p) => p.slug === page);
 const previousPage =
   currentPageIndex > 0 ? allPages[currentPageIndex - 1] : null;
