@@ -3,7 +3,9 @@ import { marked } from "marked";
 
 import Layout from "../../layouts/Layout.astro";
 import ManualNav from "../../components/ManualNav.astro";
+import ManualPageNav from "../../components/ManualPageNav.astro";
 import HeadingLinks from "../../components/HeadingLinks.astro";
+import ArchivedBanner from "../../components/ArchivedBanner.astro";
 import {
   readManualPage,
   getManualGroups,
@@ -49,36 +51,27 @@ if (!manualInfo) {
   throw new Error(`Manual group "${group}" not found.`);
 }
 
+// Get all pages for navigation
+const allPages = getManualPages(group);
+const currentPageIndex = allPages.findIndex((p) => p.slug === page);
+const previousPage =
+  currentPageIndex > 0 ? allPages[currentPageIndex - 1] : null;
+const nextPage =
+  currentPageIndex < allPages.length - 1
+    ? allPages[currentPageIndex + 1]
+    : null;
+
 const isArchived = manualInfo.status.includes("archived");
 const htmlContent = marked(manualPage.content);
 ---
 
 <Layout>
-  {
-    isArchived ? (
-      <div
-        id="archivedBanner"
-        class="fixed top-0 right-0 left-0 z-[1003] min-h-11 bg-[#e74c3c] px-5 py-3 text-center text-white shadow-[0_2px_8px_rgba(0,0,0,0.2)] md:px-8 md:py-4"
-      >
-        <div class="flex items-center justify-center gap-2 text-sm font-semibold md:text-base">
-          <i
-            class="nf nf-fa-warning font-mono text-base md:text-sm"
-            aria-label="Experimental"
-            title="Experimental"
-          />
-          <span class="font-mono">
-            <span class="hidden sm:inline">
-              This project has been archived
-              {manualInfo.dateArchived ? ` on ${manualInfo.dateArchived}` : ""}.
-            </span>
-            <span class="sm:hidden">Archived!</span>
-          </span>
-        </div>
-      </div>
-    ) : null
-  }
+  {isArchived && <ArchivedBanner dateArchived={manualInfo.dateArchived} />}
   <ManualNav currentGroup={group} currentPage={page} />
-  <section aria-labelledby="manual-heading">
+  <section
+    aria-labelledby="manual-heading"
+    class={isArchived ? "mt-12 md:mt-16" : ""}
+  >
     <h2 class="sr-only" id="manual-heading">
       {manualInfo.title} - {manualPage.title}
     </h2>
@@ -88,6 +81,12 @@ const htmlContent = marked(manualPage.content);
     >
       <Fragment set:html={htmlContent} />
     </div>
+
+    <ManualPageNav
+      group={group}
+      previousPage={previousPage}
+      nextPage={nextPage}
+    />
   </section>
 
   <HeadingLinks />

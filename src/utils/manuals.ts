@@ -1,16 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { parseFilename } from "./helpers";
-import { manuals, type Manual } from "../data/manuals";
-
-export interface ManualPage {
-  filename: string;
-  title: string;
-  content: string;
-  order: number;
-  exists: boolean;
-  slug: string;
-}
+import { manuals, type Manual, type ManualPage } from "../data/manuals";
 
 /**
  * Get manual data by ID from structured data

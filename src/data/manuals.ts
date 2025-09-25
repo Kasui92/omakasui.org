@@ -7,7 +7,17 @@ export interface Manual {
   url: string;
   coverImage?: string;
   status: Status[];
+  dateArchived?: string;
   hidden?: boolean;
+}
+
+export interface ManualPage {
+  filename: string;
+  title: string;
+  content: string;
+  order: number;
+  exists: boolean;
+  slug: string;
 }
 
 export const manuals: Manual[] = [
@@ -18,6 +28,7 @@ export const manuals: Manual[] = [
     url: "/manuals/omarell/",
     coverImage: "/logos/omarell.png",
     status: ["archived"],
+    dateArchived: "2025-09-13",
     hidden: true,
   },
   {
@@ -27,6 +38,7 @@ export const manuals: Manual[] = [
     url: "/manuals/omaforge/",
     coverImage: "/logos/omaforge.png",
     status: ["archived"],
+    dateArchived: "2025-09-10",
     hidden: true,
   },
 ];
