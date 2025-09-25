@@ -34,6 +34,7 @@
   font-size: 75%;
   cursor: pointer;
   vertical-align: middle;
+  margin-left: 0.5rem;
 }
 
 .heading-links i {
@@ -91,11 +92,13 @@
 }
 
 .markdown-content code {
-  background-color: #2a2a2a;
+  background-color: #1a1a1a;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+  border-width: 1px;
+  border-color: #444;
   border-radius: 0.25rem;
   color: #89b29ee6;
   font-size: 0.875rem;
@@ -103,20 +106,51 @@
 }
 
 .markdown-content pre {
-  background-color: #221e22;
+  background-color: #1a1a1a;
   border-width: 1px;
-  border-color: #89b29e33;
+  border-color: #444;
   border-radius: 0.5rem;
   padding: 1rem;
   overflow-x: auto;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  position: relative;
 }
 
 .markdown-content pre code {
   background-color: transparent;
+  border: none;
   padding: 0;
-  color: #e0e0e0;
+  color: #89b29ee6;
+}
+
+.code-copy-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  cursor: pointer;
+  border: 1px solid #555;
+  background-color: #333;
+  color: #bbb;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+  opacity: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.markdown-content pre:hover .code-copy-button {
+  opacity: 1;
+}
+
+.code-copy-button:hover {
+  background-color: #444;
+  color: white;
 }
 
 .markdown-content blockquote {
@@ -131,11 +165,70 @@
   margin-bottom: 1.5rem;
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
+  position: relative;
 }
 
 .markdown-content blockquote p {
   margin: 0;
   font-style: italic;
+  color: #89b29ee6;
+}
+
+/* Callout styles - Note (green, based on main palette) */
+.markdown-content blockquote.callout-note {
+  border-left-color: #89b29e;
+  background-color: #89b29e1a;
+  border: 1px solid #89b29e33;
+  padding-left: 3rem;
+}
+
+/* Callout styles - Warning (orange/yellow) */
+.markdown-content blockquote.callout-warning {
+  border-left-color: #d4a574;
+  background-color: #d4a5741a;
+  border: 1px solid #d4a57433;
+  padding-left: 3rem;
+}
+
+/* Callout styles - Important (red/pink) */
+.markdown-content blockquote.callout-important {
+  border-left-color: #cc8f8f;
+  background-color: #cc8f8f1a;
+  border: 1px solid #cc8f8f33;
+  padding-left: 3rem;
+}
+
+/* Keep text color consistent with rest of content */
+.markdown-content blockquote.callout-note p,
+.markdown-content blockquote.callout-warning p,
+.markdown-content blockquote.callout-important p {
+  color: #e0e0e0;
+}
+
+/* Ensure nested markdown elements maintain their styles */
+.markdown-content blockquote.callout-note pre,
+.markdown-content blockquote.callout-warning pre,
+.markdown-content blockquote.callout-important pre {
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+}
+
+.markdown-content blockquote.callout-note code,
+.markdown-content blockquote.callout-warning code,
+.markdown-content blockquote.callout-important code {
+  background-color: #333;
+  color: #89b29ee6;
+}
+
+.markdown-content blockquote.callout-note strong,
+.markdown-content blockquote.callout-warning strong,
+.markdown-content blockquote.callout-important strong {
+  color: #f2f2f2e6;
+}
+
+.markdown-content blockquote.callout-note em,
+.markdown-content blockquote.callout-warning em,
+.markdown-content blockquote.callout-important em {
   color: #89b29ee6;
 }
 
@@ -177,6 +270,49 @@
   border-top-color: #89b29e66;
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #444;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #333;
+  border-right: 1px solid #333;
+}
+
+.markdown-content th:last-child,
+.markdown-content td:last-child {
+  border-right: none;
+}
+
+.markdown-content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-content th {
+  background-color: #2a2a2a;
+  color: #f2f2f2e6;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.markdown-content td {
+  color: #e0e0e0;
+  font-size: 0.875rem;
+}
+
+.markdown-content tbody tr:hover {
+  background-color: #222;
 }
 
 /** --------- **/

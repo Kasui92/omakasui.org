@@ -1,10 +1,8 @@
 ---
-import { marked } from "marked";
-
 import Layout from "../../layouts/Layout.astro";
 import ManualNav from "../../components/ManualNav.astro";
 import ManualPageNav from "../../components/ManualPageNav.astro";
-import HeadingLinks from "../../components/HeadingLinks.astro";
+import MarkdownEnhancements from "../../components/MarkdownEnhancements.astro";
 import ArchivedBanner from "../../components/ArchivedBanner.astro";
 import {
   readManualPage,
@@ -12,8 +10,13 @@ import {
   getManualPages,
   getManualById,
 } from "../../utils/manuals";
+import {
+  preprocessCallouts,
+  postprocessCallouts,
+} from "../../utils/calloutRenderer";
 
 import "../../styles/manuals.css";
+import { contentRenderer } from "../../utils/contentRenderer";
 
 export async function getStaticPaths() {
   const groups = getManualGroups();
@@ -61,8 +64,15 @@ const nextPage =
     ? allPages[currentPageIndex + 1]
     : null;
 
+// Content processing
+const content = contentRenderer(
+  manualPage.content,
+  [preprocessCallouts],
+  [postprocessCallouts],
+);
+
+// Status of the manual
 const isArchived = manualInfo.status.includes("archived");
-const htmlContent = marked(manualPage.content);
 ---
 
 <Layout>
@@ -79,7 +89,7 @@ const htmlContent = marked(manualPage.content);
       id="content"
       class="markdown-content mx-auto w-full max-w-3xl p-4 leading-relaxed break-words"
     >
-      <Fragment set:html={htmlContent} />
+      <Fragment set:html={content} />
     </div>
 
     <ManualPageNav
@@ -89,5 +99,5 @@ const htmlContent = marked(manualPage.content);
     />
   </section>
 
-  <HeadingLinks />
+  <MarkdownEnhancements />
 </Layout>
