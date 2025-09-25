@@ -75,7 +75,9 @@ const content = contentRenderer(
 const isArchived = manualInfo.status.includes("archived");
 ---
 
-<Layout>
+<Layout
+  title={manualInfo.description ? manualInfo.description : manualInfo.title}
+>
   {isArchived && <ArchivedBanner dateArchived={manualInfo.dateArchived} />}
   <ManualNav currentGroup={group} currentPage={page} />
   <section
