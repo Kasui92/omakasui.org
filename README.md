@@ -5,3 +5,7 @@ Static website to showcase my personal Omakase, a collection of post-installatio
 ## Contributions
 
 This is a personal project, but suggestions and feedback are always welcome!
+
+## License
+
+Omakasui.org is released under the MIT License.
