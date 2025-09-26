@@ -1,0 +1,44 @@
+---
+const { currentPage, currentGroup, manual, manualPage } = Astro.props;
+---
+
+<nav
+  id="breadcrumb"
+  class="sticky top-0 w-full border-b border-[#89b29e33] p-6"
+>
+  <ol class="flex items-center justify-center space-x-2 text-sm font-medium">
+    <li>
+      <a
+        href="/manuals"
+        class="flex items-center text-[#89b29e] hover:text-[#7ba088]"
+      >
+        <i class="nf nf-md-library" aria-hidden="true"></i>
+        <span class="sr-only">Manuali</span>
+      </a>
+    </li>
+    <li class="flex items-center">
+      <i class="nf nf-md-chevron_right" aria-hidden="true"></i>
+      {
+        currentPage === "home" ? (
+          <span class="ml-2 font-medium">
+            {manual.description || manual.title}
+          </span>
+        ) : (
+          <a href={`/manuals/${currentGroup}`} class="ml-2">
+            {manual.description || manual.title}
+          </a>
+        )
+      }
+    </li>
+    {
+      currentPage !== "home" && (
+        <li class="flex items-center">
+          <i class="nf nf-md-chevron_right" aria-hidden="true" />
+          <span class="ml-2 font-medium text-[#e0e0e0]">
+            {manualPage.title}
+          </span>
+        </li>
+      )
+    }
+  </ol>
+</nav>

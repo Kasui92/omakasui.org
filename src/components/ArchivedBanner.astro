@@ -8,21 +8,17 @@ const { dateArchived } = Astro.props;
 
 <div
   id="archivedBanner"
-  class="fixed top-0 right-0 left-0 z-[1003] min-h-10 bg-[#e74c3c] px-5 py-3 text-center text-white shadow-[0_2px_8px_rgba(0,0,0,0.2)] md:px-6 md:py-3"
+  class="fixed top-0 right-0 left-0 z-30 flex h-[44px] items-center justify-center gap-2 bg-[#e74c3c] px-5 py-2 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.2)] md:text-base"
 >
-  <div
-    class="flex items-center justify-center gap-2 text-sm font-semibold md:text-base"
-  >
-    <i
-      class="nf nf-fa-warning font-mono text-base md:text-sm"
-      aria-label="Experimental"
-      title="Experimental"></i>
-    <span class="font-mono">
-      <span class="hidden sm:inline">
-        This project has been archived
-        {dateArchived ? ` on ${dateArchived}` : ""}.
-      </span>
-      <span class="sm:hidden">Archived!</span>
+  <i
+    class="nf nf-fa-warning font-mono text-base md:text-sm"
+    aria-label="Experimental"
+    title="Experimental"></i>
+  <span class="font-mono">
+    <span class="hidden sm:inline">
+      This project has been archived
+      {dateArchived ? ` on ${dateArchived}` : ""}.
     </span>
-  </div>
+    <span class="sm:hidden">Archived!</span>
+  </span>
 </div>

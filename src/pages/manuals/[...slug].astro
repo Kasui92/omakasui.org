@@ -1,6 +1,7 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import ManualLayout from "../../layouts/ManualLayout.astro";
 import ManualNav from "../../components/ManualNav.astro";
+import ManualBreadcrumb from "../../components/ManualBreadcrumb.astro";
 import ManualPageNav from "../../components/ManualPageNav.astro";
 import MarkdownEnhancements from "../../components/MarkdownEnhancements.astro";
 import ArchivedBanner from "../../components/ArchivedBanner.astro";
@@ -55,11 +56,12 @@ if (!group) {
   });
 }
 
-const manualInfo = getManualById(group);
-if (!manualInfo) {
+// Try to read the manual info
+const manual = getManualById(group);
+if (!manual) {
   return new Response(null, {
     status: 404,
-    statusText: "Manual group not found",
+    statusText: "Manual not found",
   });
 }
 
@@ -74,7 +76,7 @@ try {
   });
 }
 
-// Additional validation - check that the page actually exists
+// Check that the page actually exists
 if (!manualPage || !manualPage.content) {
   return new Response(null, {
     status: 404,
@@ -110,34 +112,45 @@ const content = contentRenderer(
 );
 
 // Status of the manual
-const isArchived = manualInfo.status.includes("archived");
+const isArchived = manual.status.includes("archived");
 ---
 
-<Layout
-  title={manualInfo.description ? manualInfo.description : manualInfo.title}
+<ManualLayout
+  title={`${manual.description ? manual.description : manual.title}${manualPage.title && manualPage.title !== "Home" ? ` - ${manualPage.title}` : ""}`}
 >
-  {isArchived && <ArchivedBanner dateArchived={manualInfo.dateArchived} />}
-  <ManualNav currentGroup={group} currentPage={page} />
-  <section
-    aria-labelledby="manual-heading"
-    class={isArchived ? "mt-12 md:mt-16" : ""}
-  >
-    <h2 class="sr-only" id="manual-heading">
-      {manualInfo.title} - {manualPage.title}
-    </h2>
-    <div
-      id="content"
-      class="markdown-content mx-auto w-full max-w-3xl p-4 leading-relaxed break-words"
-    >
-      <Fragment set:html={content} />
-    </div>
-
-    <ManualPageNav
-      group={group}
-      previousPage={previousPage}
-      nextPage={nextPage}
+  {isArchived && <ArchivedBanner dateArchived={manual.dateArchived} />}
+  <header class="w-full">
+    <ManualBreadcrumb
+      currentPage={page}
+      currentGroup={group}
+      manual={manual}
+      manualPage={manualPage}
     />
-  </section>
+    <ManualNav currentGroup={group} currentPage={page} />
+  </header>
+  <main role="main" aria-label="Main content" class="mt-12 flex-1 md:mt-16">
+    <section
+      aria-labelledby="manual-heading"
+      class={isArchived ? "mt-12 md:mt-16" : ""}
+    >
+      <h2 class="sr-only" id="manual-heading">
+        {manual.title} - {manualPage.title}
+      </h2>
+
+      <div
+        id="content"
+        class="markdown-content mx-auto w-full max-w-3xl p-4 leading-relaxed break-words"
+      >
+        <Fragment set:html={content} />
+      </div>
+
+      <ManualPageNav
+        group={group}
+        previousPage={previousPage}
+        nextPage={nextPage}
+      />
+    </section>
+  </main>
 
   <MarkdownEnhancements />
-</Layout>
+</ManualLayout>

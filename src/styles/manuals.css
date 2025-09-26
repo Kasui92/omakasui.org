@@ -316,11 +316,6 @@
 }
 
 /** --------- **/
-.breadcrumb {
-  font-family: "Fira Code", monospace;
-  font-size: 0.875rem;
-  color: #89b29e99;
-}
 
 #toggleNavBtn.active {
   background-color: #89b29ee6;
@@ -331,36 +326,49 @@
   background-color: #221e22;
 }
 
-main:has(:not(#archivedBanner)) #toggleNavBtn {
-  top: 16px;
+body:has(header):has(:not(#archivedBanner)) #toggleNavBtn {
+  top: 1rem;
 }
 
-main:has(:not(#archivedBanner)) #sideNav {
-  padding-top: 48px;
+body:has(header):has(:not(#archivedBanner)) #sideNav {
+  padding-top: 3rem;
 }
 
-main:has(#archivedBanner) #toggleNavBtn {
-  top: 50px;
+body:has(header):has(#archivedBanner) header {
+  position: relative;
+  top: 44px;
 }
 
-main:has(#archivedBanner) #sideNav {
-  padding-top: 86px;
+body:has(header):has(#archivedBanner) #toggleNavBtn {
+  top: calc(44px + 0.75rem);
+}
+
+body:has(header):has(#archivedBanner) #sideNav {
+  padding-top: calc(44px + 3rem);
+}
+
+body:has(#archivedBanner) #breadcrumb {
+  top: calc(44px + 4px);
+}
+
+body:has(:not(#archivedBanner)) #breadcrumb {
+  top: 0;
 }
 
 @media (min-width: 768px) {
-  main:has(:not(#archivedBanner)) #toggleNavBtn {
-    top: 32px;
+  body:has(header):has(:not(#archivedBanner)) #toggleNavBtn {
+    top: 0.5rem;
   }
 
-  main:has(:not(#archivedBanner)) #sideNav {
-    padding-top: 64px;
+  body:has(header):has(:not(#archivedBanner)) #sideNav {
+    padding-top: 3rem;
   }
 
-  main:has(#archivedBanner) #toggleNavBtn {
-    top: 64px;
+  body:has(header):has(#archivedBanner) #toggleNavBtn {
+    top: calc(44px + 0.75rem);
   }
 
-  main:has(#archivedBanner) #sideNav {
-    padding-top: 96px;
+  body:has(header):has(#archivedBanner) #sideNav {
+    padding-top: calc(44px + 3rem);
   }
 }
