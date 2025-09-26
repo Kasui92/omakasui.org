@@ -41,4 +41,13 @@ export const manuals: Manual[] = [
     dateArchived: "2025-09-10",
     hidden: true,
   },
+  {
+    id: "omakube",
+    title: "Omakube",
+    description: "The Omakube Manual",
+    url: "/manuals/omakube/",
+    coverImage: "/logos/omakube.png",
+    status: [],
+    hidden: false,
+  },
 ];
