@@ -11,7 +11,6 @@ const { group } = parseManualCollectionId(id, true);
 
 const manualPages = (await getCollection("manualsPages"))
   .filter((page) => {
-    console.log(page.id, group);
     return page.id.startsWith(`${group}/`);
   })
   .sort((a, b) => {
