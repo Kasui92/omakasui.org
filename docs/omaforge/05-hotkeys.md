@@ -2,11 +2,12 @@
 
 A carefully crafted set of keyboard shortcuts is included with Omaforge to enhance your productivity. These shortcuts are set up automatically during installation and remain fully customizable afterward.
 
-> [!note] **Note:** Many of these shortcuts are inspired by and derived from the [Omakub configuration](https://manual.omakub.org/1/read/29/hotkeys/). Omaforge builds upon this foundation with additional customizations.
+> Many of these shortcuts are inspired by and derived from the [Omakub configuration](https://manual.omakub.org/1/read/29/hotkeys/). Omaforge builds upon this foundation with additional customizations.
 
 ## Window Management
 
-> [!note] **Note:** Omaforge uses 6 fixed workspaces instead of dynamic mode for better organization. `Alt + number` shortcuts for dock apps have been removed.
+> [!note]
+> Omaforge uses 6 fixed workspaces instead of dynamic mode for better organization. `Alt + number` shortcuts for dock apps have been removed.
 
 | Hotkey                      | Action                                                    |
 | --------------------------- | --------------------------------------------------------- |

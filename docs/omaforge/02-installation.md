@@ -2,7 +2,8 @@
 
 Get started with Omaforge on your Ubuntu system
 
-> [!warning] **Warning:** Although a stable version has been released, **Omaforge is still an experimental project with an [unclear future](https://github.com/forge-ext/forge/issues/336)**. I recommend installing it to try it out, **_not using it on a daily basis_**.
+> [!WARNING]
+> Although a stable version has been released, **Omaforge is still an experimental project with an [unclear future](https://github.com/forge-ext/forge/issues/336)**. I recommend installing it to try it out, **_not using it on a daily basis_**.
 
 ## Prerequisites
 
