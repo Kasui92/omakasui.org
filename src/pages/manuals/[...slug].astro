@@ -1,132 +1,58 @@
 ---
-import ManualLayout from "../../layouts/ManualLayout.astro";
-import ManualNav from "../../components/ManualNav.astro";
-import ManualBreadcrumb from "../../components/ManualBreadcrumb.astro";
-import ManualPageNav from "../../components/ManualPageNav.astro";
-import MarkdownEnhancements from "../../components/MarkdownEnhancements.astro";
-import ArchivedBanner from "../../components/ArchivedBanner.astro";
-import {
-  readManualPage,
-  getManualGroups,
-  getManualPages,
-  getManualById,
-} from "../../utils/manuals";
-import {
-  preprocessCallouts,
-  postprocessCallouts,
-} from "../../utils/calloutRenderer";
+import { getCollection, getEntry, render } from "astro:content";
+import { getManual, parseManualCollectionId } from "../../utils/manuals";
 
-import "../../styles/manuals.css";
-import { contentRenderer } from "../../utils/contentRenderer";
+import ManualLayout from "../../layouts/ManualLayout.astro";
+import ArchivedBanner from "../../components/ArchivedBanner.astro";
+import ManualBreadcrumb from "../../components/ManualBreadcrumb.astro";
+import ManualNav from "../../components/ManualNav.astro";
+import MarkdownEnhancements from "../../components/MarkdownEnhancements.astro";
+import ManualPageNav from "../../components/ManualPageNav.astro";
 
 export async function getStaticPaths() {
-  const groups = getManualGroups();
-  const paths = [];
-
-  for (const group of groups) {
-    paths.push({
-      params: { slug: group },
-    });
-
-    const pages = getManualPages(group);
-    for (const pageInfo of pages) {
-      if (pageInfo.slug !== "home") {
-        paths.push({
-          params: { slug: `${group}/${pageInfo.slug}` },
-        });
-      }
-    }
-  }
-
-  return paths;
-}
-
-const { slug } = Astro.params;
-const slugParts = slug?.split("/") || [];
-
-// First part is the group, second part (if any) is the page (default to "home")
-const group = slugParts[0];
-const page = slugParts[1] || "home";
-
-// Validate that group exists
-if (!group) {
-  return new Response(null, {
-    status: 404,
-    statusText: "Not found",
+  const manualCollection = await getCollection("manualsPages");
+  return manualCollection.map((manual) => {
+    const { group, slug, title } = parseManualCollectionId(manual.id, true);
+    return {
+      params: {
+        slug: slug === "home" ? group : `${group}/${slug}`,
+      },
+      props: {
+        id: manual.id,
+        group,
+        title,
+        slug,
+      },
+    };
   });
 }
 
-// Try to read the manual info
-const manual = getManualById(group);
+const { id, group, slug, title } = Astro.props;
+
+const manualPage = await getEntry("manualsPages", id);
+if (!manualPage) {
+  return Astro.redirect("/manuals");
+}
+
+const manual = await getManual(group);
 if (!manual) {
-  return new Response(null, {
-    status: 404,
-    statusText: "Manual not found",
-  });
+  return Astro.redirect(`/manuals`);
 }
 
-// Try to read the manual page
-let manualPage;
-try {
-  manualPage = readManualPage(group, page);
-} catch (error) {
-  return new Response(null, {
-    status: 404,
-    statusText: "Manual page not found",
-  });
-}
+const { Content } = await render(manualPage);
 
-// Check that the page actually exists
-if (!manualPage || !manualPage.content) {
-  return new Response(null, {
-    status: 404,
-    statusText: "Manual page content not found",
-  });
-}
-
-// Get all pages for navigation
-let allPages;
-try {
-  allPages = getManualPages(group);
-} catch (error) {
-  return new Response(null, {
-    status: 404,
-    statusText: "Manual pages not found",
-  });
-}
-
-// Navigation items
-const currentPageIndex = allPages.findIndex((p) => p.slug === page);
-const previousPage =
-  currentPageIndex > 0 ? allPages[currentPageIndex - 1] : null;
-const nextPage =
-  currentPageIndex < allPages.length - 1
-    ? allPages[currentPageIndex + 1]
-    : null;
-
-// Content processing
-const content = contentRenderer(
-  manualPage.content,
-  [preprocessCallouts],
-  [postprocessCallouts],
-);
-
-// Status of the manual
+// Options for rendering the page
+const pageTitle = `${manual.description ? manual.description : manual.title}${
+  title && title !== "Home" ? ` - ${title}` : ""
+}`;
 const isArchived = manual.status.includes("archived");
 ---
 
-<ManualLayout
-  title={`${manual.description ? manual.description : manual.title}${manualPage.title && manualPage.title !== "Home" ? ` - ${manualPage.title}` : ""}`}
->
+<ManualLayout title={pageTitle}>
   {isArchived && <ArchivedBanner dateArchived={manual.dateArchived} />}
   <header class="w-full">
-    <ManualBreadcrumb
-      currentPage={page}
-      currentGroup={group}
-      manual={manual}
-      manualPage={manualPage}
-    />
-    <ManualNav currentGroup={group} currentPage={page} />
+    <ManualBreadcrumb id={manualPage.id} />
+    <ManualNav id={manualPage.id} />
   </header>
   <main role="main" aria-label="Main content" class="mt-12 flex-1 md:mt-16">
     <section
@@ -134,23 +60,18 @@ const isArchived = manual.status.includes("archived");
       class={isArchived ? "mt-12 md:mt-16" : ""}
     >
       <h2 class="sr-only" id="manual-heading">
-        {manual.title} - {manualPage.title}
+        {manual.title} - {title}
       </h2>
 
       <div
         id="content"
         class="markdown-content mx-auto w-full max-w-3xl p-4 leading-relaxed break-words"
       >
-        <Fragment set:html={content} />
+        <Content />
       </div>
 
-      <ManualPageNav
-        group={group}
-        previousPage={previousPage}
-        nextPage={nextPage}
-      />
+      <ManualPageNav id={manualPage.id} />
     </section>
   </main>
-
   <MarkdownEnhancements />
 </ManualLayout>

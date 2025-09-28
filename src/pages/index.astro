@@ -1,13 +1,15 @@
 ---
+import { getCollection } from "astro:content";
+
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/layout/Header.astro";
 import ProjectList from "../components/ProjectList.astro";
 import HiddensToggle from "../components/HiddensToggle.astro";
 
-import { projects, type Project } from "../data/projects.ts";
+const projects = await getCollection("projects");
 
-const activeProjects: Project[] = projects.filter((project) => !project.hidden);
-const hiddenProjects: Project[] = projects.filter((project) => project.hidden);
+const activeProjects = projects.filter((project) => !project.data.hidden);
+const hiddenProjects = projects.filter((project) => project.data.hidden);
 ---
 
 <Layout>
