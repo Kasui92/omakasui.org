@@ -1,6 +1,13 @@
 ---
+import { getCollection } from "astro:content";
+
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/layout/Header.astro";
+import ThemesList from "../../components/ThemesList.astro";
+
+const themes = (await getCollection("themes")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name),
+);
 ---
 
 <Layout title="Manuals">
@@ -9,10 +16,10 @@ import Header from "../../components/layout/Header.astro";
     subtitle="The curated theme list for OmaKasui (and beyond)"
     accessibleName="OmaKasui - Themes"
   />
+
   <section aria-labelledby="themes-heading">
-    <h2 class="sr-only" id="themes-heading">Available themes</h2>
-    <p class="text-[1.1rem] leading-[1.8] text-[#ccc]">
-      This section is under construction. Please check back later for updates.
-    </p>
+    <h2 class="sr-only" id="themes-heading">Themes Library</h2>
+    <h2>$ ls</h2>
+    {themes.length > 0 && <ThemesList themes={themes} />}
   </section>
 </Layout>

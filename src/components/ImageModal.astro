@@ -1,0 +1,96 @@
+---
+interface Props {
+  src?: string;
+  name: string;
+  id: string;
+}
+
+const { src, name, id } = Astro.props;
+const modalId = `modal-${id}`;
+---
+
+<button
+  class="block w-full cursor-pointer"
+  onclick={`openImageModal('${modalId}')`}
+  title={`Open preview of ${name}`}
+  data-image={src}
+  data-name={name}
+>
+  {
+    src ? (
+      <img
+        src={src}
+        alt={`${name} preview`}
+        class="h-48 w-full rounded-lg object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+        loading="lazy"
+      />
+    ) : (
+      <div class="flex h-48 w-full items-center justify-center rounded-lg bg-gray-200 text-6xl opacity-70">
+        <i class="nf nf-fa-picture_o" />
+      </div>
+    )
+  }
+</button>
+
+<div
+  id={modalId}
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4"
+>
+  <div class="relative max-h-full max-w-full">
+    <button
+      class="absolute -top-10 right-0 cursor-pointer text-2xl text-white transition-colors hover:text-gray-300"
+      onclick={`closeImageModal('${modalId}')`}
+    >
+      <i class="nf nf-md-close"></i>
+    </button>
+    <img
+      id={`${modalId}-image`}
+      src=""
+      alt=""
+      class="max-h-[90vh] max-w-full rounded-lg shadow-2xl"
+    />
+  </div>
+</div>
+
+<script is:inline define:vars={{ modalId, src, name }}>
+  if (typeof window.openImageModal === "undefined") {
+    window.openImageModal = function (modalId) {
+      const button = event.target.closest("button");
+      const imageSrc = button.getAttribute("data-image");
+      const imageName = button.getAttribute("data-name");
+
+      if (!imageSrc) return;
+
+      const modal = document.getElementById(modalId);
+      const modalImage = document.getElementById(`${modalId}-image`);
+
+      modalImage.src = imageSrc;
+      modalImage.alt = `${imageName} full size`;
+
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    };
+
+    window.closeImageModal = function (modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.body.style.overflow = "auto";
+    };
+  }
+
+  const modal = document.getElementById(modalId);
+
+  modal.addEventListener("click", function (e) {
+    if (e.target === this) {
+      window.closeImageModal(modalId);
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+      window.closeImageModal(modalId);
+    }
+  });
+</script>

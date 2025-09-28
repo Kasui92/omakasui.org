@@ -33,8 +33,19 @@ const projects = defineCollection({
   }),
 });
 
+const themes = defineCollection({
+  loader: file("src/data/themes.json"),
+  schema: z.object({
+    id: z.string(),
+    name: z.string(),
+    url: z.string(),
+    image: z.string(),
+  }),
+});
+
 export const collections = {
   manualsPages,
   manuals,
   projects,
+  themes,
 };

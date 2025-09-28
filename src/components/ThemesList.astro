@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ImageModal from "./ImageModal.astro";
+
+const { themes } = Astro.props;
+---
+
+{
+  themes.length > 0 && (
+    <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {themes.map((theme: CollectionEntry<"themes">, index: number) => (
+        <div class="flex flex-col items-center">
+          <ImageModal
+            src={theme.data.image}
+            name={theme.data.name}
+            id={`theme-${index}`}
+          />
+          <a
+            href={theme.data.url}
+            target="_blank"
+            rel="noopener"
+            title={`Open the theme ${theme.data.name} in a new tab`}
+            class="mt-3 text-center text-base font-medium"
+          >
+            {theme.data.name}
+          </a>
+        </div>
+      ))}
+    </div>
+  )
+}
