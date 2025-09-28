@@ -1,13 +1,40 @@
 ---
-import { type ManualPage } from "../data/manuals";
+import { getCollection } from "astro:content";
+import { parseManualCollectionId } from "../utils/manuals";
 
 interface Props {
-  group: string;
-  previousPage?: Partial<ManualPage> | null;
-  nextPage?: Partial<ManualPage> | null;
+  id: string;
 }
 
-const { group, previousPage, nextPage } = Astro.props;
+const { id } = Astro.props;
+const { group, slug } = parseManualCollectionId(id, true);
+
+const manualPages = (await getCollection("manualsPages")).filter((page) => {
+  return page.id.startsWith(`${group}/`);
+});
+
+const navigationItems = manualPages
+  .map((page) => {
+    const { group, slug, title, order } = parseManualCollectionId(
+      page.id,
+      true,
+    );
+    return {
+      slug,
+      title,
+      url: `/manuals/${group}${slug === "home" ? "" : `/${slug}`}`,
+      order,
+    };
+  })
+  .sort((a, b) => a.order - b.order);
+
+const currentIndex = navigationItems.findIndex((item) => item.slug === slug);
+const previousPage =
+  currentIndex > 0 ? navigationItems[currentIndex - 1] : null;
+const nextPage =
+  currentIndex < navigationItems.length - 1
+    ? navigationItems[currentIndex + 1]
+    : null;
 ---
 
 {

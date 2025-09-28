@@ -1,13 +1,15 @@
 ---
+import { getCollection } from "astro:content";
+
 import Header from "../../components/layout/Header.astro";
 import Layout from "../../layouts/Layout.astro";
 import ManualList from "../../components/ManualList.astro";
 import HiddensToggle from "../../components/HiddensToggle.astro";
 
-import { manuals } from "../../data/manuals";
+const manuals = await getCollection("manuals");
 
-const activeManuals = manuals.filter((manual) => !manual.hidden);
-const hiddenManuals = manuals.filter((manual) => manual.hidden);
+const activeManuals = manuals.filter((manual) => !manual.data.hidden);
+const hiddenManuals = manuals.filter((manual) => manual.data.hidden);
 ---
 
 <Layout title="Manuals">

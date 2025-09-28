@@ -1,5 +1,5 @@
 ---
-import type { Manual } from "../data/manuals";
+import type { CollectionEntry } from "astro:content";
 import StatusIcon from "./StatusIcon.astro";
 
 const { manuals } = Astro.props;
@@ -8,32 +8,32 @@ const { manuals } = Astro.props;
 {
   manuals.length > 0 && (
     <div class="mb-6 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] justify-center gap-4 sm:grid-cols-[repeat(auto-fit,minmax(200px,200px))]">
-      {manuals.map((manual: Manual) => (
+      {manuals.map((manual: CollectionEntry<"manuals">) => (
         <div class="flex w-full flex-col items-center justify-self-center sm:max-w-[200px]">
           <a
-            href={manual.url}
+            href={manual.data.url}
             class="group block"
             target="_blank"
             rel="noopener"
-            title={`Open the manual for ${manual.title} in a new tab`}
+            title={`Open the manual for ${manual.data.title} in a new tab`}
           >
             <div class="relative h-[240px] w-[160px] overflow-hidden rounded-lg border border-[#333] bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] shadow-[0_8px_20px_rgba(0,0,0,0.3)] transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-[0_12px_30px_rgba(0,0,0,0.4)]">
               <div class="flex h-full w-full items-center justify-center p-6">
-                {manual.coverImage ? (
+                {manual.data.coverImage ? (
                   <img
-                    src={manual.coverImage}
-                    alt={`${manual.title} cover`}
+                    src={manual.data.coverImage}
+                    alt={`${manual.data.title} cover`}
                     class="max-h-32 max-w-32 object-contain opacity-90"
                     loading="lazy"
                   />
                 ) : (
                   <div class="flex h-32 w-32 items-center justify-center text-6xl opacity-70">
-                    <StatusIcon status={manual.status[0]} />
+                    <StatusIcon status={manual.data.status[0]} />
                   </div>
                 )}
               </div>
 
-              {manual.status.includes("archived") && (
+              {manual.data.status.includes("archived") && (
                 <>
                   <div class="absolute inset-0 bg-[#e74c3c]/10" />
                   <div class="absolute top-4 -right-8 w-32 rotate-45 border border-red-800/50 bg-[#e74c3c] py-2 text-center text-xs font-bold text-white shadow-lg">
@@ -46,7 +46,7 @@ const { manuals } = Astro.props;
 
           <div class="mt-2 w-full text-center">
             <div class="m-0 text-lg font-bold text-[#f2f2f2e6] lg:text-base">
-              {manual.description}
+              {manual.data.description}
             </div>
           </div>
         </div>
