@@ -1,0 +1,22 @@
+[
+  {
+    "id": "omarell",
+    "title": "Omarell",
+    "description": "The Omarell Manual",
+    "url": "/manuals/omarell/",
+    "coverImage": "/logos/omarell.png",
+    "status": ["archived"],
+    "dateArchived": "2025-09-13",
+    "hidden": true
+  },
+  {
+    "id": "omaforge",
+    "title": "Omaforge",
+    "description": "The Omaforge Manual",
+    "url": "/manuals/omaforge/",
+    "coverImage": "/logos/omaforge.png",
+    "status": ["archived"],
+    "dateArchived": "2025-09-10",
+    "hidden": true
+  }
+]
