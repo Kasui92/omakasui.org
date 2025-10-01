@@ -1,6 +1,6 @@
 # Features
 
-A collection of features that make Omarell lightweight, flexible, and tailored to real everyday use.
+A collection of features that make Omakube lightweight, flexible, and tailored to real everyday use.
 
 ## In the heart is Omakub...
 
@@ -12,7 +12,7 @@ The drive and desire to provide something interesting and enjoyable comes from _
 
 ## Wofi App Launcher & Unified Menu
 
-Omarell features seamless integration with [`Wofi`](https://hg.sr.ht/~scoopta/wofi), a powerful application launcher for Wayland. This allows for quick access to applications, themes and, most importantly, a **Unified Menu** for all Omarell/Omakub features.
+Omakube features seamless integration with [`Wofi`](https://hg.sr.ht/~scoopta/wofi), a powerful application launcher for Wayland. This allows for quick access to applications, themes and, most importantly, a **Unified Menu** for all Omakube features.
 
 <video controls width="100%" height="auto" preload="metadata">
   <source src="/videos/omakube/wofi-launcher.webm" type="video/webm" />
@@ -22,7 +22,11 @@ Omarell features seamless integration with [`Wofi`](https://hg.sr.ht/~scoopta/wo
   <i>A quick demonstration of the Wofi integration and Unified Menu.</i>
 </p>
 
-## More Themes
+## Shell Scripts
+
+A set of scripts, adapted from Omarchy and customized for Omakube, designed to simplify the user experience and integrate seamlessly with its features. Just type `omakub-` in the terminal and press `Tab` to see the full list.
+
+## More Default Themes and Extra Themes
 
 There are a few more default themes than Omakub (_catppuccin-latte_ and _osaka-jade_), and you can install new ones using the dedicated tool in the menu.
 
@@ -38,16 +42,18 @@ There are a few more default themes than Omakub (_catppuccin-latte_ and _osaka-j
   <i>Catppuccin Latte</i>
 </p>
 
+You can view the extra themes on the [dedicated page](/themes) on OmaKasui.org.
+
 ## Enhance Extensions
 
 More GNOME extensions have been added to make using the overview and quick settings more pleasant, as well as some updates to existing ones.
 
+Specifically, [`Tactile`](https://extensions.gnome.org/extension/4548/tactile/)’s grid has been set to 4 columns to provide greater flexibility. In addition, the [`Quick Settings Tweaks`](https://extensions.gnome.org/extension/5446/quick-settings-tweaker/) extension updates the user menu in the GNOME top bar, and [`GNOME 4x UI Improvements`](https://extensions.gnome.org/extension/4158/gnome-40-ui-improvements/) has been included to bring more consistency to the overview.
+
 ## Custom Plymouth and GDM3
 
-Omarell comes with _custom Plymouth_ boot screen and _GDM3_ login screen designs, creating a cohesive and consistent visual experience from boot to login that matches the overall desktop theme.
+Omakube comes with _custom Plymouth_ boot screen and _GDM3_ login screen designs, creating a cohesive and consistent visual experience from boot to login that matches the overall desktop theme.
 
-## Minimal and Essential Software
+## No SNAP!
 
-The system ships with a carefully curated selection of essential tools for GNOME management, deliberately excluding software centers and Snap packages to maintain focus and simplicity. Flatpak comes _pre-configured_ and ready to use from the command line, putting you in _complete control_ of your software installation process.
-
-This minimalist philosophy ensures a lightweight, customizable foundation where you can build your ideal development environment by adding _only what you truly need_, when you need it.
+Yes, exactly — _*no Snap*_. It’s a choice I’ve always made and continue to stick with, to avoid a system bloated with preinstalled software and forced defaults. Instead, I prefer to add Snapd only when it’s actually needed, along with any apps that come with it.
