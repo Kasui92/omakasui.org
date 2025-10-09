@@ -12,7 +12,7 @@ Although Omakub has reached a mature and complete stage, I believe there’s sti
 
 I understand the enthusiasm around Arch and Hyprland, and the desire to build a system from the ground up to match that aesthetic and philosophy. However, there are still many who prefer a stable and predictable base — for practical, professional, or personal reasons — and who continue to believe in what Omakub represents. Omakube was created precisely for them: to carry that vision forward and make it even better.
 
-## How to Contribute
+## How to contribute
 
 Contributions are welcome, both to Omakub itself and to its Manual. Each improvement, correction, or idea helps strengthen the project as a whole. Everything here is designed with sharing in mind: from the structure to the documentation, every part exists to be learned from, built upon, and given back to the community. That’s what keeps Omakube alive and evolving.
 
