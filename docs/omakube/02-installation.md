@@ -23,20 +23,4 @@ To install Omakube, simply run the following command in your terminal:
 curl -fsSL https://omakasui.org/omakube | bash
 ```
 
-## Troubleshooting
-
-### Installation Failed
-
-If installation fails, retry with:
-
-```bash
-source ~/.local/share/omakube/install.sh
-```
-
-### Permission Issues
-
-Ensure you have sudo privileges:
-
-```bash
-sudo -v
-```
+If you encounter errors, you can consult the [dedicated section](/manuals/omakube/troubleshooting) in **troubleshooting**.
