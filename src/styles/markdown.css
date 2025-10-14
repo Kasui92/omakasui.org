@@ -1,7 +1,16 @@
 .markdown-content {
+  --ok-font-serif: "Inter", sans-serif;
+  --ok-font-sans: "Inter", sans-serif;
+  --ok-font-mono: "Fira Code", monospace;
+  --ok-font-size: 1.125rem;
+}
+
+.markdown-content {
   color: #e0e0e0;
   line-height: 1.6;
   max-width: none;
+  font-family: var(--ok-font-family);
+  font-size: var(--ok-font-size);
 }
 
 .markdown-content h1,
@@ -31,7 +40,7 @@
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   text-decoration: none !important;
-  font-size: 75%;
+  font-size: calc(var(--ok-font-size) * 0.67);
   cursor: pointer;
   vertical-align: middle;
   margin-left: 0.5rem;
@@ -55,23 +64,23 @@
 }
 
 .markdown-content h1 {
-  font-size: 2.5rem;
+  font-size: calc(var(--ok-font-size) * 2.22);
   margin-top: 0;
 }
 
 .markdown-content h2 {
-  font-size: 1.875rem;
+  font-size: calc(var(--ok-font-size) * 1.67);
   border-bottom-width: 2px;
   border-bottom-color: #89b29e66;
   padding-bottom: 0.5rem;
 }
 
 .markdown-content h3 {
-  font-size: 1.5rem;
+  font-size: calc(var(--ok-font-size) * 1.33);
 }
 
 .markdown-content h4 {
-  font-size: 1.25rem;
+  font-size: calc(var(--ok-font-size) * 1.11);
 }
 
 .markdown-content p {
@@ -101,8 +110,8 @@
   border-color: #444;
   border-radius: 0.25rem;
   color: #89b29ee6;
-  font-size: 0.875rem;
-  font-family: "Fira Code", monospace;
+  font-size: calc(var(--ok-font-size) * 0.78);
+  font-family: var(--ok-font-mono);
 }
 
 .markdown-content pre {
@@ -134,7 +143,7 @@
   color: #bbb;
   border-radius: 0.25rem;
   padding: 0.5rem;
-  font-size: 0.75rem;
+  font-size: calc(var(--ok-font-size) * 0.67);
   transition: all 0.2s ease;
   opacity: 0;
   width: 2rem;
@@ -259,12 +268,12 @@
   background-color: #2a2a2a;
   color: #f2f2f2e6;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: calc(var(--ok-font-size) * 0.78);
 }
 
 .markdown-content td {
   color: #e0e0e0;
-  font-size: 0.875rem;
+  font-size: calc(var(--ok-font-size) * 0.78);
 }
 
 .markdown-content tbody tr:hover {
