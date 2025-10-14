@@ -7,10 +7,18 @@ interface Props {
 }
 
 const { id } = Astro.props;
-const { title, group } = parseManualCollectionId(id, true);
+const { title, group, chapter } = parseManualCollectionId(id, true);
 
 const manual = group ? await getManual(group) : null;
 const manualPage = await getEntry("manualsPages", id);
+
+// Format chapter title
+const chapterTitle = chapter
+  ? chapter
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
+  : null;
 ---
 
 {
@@ -31,7 +39,7 @@ const manualPage = await getEntry("manualsPages", id);
         </li>
         <li class="flex items-center">
           <i class="nf nf-md-chevron_right" aria-hidden="true" />
-          {title === "Home" ? (
+          {title === "Home" && !chapter ? (
             <span class="ml-2 font-medium">
               {manual.description || manual.title}
             </span>
@@ -41,10 +49,16 @@ const manualPage = await getEntry("manualsPages", id);
             </a>
           )}
         </li>
+        {chapterTitle && (
+          <li class="flex items-center">
+            <i class="nf nf-md-chevron_right" aria-hidden="true" />
+            <span class="ml-2 text-[#e0e0e0]">{chapterTitle}</span>
+          </li>
+        )}
         {title !== "Home" && (
           <li class="flex items-center">
             <i class="nf nf-md-chevron_right" aria-hidden="true" />
-            <span class="ml-2 font-medium text-[#e0e0e0]">{title}</span>
+            <span class="ml-2 font-bold text-[#e0e0e0]">{title}</span>
           </li>
         )}
       </ol>

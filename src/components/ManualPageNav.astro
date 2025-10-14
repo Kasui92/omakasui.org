@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { id } = Astro.props;
-const { group, slug } = parseManualCollectionId(id, true);
+const { group } = parseManualCollectionId(id, true);
 
 const manualPages = (await getCollection("manualsPages")).filter((page) => {
   return page.id.startsWith(`${group}/`);
@@ -15,20 +15,29 @@ const manualPages = (await getCollection("manualsPages")).filter((page) => {
 
 const navigationItems = manualPages
   .map((page) => {
-    const { group, slug, title, order } = parseManualCollectionId(
-      page.id,
-      true,
-    );
+    const parsed = parseManualCollectionId(page.id, true);
     return {
-      slug,
-      title,
-      url: `/manuals/${group}${slug === "home" ? "" : `/${slug}`}`,
-      order,
+      id: page.id,
+      slug: parsed.slug,
+      title: parsed.title,
+      url: `/manuals/${group}${parsed.slug === "home" ? "" : `/${parsed.slug}`}`,
+      order: parsed.order,
+      orderChapter: parsed.orderChapter,
+      chapter: parsed.chapter,
     };
   })
-  .sort((a, b) => a.order - b.order);
+  .sort((a, b) => {
+    // First sort by chapter
+    if (a.orderChapter !== undefined && b.orderChapter !== undefined) {
+      if (a.orderChapter !== b.orderChapter) {
+        return a.orderChapter - b.orderChapter;
+      }
+    }
+    // Then sort by page
+    return a.order - b.order;
+  });
 
-const currentIndex = navigationItems.findIndex((item) => item.slug === slug);
+const currentIndex = navigationItems.findIndex((item) => item.id === id);
 const previousPage =
   currentIndex > 0 ? navigationItems[currentIndex - 1] : null;
 const nextPage =

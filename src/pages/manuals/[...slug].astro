@@ -12,22 +12,26 @@ import ManualPageNav from "../../components/ManualPageNav.astro";
 export async function getStaticPaths() {
   const manualCollection = await getCollection("manualsPages");
   return manualCollection.map((manual) => {
-    const { group, slug, title } = parseManualCollectionId(manual.id, true);
+    const parsed = parseManualCollectionId(manual.id, true);
     return {
       params: {
-        slug: slug === "home" ? group : `${group}/${slug}`,
+        slug:
+          parsed.slug === "home"
+            ? parsed.group
+            : `${parsed.group}/${parsed.slug}`,
       },
       props: {
         id: manual.id,
-        group,
-        title,
-        slug,
+        group: parsed.group,
+        title: parsed.title,
+        slug: parsed.slug,
+        chapter: parsed.chapter,
       },
     };
   });
 }
 
-const { id, group, slug, title } = Astro.props;
+const { id, group, title } = Astro.props;
 
 const manualPage = await getEntry("manualsPages", id);
 if (!manualPage) {
@@ -41,10 +45,7 @@ if (!manual) {
 
 const { Content } = await render(manualPage);
 
-// Options for rendering the page
-const pageTitle = `${manual.description ? manual.description : manual.title}${
-  title && title !== "Home" ? ` - ${title}` : ""
-}`;
+const pageTitle = `${manual.description ? manual.description : manual.title}${title && title !== "Home" ? ` - ${title}` : ""}`;
 const isArchived = manual.status.includes("archived");
 ---
 

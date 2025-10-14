@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { parseManualCollectionId } from "../utils/manuals";
+import type { ManualNavItem } from "../@types/manual";
 
 interface Props {
   id: string;
@@ -14,19 +15,53 @@ const manualPages = (await getCollection("manualsPages"))
     return page.id.startsWith(`${group}/`);
   })
   .sort((a, b) => {
-    const aOrder = parseManualCollectionId(a.id).order;
-    const bOrder = parseManualCollectionId(b.id).order;
-    return aOrder - bOrder;
+    const aParsed = parseManualCollectionId(a.id, true);
+    const bParsed = parseManualCollectionId(b.id, true);
+
+    // First sort by chapter
+    if (
+      aParsed.orderChapter !== undefined &&
+      bParsed.orderChapter !== undefined
+    ) {
+      if (aParsed.orderChapter !== bParsed.orderChapter) {
+        return aParsed.orderChapter - bParsed.orderChapter;
+      }
+    }
+
+    // Then sort by page
+    return aParsed.order - bParsed.order;
   });
 
-const navigationItems = manualPages.map((page) => {
-  const { group, slug, title } = parseManualCollectionId(page.id, true);
-  return {
-    slug,
-    title,
-    url: `/manuals/${group}${slug === "home" ? "" : `/${slug}`}`,
+const navigationItems: (
+  | ManualNavItem
+  | { isChapter: true; title: string; orderChapter: number }
+)[] = [];
+let lastChapter: string | undefined = undefined;
+
+manualPages.forEach((page) => {
+  const parsed = parseManualCollectionId(page.id, true);
+
+  // Se c'è un nuovo capitolo, aggiungi l'header del capitolo
+  if (parsed.chapter && parsed.chapter !== lastChapter) {
+    navigationItems.push({
+      isChapter: true,
+      title: parsed.chapter
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
+      orderChapter: parsed.orderChapter || 999,
+    });
+    lastChapter = parsed.chapter;
+  }
+
+  navigationItems.push({
+    slug: parsed.slug,
+    title: parsed.title,
+    url: `/manuals/${group}${parsed.slug === "home" ? "" : `/${parsed.slug}`}`,
     active: page.id === id,
-  };
+    chapter: parsed.chapter,
+    orderChapter: parsed.orderChapter,
+  });
 });
 ---
 
@@ -56,32 +91,60 @@ const navigationItems = manualPages.map((page) => {
 <div class="py-4">
   <ul class="m-0 list-none p-0">
     {
-      navigationItems.map((item, index) => (
-        <li class="border-b border-gray-700">
-          <a
-            href={item.url}
-            class={`group flex items-center border-l-4 p-4 text-gray-300 no-underline transition-all duration-300 ${
-              item.active
-                ? "border-l-[#89b29e] bg-[#89b29e]/15 font-bold text-[#89b29e]"
-                : "border-l-transparent hover:border-l-[#89b29e] hover:bg-[#89b29e]/10 hover:text-[#89b29e]"
-            }`}
-            data-page={item.slug}
-          >
-            <span
-              class={`mr-4 min-w-3 text-left text-base font-bold text-[#89b29e]`}
+      navigationItems.map((item) => {
+        if ("isChapter" in item && item.isChapter) {
+          // Render chapter header - stile minimalista
+          return (
+            <li>
+              <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wider text-gray-500 uppercase">
+                {item.title}
+              </div>
+            </li>
+          );
+        }
+
+        // Render page item
+        const pageItem = item as ManualNavItem;
+        return (
+          <li>
+            <a
+              href={pageItem.url}
+              class={`group flex items-center gap-3 border-l-4 p-4 text-gray-300 no-underline transition-all duration-300 ${
+                pageItem.active
+                  ? "border-l-[#89b29e] bg-[#89b29e]/15 font-bold text-[#89b29e]"
+                  : "border-l-transparent hover:border-l-[#89b29e] hover:bg-[#89b29e]/10 hover:text-[#89b29e]"
+              } ${pageItem.chapter ? "pl-8" : ""}`}
+              data-page={pageItem.slug}
             >
-              {String(index + 1)}.
-            </span>
-            <span
-              class={`whitespace-nowrap group-hover:underline ${
-                item.active ? "text-[#89b29e]" : ""
-              }`}
-            >
-              {item.title}
-            </span>
-          </a>
-        </li>
-      ))
+              {!pageItem.chapter && (
+                <span
+                  class={`h-1.5 w-1.5 flex-shrink-0 rounded-full transition-colors ${
+                    pageItem.active
+                      ? "bg-[#89b29e]"
+                      : "bg-gray-600 group-hover:bg-[#89b29e]"
+                  }`}
+                />
+              )}
+              {pageItem.chapter && (
+                <span
+                  class={`h-1 w-1 flex-shrink-0 rounded-full transition-colors ${
+                    pageItem.active
+                      ? "bg-[#89b29e]"
+                      : "bg-gray-600 group-hover:bg-[#89b29e]"
+                  }`}
+                />
+              )}
+              <span
+                class={`whitespace-nowrap group-hover:underline ${
+                  pageItem.active ? "text-[#89b29e]" : ""
+                }`}
+              >
+                {pageItem.title}
+              </span>
+            </a>
+          </li>
+        );
+      })
     }
   </ul>
 </div>
