@@ -44,6 +44,30 @@ import Button from "@/components/ui/Button.astro";
   </div>
 
   <div class="mt-6 flex justify-end">
-    <Button data-modal-close variant="primary" size="md"> Got it! </Button>
+    <Button data-modal-close variant="primary" size="md" class="cursor-pointer">
+      Got it!
+    </Button>
   </div>
 </Modal>
+
+<button
+  id="openNavigationHelp"
+  class="fixed right-[0.25rem] z-50 hidden h-[40px] w-[40px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-[#89b29e]/30 bg-[#2a252a] p-0 shadow-lg transition-all duration-300 hover:scale-105 hover:border-[#89b29e] hover:bg-[#89b29e]/10 hover:shadow-xl md:right-[1.25rem] md:bottom-[1.25rem] md:flex"
+  aria-label="Navigation tips"
+  title="Navigation tips"
+>
+  <i class="nf nf-md-help_circle text-xl text-[#89b29e]" aria-hidden="true"></i>
+</button>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const helpButton = document.getElementById("openNavigationHelp");
+    if (helpButton) {
+      helpButton.addEventListener("click", () => {
+        if (window.openNavigationHelpModal) {
+          window.openNavigationHelpModal();
+        }
+      });
+    }
+  });
+</script>

@@ -7,7 +7,6 @@ import {
   isFirstPage as checkIsFirstPage,
   formatChapterTitle,
 } from "@/utils/manuals";
-import IconButton from "@/components/ui/IconButton.astro";
 
 interface Props {
   id: string;
@@ -70,32 +69,7 @@ const chapterTitle = formatChapterTitle(chapter);
             </li>
           )}
         </ol>
-
-        <!-- Help Button - Desktop only -->
-        <div class="absolute right-0 top-1/2 hidden -translate-y-1/2 md:block">
-          <IconButton
-            id="openNavigationHelp"
-            icon="nf nf-md-help_circle"
-            variant="secondary"
-            size="md"
-            aria-label="Navigation tips"
-            title="Navigation tips"
-          />
-        </div>
       </div>
     </nav>
   )
 }
-
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const helpButton = document.getElementById("openNavigationHelp");
-    if (helpButton) {
-      helpButton.addEventListener("click", () => {
-        if (window.openNavigationHelpModal) {
-          window.openNavigationHelpModal();
-        }
-      });
-    }
-  });
-</script>

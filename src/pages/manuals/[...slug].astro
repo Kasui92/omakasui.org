@@ -10,6 +10,7 @@ import ManualLayout from "@/layouts/ManualLayout.astro";
 import ArchivedBanner from "@/components/ArchivedBanner.astro";
 import ManualBreadcrumb from "@/components/ManualBreadcrumb.astro";
 import ManualNav from "@/components/ManualNav.astro";
+import ManualHelp from "@/components/ManualHelp.astro";
 import MarkdownEnhancements from "@/components/MarkdownEnhancements.astro";
 import ManualPageNav from "@/components/ManualPageNav.astro";
 
@@ -85,6 +86,7 @@ const isArchived = manual.status.includes("archived");
   <header class="w-full">
     <ManualBreadcrumb id={manualPage.id} />
     <ManualNav id={manualPage.id} />
+    <ManualHelp />
   </header>
   <main role="main" aria-label="Main content" class="mt-8 flex-1 md:mt-6">
     <section

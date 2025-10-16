@@ -24,7 +24,6 @@ const sizeClasses = {
   aria-labelledby={title ? `${id}-title` : undefined}
   data-modal
 >
-  <!-- Backdrop -->
   <div
     class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300"
     data-modal-backdrop
@@ -32,7 +31,6 @@ const sizeClasses = {
   >
   </div>
 
-  <!-- Modal Content -->
   <div
     class={`relative ${sizeClasses[size]} w-full rounded-lg border border-[#89b29e33] bg-[#2a252a] p-6 shadow-2xl transition-all duration-300 mx-4`}
     data-modal-content
@@ -40,21 +38,23 @@ const sizeClasses = {
     {
       title && (
         <div class="mb-4 flex items-center justify-between border-b border-gray-700 pb-4">
-          <h2 id={`${id}-title`} class="text-xl font-bold text-[#89b29e]">
+          <h2
+            id={`${id}-title`}
+            class="my-auto text-xl leading-tight font-bold text-[#89b29e]"
+          >
             {title}
           </h2>
           <button
             data-modal-close
-            class="rounded-lg p-2 text-gray-400 transition-colors hover:bg-[#89b29e]/10 hover:text-[#89b29e]"
+            class="mb-0 cursor-pointer rounded-lg p-2 text-gray-400 transition-colors hover:bg-[#89b29e]/10 hover:text-[#89b29e]"
             aria-label="Close modal"
           >
-            <i class="nf nf-md-close text-xl" />
+            <i class="nf nf-md-close align-middle text-xl" />
           </button>
         </div>
       )
     }
 
-    <!-- Modal Body -->
     <div class="modal-body">
       <slot />
     </div>
