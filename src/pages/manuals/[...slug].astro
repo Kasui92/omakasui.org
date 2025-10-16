@@ -1,37 +1,66 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
-import { getManual, parseManualCollectionId } from "../../utils/manuals";
+import {
+  getManual,
+  parseManualCollectionId,
+  sortManualPages,
+} from "@/utils/manuals";
 
-import ManualLayout from "../../layouts/ManualLayout.astro";
-import ArchivedBanner from "../../components/ArchivedBanner.astro";
-import ManualBreadcrumb from "../../components/ManualBreadcrumb.astro";
-import ManualNav from "../../components/ManualNav.astro";
-import MarkdownEnhancements from "../../components/MarkdownEnhancements.astro";
-import ManualPageNav from "../../components/ManualPageNav.astro";
+import ManualLayout from "@/layouts/ManualLayout.astro";
+import ArchivedBanner from "@/components/ArchivedBanner.astro";
+import ManualBreadcrumb from "@/components/ManualBreadcrumb.astro";
+import ManualNav from "@/components/ManualNav.astro";
+import ManualHelp from "@/components/ManualHelp.astro";
+import MarkdownEnhancements from "@/components/MarkdownEnhancements.astro";
+import ManualPageNav from "@/components/ManualPageNav.astro";
 
 export async function getStaticPaths() {
   const manualCollection = await getCollection("manualsPages");
-  return manualCollection.map((manual) => {
+
+  // Group pages by their manual group
+  const manualsByGroup = new Map<string, typeof manualCollection>();
+
+  manualCollection.forEach((manual) => {
     const parsed = parseManualCollectionId(manual.id, true);
-    return {
-      params: {
-        slug:
-          parsed.slug === "home"
-            ? parsed.group
-            : `${parsed.group}/${parsed.slug}`,
-      },
-      props: {
-        id: manual.id,
-        group: parsed.group,
-        title: parsed.title,
-        slug: parsed.slug,
-        chapter: parsed.chapter,
-      },
-    };
+    if (!manualsByGroup.has(parsed.group)) {
+      manualsByGroup.set(parsed.group, []);
+    }
+    manualsByGroup.get(parsed.group)!.push(manual);
   });
+
+  // Sort pages within each group using the utility function
+  manualsByGroup.forEach((pages) => {
+    sortManualPages(pages);
+  });
+
+  // Generate paths
+  const paths: any[] = [];
+
+  manualsByGroup.forEach((pages) => {
+    pages.forEach((manual, index) => {
+      const parsed = parseManualCollectionId(manual.id, true);
+      const isFirstPage = index === 0;
+
+      paths.push({
+        params: {
+          slug: isFirstPage ? parsed.group : `${parsed.group}/${parsed.slug}`,
+        },
+        props: {
+          id: manual.id,
+          group: parsed.group,
+          title: parsed.title,
+          slug: parsed.slug,
+          chapter: parsed.chapter,
+          isFirstPage,
+        },
+      });
+    });
+  });
+
+  return paths;
 }
 
-const { id, group, title } = Astro.props;
+const { id, group, title, isFirstPage } = Astro.props;
 
 const manualPage = await getEntry("manualsPages", id);
 if (!manualPage) {
@@ -45,7 +74,10 @@ if (!manual) {
 
 const { Content } = await render(manualPage);
 
-const pageTitle = `${manual.description ? manual.description : manual.title}${title && title !== "Home" ? ` - ${title}` : ""}`;
+// Decide if to include page title in document title or not
+// If it's the first page and its title is "home", skip it
+const shouldIncludePageTitle = !(isFirstPage && title.toLowerCase() === "home");
+const pageTitle = `${manual.description ? manual.description : manual.title}${shouldIncludePageTitle && title ? ` - ${title}` : ""}`;
 const isArchived = manual.status.includes("archived");
 ---
 
@@ -74,5 +106,6 @@ const isArchived = manual.status.includes("archived");
       <ManualPageNav id={manualPage.id} />
     </section>
   </main>
+  <ManualHelp />
   <MarkdownEnhancements />
 </ManualLayout>

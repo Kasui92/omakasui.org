@@ -1,6 +1,12 @@
 ---
-import { getEntry } from "astro:content";
-import { parseManualCollectionId, getManual } from "../utils/manuals";
+import { getCollection, getEntry } from "astro:content";
+import {
+  parseManualCollectionId,
+  getManual,
+  getManualPagesByGroup,
+  isFirstPage as checkIsFirstPage,
+  formatChapterTitle,
+} from "@/utils/manuals";
 
 interface Props {
   id: string;
@@ -12,13 +18,13 @@ const { title, group, chapter } = parseManualCollectionId(id, true);
 const manual = group ? await getManual(group) : null;
 const manualPage = await getEntry("manualsPages", id);
 
+// Get all pages in the same group to determine if this is the first page
+const allPages = await getCollection("manualsPages");
+const allPagesInGroup = getManualPagesByGroup(allPages, group);
+const isFirstPage = checkIsFirstPage(allPagesInGroup, id);
+
 // Format chapter title
-const chapterTitle = chapter
-  ? chapter
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ")
-  : null;
+const chapterTitle = formatChapterTitle(chapter);
 ---
 
 {
@@ -27,41 +33,43 @@ const chapterTitle = chapter
       id="breadcrumb"
       class="sticky top-0 w-full border-b border-[#89b29e33] p-6 md:border-0"
     >
-      <ol class="flex items-center justify-center space-x-2 text-sm font-medium md:text-base">
-        <li>
-          <a
-            href="/manuals"
-            class="flex items-center text-[#89b29e] hover:text-[#7ba088]"
-          >
-            <i class="nf nf-md-library" aria-hidden="true" />
-            <span class="sr-only">Manuali</span>
-          </a>
-        </li>
-        <li class="flex items-center">
-          <i class="nf nf-md-chevron_right" aria-hidden="true" />
-          {title === "Home" && !chapter ? (
-            <span class="ml-2 font-medium">
-              {manual.description || manual.title}
-            </span>
-          ) : (
-            <a href={`/manuals/${group}`} class="ml-2">
-              {manual.description || manual.title}
+      <div class="relative">
+        <ol class="flex items-center justify-center space-x-2 text-sm font-medium md:text-base">
+          <li>
+            <a
+              href="/manuals"
+              class="flex items-center text-[#89b29e] hover:text-[#7ba088]"
+            >
+              <i class="nf nf-md-library" aria-hidden="true" />
+              <span class="sr-only">Manuali</span>
             </a>
+          </li>
+          <li class="flex items-center">
+            <i class="nf nf-md-chevron_right" aria-hidden="true" />
+            {isFirstPage && title === "home" ? (
+              <span class="ml-2 font-medium">
+                {manual.description || manual.title}
+              </span>
+            ) : (
+              <a href={`/manuals/${group}`} class="ml-2">
+                {manual.description || manual.title}
+              </a>
+            )}
+          </li>
+          {chapterTitle && (
+            <li class="flex items-center">
+              <i class="nf nf-md-chevron_right" aria-hidden="true" />
+              <span class="ml-2 text-gray-400">{chapterTitle}</span>
+            </li>
           )}
-        </li>
-        {chapterTitle && (
-          <li class="flex items-center">
-            <i class="nf nf-md-chevron_right" aria-hidden="true" />
-            <span class="ml-2 text-[#e0e0e0]">{chapterTitle}</span>
-          </li>
-        )}
-        {title !== "Home" && (
-          <li class="flex items-center">
-            <i class="nf nf-md-chevron_right" aria-hidden="true" />
-            <span class="ml-2 font-bold text-[#e0e0e0]">{title}</span>
-          </li>
-        )}
-      </ol>
+          {(!isFirstPage || (isFirstPage && title !== "home")) && (
+            <li class="flex items-center">
+              <i class="nf nf-md-chevron_right" aria-hidden="true" />
+              <span class="ml-2 font-medium text-[#e0e0e0]">{title}</span>
+            </li>
+          )}
+        </ol>
+      </div>
     </nav>
   )
 }

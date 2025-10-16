@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 
-import Header from "../../components/layout/Header.astro";
-import Layout from "../../layouts/Layout.astro";
-import ManualList from "../../components/ManualList.astro";
-import HiddensToggle from "../../components/HiddensToggle.astro";
+import Header from "@/components/layout/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import ManualList from "@/components/ManualList.astro";
+import HiddensToggle from "@/components/HiddensToggle.astro";
 
 const manuals = await getCollection("manuals");
 

@@ -1,7 +1,12 @@
 ---
 import { getCollection } from "astro:content";
-import { parseManualCollectionId } from "../utils/manuals";
-import type { ManualNavItem } from "../@types/manual";
+import {
+  parseManualCollectionId,
+  getManualPagesByGroup,
+  getManualPageUrl,
+  formatChapterTitle,
+} from "@/utils/manuals";
+import type { ManualNavItem } from "@/@types/manual";
 
 interface Props {
   id: string;
@@ -10,27 +15,8 @@ interface Props {
 const { id } = Astro.props;
 const { group } = parseManualCollectionId(id, true);
 
-const manualPages = (await getCollection("manualsPages"))
-  .filter((page) => {
-    return page.id.startsWith(`${group}/`);
-  })
-  .sort((a, b) => {
-    const aParsed = parseManualCollectionId(a.id, true);
-    const bParsed = parseManualCollectionId(b.id, true);
-
-    // First sort by chapter
-    if (
-      aParsed.orderChapter !== undefined &&
-      bParsed.orderChapter !== undefined
-    ) {
-      if (aParsed.orderChapter !== bParsed.orderChapter) {
-        return aParsed.orderChapter - bParsed.orderChapter;
-      }
-    }
-
-    // Then sort by page
-    return aParsed.order - bParsed.order;
-  });
+const allPages = await getCollection("manualsPages");
+const manualPages = getManualPagesByGroup(allPages, group);
 
 const navigationItems: (
   | ManualNavItem
@@ -38,26 +24,27 @@ const navigationItems: (
 )[] = [];
 let lastChapter: string | undefined = undefined;
 
-manualPages.forEach((page) => {
+manualPages.forEach((page, index) => {
   const parsed = parseManualCollectionId(page.id, true);
+  const isFirstPage = index === 0;
 
   // Se c'è un nuovo capitolo, aggiungi l'header del capitolo
   if (parsed.chapter && parsed.chapter !== lastChapter) {
-    navigationItems.push({
-      isChapter: true,
-      title: parsed.chapter
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" "),
-      orderChapter: parsed.orderChapter || 999,
-    });
+    const chapterTitle = formatChapterTitle(parsed.chapter);
+    if (chapterTitle) {
+      navigationItems.push({
+        isChapter: true,
+        title: chapterTitle,
+        orderChapter: parsed.orderChapter || 999,
+      });
+    }
     lastChapter = parsed.chapter;
   }
 
   navigationItems.push({
     slug: parsed.slug,
     title: parsed.title,
-    url: `/manuals/${group}${parsed.slug === "home" ? "" : `/${parsed.slug}`}`,
+    url: getManualPageUrl(group, parsed.slug, isFirstPage),
     active: page.id === id,
     chapter: parsed.chapter,
     orderChapter: parsed.orderChapter,
