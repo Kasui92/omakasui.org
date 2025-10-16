@@ -1,10 +1,11 @@
 ---
-import Footer from "../components/layout/Footer.astro";
+import Footer from "@/components/layout/Footer.astro";
+import NavigationHelp from "@/components/NavigationHelp.astro";
 
-import "../styles/global.css";
-import "../styles/manuals.css";
+import "@/styles/global.css";
+import "@/styles/manuals.css";
 import "remark-github-blockquote-alert/alert.css";
-import "../styles/markdown.css";
+import "@/styles/markdown.css";
 
 interface Props {
   title?: string;
@@ -66,5 +67,6 @@ const { title } = Astro.props;
   >
     <slot />
     <Footer />
+    <NavigationHelp />
   </body>
 </html>

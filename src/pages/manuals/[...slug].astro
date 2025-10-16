@@ -4,14 +4,14 @@ import {
   getManual,
   parseManualCollectionId,
   sortManualPages,
-} from "../../utils/manuals";
+} from "@/utils/manuals";
 
-import ManualLayout from "../../layouts/ManualLayout.astro";
-import ArchivedBanner from "../../components/ArchivedBanner.astro";
-import ManualBreadcrumb from "../../components/ManualBreadcrumb.astro";
-import ManualNav from "../../components/ManualNav.astro";
-import MarkdownEnhancements from "../../components/MarkdownEnhancements.astro";
-import ManualPageNav from "../../components/ManualPageNav.astro";
+import ManualLayout from "@/layouts/ManualLayout.astro";
+import ArchivedBanner from "@/components/ArchivedBanner.astro";
+import ManualBreadcrumb from "@/components/ManualBreadcrumb.astro";
+import ManualNav from "@/components/ManualNav.astro";
+import MarkdownEnhancements from "@/components/MarkdownEnhancements.astro";
+import ManualPageNav from "@/components/ManualPageNav.astro";
 
 export async function getStaticPaths() {
   const manualCollection = await getCollection("manualsPages");
