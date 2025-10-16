@@ -7,8 +7,7 @@
   background-color: #221e22;
 }
 
-body:has(header):has(:not(#archivedBanner)) #toggleNavBtn,
-body:has(header):has(:not(#archivedBanner)) #openNavigationHelp {
+body:has(header):has(:not(#archivedBanner)) #toggleNavBtn {
   top: 1rem;
 }
 
@@ -21,8 +20,7 @@ body:has(header):has(#archivedBanner) header {
   top: 44px;
 }
 
-body:has(header):has(#archivedBanner) #toggleNavBtn,
-body:has(header):has(#archivedBanner) #openNavigationHelp {
+body:has(header):has(#archivedBanner) #toggleNavBtn {
   top: calc(44px + 0.75rem);
 }
 
@@ -39,8 +37,7 @@ body:has(:not(#archivedBanner)) #breadcrumb {
 }
 
 @media (min-width: 768px) {
-  body:has(header):has(:not(#archivedBanner)) #toggleNavBtn,
-  body:has(header):has(:not(#archivedBanner)) #openNavigationHelp {
+  body:has(header):has(:not(#archivedBanner)) #toggleNavBtn {
     top: 0.5rem;
   }
 
@@ -48,8 +45,7 @@ body:has(:not(#archivedBanner)) #breadcrumb {
     padding-top: 3rem;
   }
 
-  body:has(header):has(#archivedBanner) #toggleNavBtn,
-  body:has(header):has(#archivedBanner) #openNavigationHelp {
+  body:has(header):has(#archivedBanner) #toggleNavBtn {
     top: calc(44px + 0.75rem);
   }
 

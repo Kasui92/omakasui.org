@@ -36,7 +36,7 @@ export async function getStaticPaths() {
   // Generate paths
   const paths: any[] = [];
 
-  manualsByGroup.forEach((pages, group) => {
+  manualsByGroup.forEach((pages) => {
     pages.forEach((manual, index) => {
       const parsed = parseManualCollectionId(manual.id, true);
       const isFirstPage = index === 0;
@@ -86,7 +86,6 @@ const isArchived = manual.status.includes("archived");
   <header class="w-full">
     <ManualBreadcrumb id={manualPage.id} />
     <ManualNav id={manualPage.id} />
-    <ManualHelp />
   </header>
   <main role="main" aria-label="Main content" class="mt-8 flex-1 md:mt-6">
     <section
@@ -107,5 +106,6 @@ const isArchived = manual.status.includes("archived");
       <ManualPageNav id={manualPage.id} />
     </section>
   </main>
+  <ManualHelp />
   <MarkdownEnhancements />
 </ManualLayout>
