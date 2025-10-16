@@ -1,0 +1,49 @@
+---
+import Modal from "@/components/ui/Modal.astro";
+import KeyboardShortcut from "@/components/ui/KeyboardShortcut.astro";
+import Alert from "@/components/ui/Alert.astro";
+import Button from "@/components/ui/Button.astro";
+---
+
+<Modal id="navigationHelpModal" title="Navigation Tips" size="lg">
+  <div class="space-y-4">
+    <p class="text-gray-300">
+      Use these shortcuts to navigate through the documentation faster:
+    </p>
+
+    <div class="space-y-3">
+      <KeyboardShortcut
+        icon="nf nf-md-arrow_left"
+        label="Previous Page"
+        description="Use the left arrow to go to the previous page"
+      />
+
+      <KeyboardShortcut
+        icon="nf nf-md-arrow_right"
+        label="Next Page"
+        description="Use the right arrow to go to the next page"
+      />
+
+      <KeyboardShortcut
+        icon="nf nf-md-menu"
+        label="Sidebar (Ctrl + Alt + M)"
+        description="Open or close the sidebar with the table of contents"
+      />
+
+      <KeyboardShortcut
+        icon="nf nf-md-keyboard_esc"
+        label="Close (Esc)"
+        description="Press Esc to close the sidebar or this modal"
+      />
+    </div>
+
+    <Alert variant="info" title="Tip">
+      The sidebar closes automatically when you click outside of it or navigate
+      to another page.
+    </Alert>
+  </div>
+
+  <div class="mt-6 flex justify-end">
+    <Button data-modal-close variant="primary" size="md"> Got it! </Button>
+  </div>
+</Modal>

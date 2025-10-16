@@ -6,7 +6,8 @@ import {
   getManualPagesByGroup,
   isFirstPage as checkIsFirstPage,
   formatChapterTitle,
-} from "../utils/manuals";
+} from "@/utils/manuals";
+import IconButton from "@/components/ui/IconButton.astro";
 
 interface Props {
   id: string;
@@ -33,41 +34,68 @@ const chapterTitle = formatChapterTitle(chapter);
       id="breadcrumb"
       class="sticky top-0 w-full border-b border-[#89b29e33] p-6 md:border-0"
     >
-      <ol class="flex items-center justify-center space-x-2 text-sm font-medium md:text-base">
-        <li>
-          <a
-            href="/manuals"
-            class="flex items-center text-[#89b29e] hover:text-[#7ba088]"
-          >
-            <i class="nf nf-md-library" aria-hidden="true" />
-            <span class="sr-only">Manuali</span>
-          </a>
-        </li>
-        <li class="flex items-center">
-          <i class="nf nf-md-chevron_right" aria-hidden="true" />
-          {isFirstPage && title === "home" ? (
-            <span class="ml-2 font-medium">
-              {manual.description || manual.title}
-            </span>
-          ) : (
-            <a href={`/manuals/${group}`} class="ml-2">
-              {manual.description || manual.title}
+      <div class="relative">
+        <ol class="flex items-center justify-center space-x-2 text-sm font-medium md:text-base">
+          <li>
+            <a
+              href="/manuals"
+              class="flex items-center text-[#89b29e] hover:text-[#7ba088]"
+            >
+              <i class="nf nf-md-library" aria-hidden="true" />
+              <span class="sr-only">Manuali</span>
             </a>
+          </li>
+          <li class="flex items-center">
+            <i class="nf nf-md-chevron_right" aria-hidden="true" />
+            {isFirstPage && title === "home" ? (
+              <span class="ml-2 font-medium">
+                {manual.description || manual.title}
+              </span>
+            ) : (
+              <a href={`/manuals/${group}`} class="ml-2">
+                {manual.description || manual.title}
+              </a>
+            )}
+          </li>
+          {chapterTitle && (
+            <li class="flex items-center">
+              <i class="nf nf-md-chevron_right" aria-hidden="true" />
+              <span class="ml-2 text-gray-400">{chapterTitle}</span>
+            </li>
           )}
-        </li>
-        {chapterTitle && (
-          <li class="flex items-center">
-            <i class="nf nf-md-chevron_right" aria-hidden="true" />
-            <span class="ml-2 text-gray-400">{chapterTitle}</span>
-          </li>
-        )}
-        {(!isFirstPage || (isFirstPage && title !== "home")) && (
-          <li class="flex items-center">
-            <i class="nf nf-md-chevron_right" aria-hidden="true" />
-            <span class="ml-2 font-medium text-[#e0e0e0]">{title}</span>
-          </li>
-        )}
-      </ol>
+          {(!isFirstPage || (isFirstPage && title !== "home")) && (
+            <li class="flex items-center">
+              <i class="nf nf-md-chevron_right" aria-hidden="true" />
+              <span class="ml-2 font-medium text-[#e0e0e0]">{title}</span>
+            </li>
+          )}
+        </ol>
+
+        <!-- Help Button - Desktop only -->
+        <div class="absolute right-0 top-1/2 hidden -translate-y-1/2 md:block">
+          <IconButton
+            id="openNavigationHelp"
+            icon="nf nf-md-help_circle"
+            variant="secondary"
+            size="md"
+            aria-label="Navigation tips"
+            title="Navigation tips"
+          />
+        </div>
+      </div>
     </nav>
   )
 }
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const helpButton = document.getElementById("openNavigationHelp");
+    if (helpButton) {
+      helpButton.addEventListener("click", () => {
+        if (window.openNavigationHelpModal) {
+          window.openNavigationHelpModal();
+        }
+      });
+    }
+  });
+</script>
