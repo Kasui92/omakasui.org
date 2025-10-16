@@ -1,6 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import { parseManualCollectionId } from "../utils/manuals";
+import {
+  parseManualCollectionId,
+  getManualPagesByGroup,
+  getManualPageUrl,
+} from "../utils/manuals";
 
 interface Props {
   id: string;
@@ -9,33 +13,20 @@ interface Props {
 const { id } = Astro.props;
 const { group } = parseManualCollectionId(id, true);
 
-const manualPages = (await getCollection("manualsPages")).filter((page) => {
-  return page.id.startsWith(`${group}/`);
-});
+const allPages = await getCollection("manualsPages");
+const manualPages = getManualPagesByGroup(allPages, group);
 
-const navigationItems = manualPages
-  .map((page) => {
-    const parsed = parseManualCollectionId(page.id, true);
-    return {
-      id: page.id,
-      slug: parsed.slug,
-      title: parsed.title,
-      url: `/manuals/${group}${parsed.slug === "home" ? "" : `/${parsed.slug}`}`,
-      order: parsed.order,
-      orderChapter: parsed.orderChapter,
-      chapter: parsed.chapter,
-    };
-  })
-  .sort((a, b) => {
-    // First sort by chapter
-    if (a.orderChapter !== undefined && b.orderChapter !== undefined) {
-      if (a.orderChapter !== b.orderChapter) {
-        return a.orderChapter - b.orderChapter;
-      }
-    }
-    // Then sort by page
-    return a.order - b.order;
-  });
+const navigationItems = manualPages.map((page) => {
+  const parsed = parseManualCollectionId(page.id, true);
+  return {
+    id: page.id,
+    slug: parsed.slug,
+    title: parsed.title,
+    order: parsed.order,
+    orderChapter: parsed.orderChapter,
+    chapter: parsed.chapter,
+  };
+});
 
 const currentIndex = navigationItems.findIndex((item) => item.id === id);
 const previousPage =
@@ -44,15 +35,23 @@ const nextPage =
   currentIndex < navigationItems.length - 1
     ? navigationItems[currentIndex + 1]
     : null;
+
+// Generate URLs based on index
+const previousUrl = previousPage
+  ? getManualPageUrl(group, previousPage.slug, currentIndex - 1 === 0)
+  : null;
+const nextUrl = nextPage
+  ? getManualPageUrl(group, nextPage.slug, currentIndex + 1 === 0)
+  : null;
 ---
 
 {
   (previousPage || nextPage) && (
     <nav class="mx-auto max-w-3xl px-4 py-8" aria-label="Page navigation">
       <div class="flex items-center justify-between gap-4">
-        {previousPage && previousPage.slug && previousPage.title ? (
+        {previousPage && previousUrl && previousPage.title ? (
           <a
-            href={`/manuals/${group}${previousPage.slug === "home" ? "" : `/${previousPage.slug}`}`}
+            href={previousUrl}
             class="group flex max-w-[calc(45%-1rem)] min-w-0 items-center gap-2 rounded-lg border border-[#333] bg-[#2a2a2a] px-4 py-3 text-[#f2f2f2e6] no-underline transition-all duration-300 hover:border-[#89b29e] hover:bg-[#333] hover:text-[#89b29e]"
           >
             <i class="nf nf-md-chevron_left flex-shrink-0 text-sm transition-transform group-hover:-translate-x-1" />
@@ -64,9 +63,9 @@ const nextPage =
           <div />
         )}
 
-        {nextPage && nextPage.slug && nextPage.title ? (
+        {nextPage && nextUrl && nextPage.title ? (
           <a
-            href={`/manuals/${group}${nextPage.slug === "home" ? "" : `/${nextPage.slug}`}`}
+            href={nextUrl}
             class="group flex max-w-[calc(45%-1rem)] min-w-0 items-center gap-2 rounded-lg border border-[#333] bg-[#2a2a2a] px-4 py-3 text-[#f2f2f2e6] no-underline transition-all duration-300 hover:border-[#89b29e] hover:bg-[#333] hover:text-[#89b29e]"
           >
             <span class="overflow-hidden font-medium text-ellipsis whitespace-nowrap">
@@ -82,10 +81,10 @@ const nextPage =
   )
 }
 
-<script is:inline define:vars={{ group, previousPage, nextPage }}>
+<script is:inline define:vars={{ previousUrl, nextUrl }}>
   document.addEventListener("DOMContentLoaded", function () {
     // Only add keyboard navigation if there are navigation buttons
-    if (!previousPage && !nextPage) return;
+    if (!previousUrl && !nextUrl) return;
 
     function handleKeyPress(event) {
       // Only handle arrow keys if no input elements are focused
@@ -99,17 +98,15 @@ const nextPage =
 
       switch (event.key) {
         case "ArrowLeft":
-          if (previousPage && previousPage.slug && previousPage.title) {
+          if (previousUrl) {
             event.preventDefault();
-            const url = `/manuals/${group}${previousPage.slug === "home" ? "" : `/${previousPage.slug}`}`;
-            window.location.href = url;
+            window.location.href = previousUrl;
           }
           break;
         case "ArrowRight":
-          if (nextPage && nextPage.slug && nextPage.title) {
+          if (nextUrl) {
             event.preventDefault();
-            const url = `/manuals/${group}${nextPage.slug === "home" ? "" : `/${nextPage.slug}`}`;
-            window.location.href = url;
+            window.location.href = nextUrl;
           }
           break;
       }
