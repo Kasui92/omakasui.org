@@ -87,7 +87,11 @@ const isArchived = manual.status.includes("archived");
     <ManualBreadcrumb id={manualPage.id} />
     <ManualNav id={manualPage.id} />
   </header>
-  <main role="main" aria-label="Main content" class="mt-8 flex-1 md:mt-6">
+  <main
+    role="main"
+    aria-label="Main content"
+    class="mx-0 my-20 flex-1 px-0 py-0 md:my-16 md:px-8 lg:my-32 lg:px-16"
+  >
     <section
       aria-labelledby="manual-heading"
       class={isArchived ? "mt-12 md:mt-16" : ""}
@@ -98,7 +102,7 @@ const isArchived = manual.status.includes("archived");
 
       <div
         id="content"
-        class="markdown-content mx-auto w-full max-w-3xl p-4 leading-relaxed break-words"
+        class="markdown-content mx-auto w-full max-w-3xl p-4 leading-relaxed wrap-break-word"
       >
         <Content />
       </div>

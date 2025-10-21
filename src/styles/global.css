@@ -30,10 +30,6 @@
   }
 }
 
-main {
-  @apply mx-0 my-16 px-8 py-0 lg:my-32 lg:px-16;
-}
-
 header,
 section,
 footer {

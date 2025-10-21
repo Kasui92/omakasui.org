@@ -11,7 +11,6 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "astro": "^5.14.0",
-    "marked": "^16.3.0",
     "remark-github-blockquote-alert": "^2.0.0",
     "tailwindcss": "^4.1.13"
   },

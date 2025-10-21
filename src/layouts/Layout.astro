@@ -61,7 +61,11 @@ const { title } = Astro.props;
   <body
     class="font-monospace flex min-h-screen flex-col bg-[#221e22] font-mono text-[14px] leading-[1.6] text-[#e0e0e0]"
   >
-    <main role="main" aria-label="Main content" class="flex-1">
+    <main
+      role="main"
+      aria-label="Main content"
+      class="mx-0 my-16 flex-1 px-8 py-0 lg:my-32 lg:px-16"
+    >
       <slot />
     </main>
     <Footer />

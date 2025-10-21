@@ -31,11 +31,11 @@ const chapterTitle = formatChapterTitle(chapter);
   manual && manualPage && (
     <nav
       id="breadcrumb"
-      class="sticky top-0 w-full border-b border-[#89b29e33] p-6 md:border-0"
+      class="fixed top-0 z-10 w-full border-b border-[#89b29e33] bg-[#221e22] p-6 pl-[calc(--spacing(4)+40px)] md:sticky md:border-0"
     >
       <div class="relative">
         <ol class="flex items-center justify-center space-x-2 text-sm font-medium md:text-base">
-          <li>
+          <li class="shrink-0">
             <a
               href="/manuals"
               class="flex items-center text-[#89b29e] hover:text-[#7ba088]"
@@ -44,28 +44,32 @@ const chapterTitle = formatChapterTitle(chapter);
               <span class="sr-only">Manuali</span>
             </a>
           </li>
-          <li class="flex items-center">
-            <i class="nf nf-md-chevron_right" aria-hidden="true" />
+          <li class="flex min-w-0 items-center">
+            <i class="nf nf-md-chevron_right shrink-0" aria-hidden="true" />
             {isFirstPage && title === "home" ? (
-              <span class="ml-2 font-medium">
+              <span class="ml-2 min-w-0 truncate font-medium">
                 {manual.description || manual.title}
               </span>
             ) : (
-              <a href={`/manuals/${group}`} class="ml-2">
+              <a href={`/manuals/${group}`} class="ml-2 min-w-0 truncate">
                 {manual.description || manual.title}
               </a>
             )}
           </li>
           {chapterTitle && (
-            <li class="flex items-center">
-              <i class="nf nf-md-chevron_right" aria-hidden="true" />
-              <span class="ml-2 text-gray-400">{chapterTitle}</span>
+            <li class="flex min-w-0 items-center">
+              <i class="nf nf-md-chevron_right shrink-0" aria-hidden="true" />
+              <span class="ml-2 min-w-0 truncate text-gray-400">
+                {chapterTitle}
+              </span>
             </li>
           )}
           {(!isFirstPage || (isFirstPage && title !== "home")) && (
-            <li class="flex items-center">
-              <i class="nf nf-md-chevron_right" aria-hidden="true" />
-              <span class="ml-2 font-medium text-[#e0e0e0]">{title}</span>
+            <li class="flex min-w-0 items-center">
+              <i class="nf nf-md-chevron_right shrink-0" aria-hidden="true" />
+              <span class="ml-2 min-w-0 truncate font-medium text-[#e0e0e0]">
+                {title}
+              </span>
             </li>
           )}
         </ol>
