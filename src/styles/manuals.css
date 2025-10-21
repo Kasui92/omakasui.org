@@ -29,10 +29,10 @@ body:has(header):has(#archivedBanner) #sideNav {
 }
 
 body:has(#archivedBanner) #breadcrumb {
-  top: calc(44px + 4px);
+  top: calc(40px + 4px);
 }
 
-body:has(:not(#archivedBanner)) #breadcrumb {
+body:not(:has(#archivedBanner)) #breadcrumb {
   top: 0;
 }
 
