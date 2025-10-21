@@ -68,6 +68,10 @@ manualPages.forEach((page, index) => {
       <span class="h-[2px] w-[20px] rounded-sm bg-[#89b29e] transition-all duration-300"></span>
     </button>
 
+    <div
+      class="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm transition-opacity duration-300 md:hidden ${shouldBeOpen ? "opacity-100" : "opacity-0 pointer-events-none"}"
+      id="backdrop"
+    ></div>
     <nav
       class="fixed inset-y-0 left-0 z-40 h-screen w-[280px] ${shouldBeOpen ? "translate-x-0" : "-translate-x-full"} overflow-y-auto border-r border-gray-700 bg-[#2a252a] transition-transform duration-300 ease-in-out"
       id="sideNav"
@@ -144,8 +148,9 @@ manualPages.forEach((page, index) => {
   document.addEventListener("DOMContentLoaded", function () {
     const sidebar = document.getElementById("sideNav");
     const toggleBtn = document.getElementById("toggleNavBtn");
+    const backdrop = document.getElementById("backdrop");
 
-    if (!sidebar || !toggleBtn) return;
+    if (!sidebar || !toggleBtn || !backdrop) return;
 
     function updateSidebarState() {
       if (!sidebar) return;
@@ -158,18 +163,22 @@ manualPages.forEach((page, index) => {
     }
 
     function toggleSidebar() {
-      if (!sidebar || !toggleBtn) return;
+      if (!sidebar || !toggleBtn || !backdrop) return;
       sidebar.classList.toggle("translate-x-0");
       sidebar.classList.toggle("-translate-x-full");
       toggleBtn.classList.toggle("active");
+      backdrop.classList.toggle("opacity-100");
+      backdrop.classList.toggle("pointer-events-none");
       updateSidebarState();
     }
 
     function closeSidebar() {
-      if (!sidebar || !toggleBtn) return;
+      if (!sidebar || !toggleBtn || !backdrop) return;
       sidebar.classList.add("-translate-x-full");
       sidebar.classList.remove("translate-x-0");
       toggleBtn.classList.remove("active");
+      backdrop.classList.remove("opacity-100");
+      backdrop.classList.remove("pointer-events-none");
       updateSidebarState();
     }
 
