@@ -1,2 +1,3 @@
 OMAKUB_REF=master
+OMAKUB_REPO=Kasui92/omakube
 eval "$(wget -qO- https://raw.githubusercontent.com/Kasui92/omakube/main/boot.sh)"
