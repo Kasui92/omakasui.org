@@ -2,14 +2,6 @@
 
 A collection of features that make Omakube lightweight, flexible, and tailored to real everyday use.
 
-## In the heart is Omakub...
-
-It's called Omakube, but that's only a superficial name. Deep down, _it's still the same, beloved Omakub_. The folders, variables, and scripts bear his name, and that's the way it will always be. It's not meant to be anything else...and this is also to ensure it's always compatible with the project it's based on.
-
-## ...but with the passion of Omarchy
-
-The drive and desire to provide something interesting and enjoyable comes from _Omarchy_, which constantly observes and borrows ideas. Whenever a valuable feature appears, if it can be implemented without compromising stability, chances are it will be found here as well.
-
 ## Wofi App Launcher & Unified Menu
 
 Omakube features seamless integration with [`Wofi`](https://hg.sr.ht/~scoopta/wofi), a powerful application launcher for Wayland. This allows for quick access to applications, themes and, most importantly, a **Unified Menu** for all Omakube features.
@@ -28,7 +20,7 @@ A set of scripts, adapted from Omarchy and customized for Omakube, designed to s
 
 ## More Default Themes and Extra Themes
 
-There are a few more default themes than Omakub (_catppuccin-latte_ and _osaka-jade_), and you can install new ones using the dedicated tool in the menu.
+There are a few more default themes than Omakub (_catppuccin-latte_, _osaka-jade_ and _flexoki-light_), and you can install new ones using the dedicated tool in the menu.
 
 ![Osaka Jade](/images/omakube/osaka-jade.png)
 
@@ -40,6 +32,12 @@ There are a few more default themes than Omakub (_catppuccin-latte_ and _osaka-j
 
 <p class="text-center">
   <i>Catppuccin Latte</i>
+</p>
+
+![Flexoki Light](/images/omakube/flexoki-light.png)
+
+<p class="text-center">
+  <i>Flexoki Light</i>
 </p>
 
 You can view the extra themes on the [dedicated page](/themes) on OmaKasui.org.
