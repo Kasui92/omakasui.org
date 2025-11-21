@@ -279,3 +279,13 @@
 .markdown-content tbody tr:hover {
   background-color: #222;
 }
+
+.markdown-content img,
+.markdown-content video {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
