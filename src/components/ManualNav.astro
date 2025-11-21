@@ -109,7 +109,7 @@ manualPages.forEach((page, index) => {
             >
               {!pageItem.chapter && (
                 <span
-                  class={`h-1.5 w-1.5 flex-shrink-0 rounded-full transition-colors ${
+                  class={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors ${
                     pageItem.active
                       ? "bg-[#89b29e]"
                       : "bg-gray-600 group-hover:bg-[#89b29e]"
@@ -118,7 +118,7 @@ manualPages.forEach((page, index) => {
               )}
               {pageItem.chapter && (
                 <span
-                  class={`h-1 w-1 flex-shrink-0 rounded-full transition-colors ${
+                  class={`h-1 w-1 shrink-0 rounded-full transition-colors ${
                     pageItem.active
                       ? "bg-[#89b29e]"
                       : "bg-gray-600 group-hover:bg-[#89b29e]"
