@@ -8,4 +8,4 @@ The project doesn’t just provide a ready-made configuration for newcomers to L
 
 </div>
 
-![Omakube Screen](/public/images/omakube/omakube.png)
+![Omakube Screen](/images/omakube/omakube.png)
