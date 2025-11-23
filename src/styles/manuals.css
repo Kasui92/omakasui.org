@@ -7,6 +7,11 @@
   background-color: #221e22;
 }
 
+/* Prevent flash animation on page load */
+.preload * {
+  transition: none !important;
+}
+
 body:has(header):has(:not(#archivedBanner)) #toggleNavBtn {
   top: 0.75rem;
 }

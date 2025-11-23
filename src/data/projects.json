@@ -11,7 +11,7 @@
   {
     "id": "omakube",
     "name": "omakube",
-    "description": "A fork of <a href=\"https://omakub.org\" target=\"_blank\" title=\"View Omakub website\" rel=\"noopener\">Omakub</a>, weighed down and more refined",
+    "description": "A fork of <a href=\"https://omakub.org\" target=\"_blank\" title=\"View Omakub website\" rel=\"noopener\">Omakub</a>, more flexible and refined",
     "installCommand": "curl -fsSL https://omakasui.org/omakube | bash",
     "githubUrl": "https://github.com/Kasui92/omakube",
     "status": ["work-in-progress"],

@@ -9,7 +9,7 @@ type Project = CollectionEntry<"projects">;
 {
   projects.length > 0 &&
     projects.map((project: Project) => (
-      <div class="mb-8 rounded-[4px] border border-[#333] bg-[#2a2a2a] p-8 transition-colors duration-300 ease-in-out hover:border-[#89b29ee6]">
+      <div class="mb-8 rounded-sm border border-[#333] bg-[#2a2a2a] p-8 transition-colors duration-300 ease-in-out hover:border-[#89b29ee6]">
         <h3>
           >
           <a
@@ -22,18 +22,15 @@ type Project = CollectionEntry<"projects">;
           </a>
           {project.data.status.length > 0
             ? project.data.status.map((status) => (
-                <span class="ml-[.5rem] align-middle">
+                <span class="ml-2 align-middle">
                   <StatusIcon status={status} />
                 </span>
               ))
             : null}
         </h3>
-        <p
-          class="mb-[1.5rem] text-[#bbb]"
-          set:html={project.data.description}
-        />
+        <p class="mb-6 text-[#bbb]" set:html={project.data.description} />
         <div
-          class="relative mx-0 my-[1.5rem] flex items-center gap-4 rounded-[4px] border border-[#444] bg-[#1a1a1a] p-4"
+          class="relative mx-0 my-6 flex items-center gap-4 rounded-sm border border-[#444] bg-[#1a1a1a] p-4"
           role="group"
           aria-label={`Installation command for ${project.data.name}`}
         >
@@ -45,7 +42,7 @@ type Project = CollectionEntry<"projects">;
             {project.data.installCommand}
           </code>
           <button
-            class="ml-8 flex flex-shrink-0 cursor-pointer items-center justify-center rounded border border-[#555] bg-[#333] px-4 py-2 text-[0.75rem] text-[#bbb] transition-colors hover:bg-[#444] hover:text-white"
+            class="ml-8 flex shrink-0 cursor-pointer items-center justify-center rounded border border-[#555] bg-[#333] px-4 py-2 text-[0.75rem] text-[#bbb] transition-colors hover:bg-[#444] hover:text-white"
             onclick={`navigator.clipboard.writeText('${project.data.installCommand}')`}
             title="Copy to clipboard"
             aria-label="Copy installation command to clipboard"
