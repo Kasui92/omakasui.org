@@ -276,6 +276,10 @@
   font-size: calc(var(--ok-font-size) * 0.78);
 }
 
+.markdown-content td code {
+  line-height: 2;
+}
+
 .markdown-content tbody tr:hover {
   background-color: #222;
 }
