@@ -2,7 +2,7 @@
 
 A carefully crafted set of keyboard shortcuts is included with Omakube to enhance your productivity. These shortcuts are set up automatically during installation and remain fully customizable afterward.
 
-> Many of these shortcuts are inspired by and derived from the [Omakub configuration](https://manual.omakub.org/1/read/29/hotkeys/). Omakube builds upon this foundation with additional customizations.
+> Many of these shortcuts are inspired by and derived from the [Omakub](https://learn.omacom.io/1/read/29/hotkeys/) and the [Omarchy](https://learn.omacom.io/2/the-omarchy-manual/53/hotkeys) configurations. Omakube builds upon this foundation with additional customizations.
 
 ## Window Management
 
@@ -17,7 +17,7 @@ A carefully crafted set of keyboard shortcuts is included with Omakube to enhanc
 | `Super` + `W`             | Close window                     |
 | `Super` + `1-6`           | Jump to workspace 1-6            |
 | `Shift` + `Super` + `1-6` | Move window/app to workspace 1-6 |
-| `Alt` + `Number`          | Jump to dock app                 |
+| `Alt` + `1-9`             | Jump to dock app                 |
 
 ## Tiling
 
@@ -48,6 +48,13 @@ A carefully crafted set of keyboard shortcuts is included with Omakube to enhanc
 | `Shift` + `Super` + `B`           | Web Browser (New window)   |
 | `Super` + `F`                     | File Manager               |
 
+## Capture
+
+| Hotkey                     | Action                              |
+| -------------------------- | ----------------------------------- |
+| `Print Screen`             | Screenshot (default)                |
+| `Control` + `Print Screen` | Screenshot with editing (Flameshot) |
+
 ## Style
 
 | Hotkey                                  | Action                          |
@@ -58,6 +65,12 @@ A carefully crafted set of keyboard shortcuts is included with Omakube to enhanc
 Extra background images live in `~/.config/omakub/current/backgrounds`. You can put more there to cycle through. Also available via _Install > Style > Background_ in the Omakub menu.
 
 All style options are also accessible under Style in the Omakub menu (`Super + Alt + Space`).
+
+## Toggles
+
+| Hotkey                    | Action                                |
+| ------------------------- | ------------------------------------- |
+| `Super` + `Control` + `N` | Toggle nightlight display temperature |
 
 ## Terminal (Zellij)
 
