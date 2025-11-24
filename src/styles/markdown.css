@@ -112,6 +112,7 @@
   color: #89b29ee6;
   font-size: calc(var(--ok-font-size) * 0.78);
   font-family: var(--ok-font-mono);
+  white-space: nowrap;
 }
 
 .markdown-content pre {
