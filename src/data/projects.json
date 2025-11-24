@@ -14,6 +14,7 @@
     "description": "A fork of <a href=\"https://omakub.org\" target=\"_blank\" title=\"View Omakub website\" rel=\"noopener\">Omakub</a>, more flexible and refined",
     "installCommand": "curl -fsSL https://omakasui.org/omakube | bash",
     "githubUrl": "https://github.com/Kasui92/omakube",
+    "manualUrl": "/manuals/omakube/",
     "status": ["work-in-progress"],
     "hidden": false
   },
@@ -50,7 +51,7 @@
     "description": "Opinionated <strong>Ubuntu</strong>/<strong>Sway</strong> Setup",
     "installCommand": "curl -fsSL https://omakasui.org/omasway | bash",
     "githubUrl": "https://github.com/Kasui92/omasway",
-    "status": ["work-in-progress"],
-    "hidden": false
+    "status": ["work-in-progress", "paused"],
+    "hidden": true
   }
 ]

@@ -28,7 +28,15 @@ const projects = defineCollection({
     installCommand: z.string(),
     githubUrl: z.string().optional(),
     manualUrl: z.string().optional(),
-    status: z.array(z.enum(["work-in-progress", "archived", "experimental"])),
+    status: z.array(
+      z.enum([
+        "work-in-progress",
+        "archived",
+        "experimental",
+        "stable",
+        "paused",
+      ]),
+    ),
     hidden: z.boolean(),
   }),
 });

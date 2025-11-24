@@ -160,4 +160,4 @@ See all the [Neovim hotkeys](https://www.lazyvim.org/keymaps) configured by Lazy
 | `CapsLock` + `Space` + `N`     | Your name (as entered on setup)  |
 | `CapsLock` + `Space` + `E`     | Your email (as entered on setup) |
 
-You can add more of your own by editing `~/.XCompose`, then running `omalub-restart-xcompose` in the terminal to get the changes picked up.
+You can add more of your own by editing `~/.XCompose`, then running `omakub-restart-xcompose` in the terminal to get the changes picked up.
