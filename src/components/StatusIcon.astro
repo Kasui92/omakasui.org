@@ -1,7 +1,12 @@
 ---
 const { status } = Astro.props;
 
-type Status = "archived" | "work-in-progress" | "stable" | "experimental";
+type Status =
+  | "archived"
+  | "work-in-progress"
+  | "stable"
+  | "experimental"
+  | "paused";
 
 const statusIcons: Record<Status, { icon: string; label: string }> = {
   archived: {
@@ -19,6 +24,10 @@ const statusIcons: Record<Status, { icon: string; label: string }> = {
   experimental: {
     icon: "nf-md-test_tube",
     label: "Experimental",
+  },
+  paused: {
+    icon: "nf-md-pause_circle",
+    label: "Paused",
   },
 } as const;
 
