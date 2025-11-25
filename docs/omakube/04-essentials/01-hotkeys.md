@@ -9,15 +9,16 @@ A carefully crafted set of keyboard shortcuts is included with Omakube to enhanc
 > [!note]
 > Omakube uses 6 fixed workspaces instead of dynamic mode for better organization.
 
-| Hotkey                    | Action                           |
-| ------------------------- | -------------------------------- |
-| `Super` + `Space`         | Applications launcher            |
-| `Super` + `A`             | See all applications (app grid)  |
-| `Super` + `Alt` + `Space` | Omakube control menu             |
-| `Super` + `W`             | Close window                     |
-| `Super` + `1-6`           | Jump to workspace 1-6            |
-| `Shift` + `Super` + `1-6` | Move window/app to workspace 1-6 |
-| `Alt` + `1-9`             | Jump to dock app                 |
+| Hotkey                    | Action                                 |
+| ------------------------- | -------------------------------------- |
+| `Super` + `Space`         | Applications launcher                  |
+| `Super` + `A`             | See all applications (app grid)        |
+| `Super` + `Alt` + `Space` | Omakube control menu                   |
+| `Super` + `Escape`        | Lock/suspend/restart/shutdown computer |
+| `Super` + `W`             | Close window                           |
+| `Super` + `1-6`           | Jump to workspace 1-6                  |
+| `Shift` + `Super` + `1-6` | Move window/app to workspace 1-6       |
+| `Alt` + `1-9`             | Jump to dock app                       |
 
 ## Tiling
 
@@ -28,7 +29,7 @@ A carefully crafted set of keyboard shortcuts is included with Omakube to enhanc
 | `Super` + `Left/Right Arrow` | Fill left/right half                                      |
 | `Super` + `Up Arrow`         | Fill full screen                                          |
 | `Super` + `T`                | Tiling overlay (Tactile)                                  |
-| `Super` + `Shift` + `T`      | Tiling settings (Tactile)                                 |
+| `Super` + `Control` + `T`    | Tiling settings (Tactile)                                 |
 | `Alt` + `Space`              | Reveal options (including Undecorate to remove title bar) |
 
 ## Application Window
@@ -40,13 +41,17 @@ A carefully crafted set of keyboard shortcuts is included with Omakube to enhanc
 
 ## Launching Apps
 
-| Hotkey                            | Action                     |
-| --------------------------------- | -------------------------- |
-| `Control` + `Alt` + `T`           | Terminal (alacritty/kitty) |
-| `Shift` + `Control` + `Alt` + `T` | Gnome Terminal             |
-| `Super` + `B`                     | Web Browser                |
-| `Shift` + `Super` + `B`           | Web Browser (New window)   |
-| `Super` + `F`                     | File Manager               |
+| Hotkey                          | Action                          |
+| ------------------------------- | ------------------------------- |
+| `Super` + `Return`              | Terminal (alacritty/kitty)      |
+| `Control` + `Alt` + `T`         | Default Terminal (Gnome)        |
+| `Shift` + `Super` + `B`         | Web Browser                     |
+| `Shift` + `Super` + `Alt` + `B` | Web Browser (private/incognito) |
+| `Shift` + `Super` + `F`         | File Manager                    |
+| `Shift` + `Super` + `T`         | Activity (btop)                 |
+| `Shift` + `Super` + `M`         | Music (spotify)                 |
+| `Shift` + `Super` + `N`         | Editor (neovim)                 |
+| `Shift` + `Super` + `D`         | Docker (lazydocker)             |
 
 ## Capture
 
