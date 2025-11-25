@@ -31,7 +31,7 @@ That's why we've introduced several shortcuts to make it easier to quickly launc
 
 ## More Default Themes and Extra Themes
 
-There are a few more default themes than Omakub: _catppuccin-latte_ and _flexoki-light_.
+There are a few more default themes than Omakub: _catppuccin-latte_, _flexoki-light_ , _ethereal_ and _hackerman_.
 
 ![Catppuccin Latte](/images/omakube/catppuccin-latte.png)
 
@@ -43,6 +43,18 @@ There are a few more default themes than Omakub: _catppuccin-latte_ and _flexoki
 
 <p class="text-center">
   <i>Flexoki Light</i>
+</p>
+
+![Ethereal](/images/omakube/ethereal.png)
+
+<p class="text-center">
+  <i>Ethereal</i>
+</p>
+
+![Hackerman](/images/omakube/hackerman.png)
+
+<p class="text-center">
+  <i>Hackerman</i>
 </p>
 
 In addition to these, the ability to import others has been added via a dedicated tool. These can be created by the user or taken from the community.
