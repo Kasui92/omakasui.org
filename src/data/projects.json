@@ -20,24 +20,6 @@
     "hidden": false
   },
   {
-    "id": "omarell",
-    "name": "omarell",
-    "description": "A personal Omakube fork, less apps and more focus",
-    "installCommand": "curl -fsSL https://omakasui.org/omarell | bash",
-    "status": ["archived"],
-    "hidden": true
-  },
-  {
-    "id": "omaforge",
-    "name": "omaforge",
-    "description": "Opinionated <strong>Ubuntu</strong>/<strong>Gnome</strong> Setup, powered by <a href=\"https://github.com/forge-ext/forge\" target=\"_blank\" title=\"View Forge source code on GitHub\" rel=\"noopener\">Forge</a>",
-    "installCommand": "curl -fsSL https://omakasui.org/omaforge | bash",
-    "sourceUrl": "https://github.com/Kasui92/omaforge",
-    "manualUrl": "/manuals/omaforge/",
-    "status": ["archived", "experimental"],
-    "hidden": true
-  },
-  {
     "id": "omadeb",
     "name": "omadeb",
     "description": "Just like Omakube, but for <strong>Debian</strong>",
