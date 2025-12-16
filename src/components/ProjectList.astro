@@ -12,14 +12,21 @@ type Project = CollectionEntry<"projects">;
       <div class="mb-8 rounded-sm border border-[#333] bg-[#2a2a2a] p-8 transition-colors duration-300 ease-in-out hover:border-[#89b29ee6]">
         <h3>
           >
-          <a
-            href={project.data.githubUrl}
-            target="_blank"
-            title={`View ${project.data.name} source code on GitHub`}
-            rel="noopener"
-          >
-            {project.data.name}
-          </a>
+          {project.data.siteUrl ? (
+            <a
+              href={project.data.siteUrl}
+              target="_blank"
+              title={`Visit ${project.data.name} website`}
+              rel="noopener"
+              class="text-[1.5rem] font-semibold text-[#89b29ee6] hover:underline"
+            >
+              {project.data.name}
+            </a>
+          ) : (
+            <span class="text-[1.5rem] font-semibold text-[#89b29ee6]">
+              {project.data.name}
+            </span>
+          )}
           {project.data.status.length > 0
             ? project.data.status.map((status) => (
                 <span class="ml-2 align-middle">
@@ -50,18 +57,18 @@ type Project = CollectionEntry<"projects">;
             <i class="nf nf-md-content_copy" />
           </button>
         </div>
-        {project?.data.githubUrl || project?.data.manualUrl ? (
+        {project?.data.sourceUrl || project?.data.manualUrl ? (
           <p class="text-[0.875rem] text-[#bbb] italic">
             The{" "}
-            {project.data.githubUrl && (
+            {project.data.sourceUrl && (
               <a
-                href={project.data.githubUrl}
+                href={project.data.sourceUrl}
                 target="_blank"
                 title={`View ${project.data.name} source code on GitHub`}
                 rel="noopener"
               >{`source code`}</a>
             )}{" "}
-            {project?.data.githubUrl && project?.data.manualUrl ? "and" : null}{" "}
+            {project?.data.sourceUrl && project?.data.manualUrl ? "and" : null}{" "}
             {project.data.manualUrl && (
               <a
                 href={project.data.manualUrl}
@@ -72,7 +79,7 @@ type Project = CollectionEntry<"projects">;
                 {`manual`}
               </a>
             )}{" "}
-            {project?.data.githubUrl && project?.data.manualUrl ? "are" : "is"}{" "}
+            {project?.data.sourceUrl && project?.data.manualUrl ? "are" : "is"}{" "}
             available.
           </p>
         ) : null}
