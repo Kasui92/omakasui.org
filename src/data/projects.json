@@ -25,7 +25,7 @@
     "description": "Just like Omakube, but for <strong>Debian</strong>",
     "installCommand": "curl -fsSL https://omakasui.org/omadeb | bash",
     "sourceUrl": "https://github.com/Kasui92/omadeb",
-    "status": ["work-in-progress"],
+    "status": ["work-in-progress", "paused"],
     "hidden": false
   },
   {
@@ -34,7 +34,7 @@
     "description": "Opinionated <strong>Ubuntu</strong>/<strong>Sway</strong> Setup",
     "installCommand": "curl -fsSL https://omakasui.org/omasway | bash",
     "sourceUrl": "https://github.com/Kasui92/omasway",
-    "status": ["work-in-progress", "paused"],
-    "hidden": true
+    "status": ["paused"],
+    "hidden": false
   }
 ]
