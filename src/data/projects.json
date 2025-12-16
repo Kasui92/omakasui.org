@@ -26,7 +26,7 @@
     "installCommand": "curl -fsSL https://omakasui.org/omadeb | bash",
     "sourceUrl": "https://github.com/Kasui92/omadeb",
     "status": ["work-in-progress", "paused"],
-    "hidden": false
+    "hidden": true
   },
   {
     "id": "omasway",
@@ -35,6 +35,6 @@
     "installCommand": "curl -fsSL https://omakasui.org/omasway | bash",
     "sourceUrl": "https://github.com/Kasui92/omasway",
     "status": ["paused"],
-    "hidden": false
+    "hidden": true
   }
 ]
