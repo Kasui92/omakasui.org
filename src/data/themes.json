@@ -10,5 +10,11 @@
     "name": "Synthwave 84",
     "url": "https://github.com/Kasui92/omakub-synthwave84-theme",
     "image": "/themes/synthwave84.png"
+  },
+  {
+    "id": "miasma",
+    "name": "Miasma",
+    "url": "https://github.com/Kasui92/omakub-miasma-theme",
+    "image": "/themes/miasma.png"
   }
 ]
